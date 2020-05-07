@@ -215,7 +215,7 @@
 				current += job[i]/time[i];
 				dataJT.push(Math.round(current));
 			}
-			dataJT = [1,2,4,5]
+
 			let ctxDia = document.getElementById('dia').getContext('2d');
 			let myChartDia = new Chart(ctxDia, {
 				type: 'bar',
