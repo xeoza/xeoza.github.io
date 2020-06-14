@@ -1,0 +1,409 @@
+.nice-select {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    min-height: 44px;
+    border: none;
+    border-bottom: 4px solid #d8d8d8;
+    border-radius: 0;
+    padding: 10px;
+    font-size: 1em;
+    white-space: normal;
+    line-height: 1.2;
+    clear: initial;
+    float: initial;
+}
+.input__label:hover ~ .nice-select,
+.nice-select:hover, .nice-select.open {
+    border-color: #c3c3c3;
+}
+.nice-select:focus {
+    border-color: #3b8ced;
+}
+.nice-select:not(:last-child) {
+    margin-bottom: .5em;
+}
+.nice-select::after {
+    right: 16px;
+    width: 10px;
+    height: 10px;
+    margin-top: -8px;
+    border-color: #fc1053;
+}
+.nice-select .current {
+    max-width: calc(100% - 32px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #000;
+}
+.nice-select .list {
+    width: 100%;
+    max-width: 100%;
+    max-height: 19em;
+    overflow-y: scroll;
+    border-radius: 0;
+    box-shadow: 0 0 0 1px #d2d2d2;
+    transition: none;
+}
+.nice-select .option {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    line-height: inherit;
+    padding: 10px;
+}
+.nice-select .option:not(:last-child) {
+    border-bottom: 1px dotted #eee;
+}
+.nice-select .option:empty,
+.nice-select .option:first-child {
+    display: none;
+}
+.form__row {
+    margin-bottom: 1.7em;
+    min-height: 90px;
+}
+.input__label {
+    display: block;
+    margin: 0 0 4px;
+    font-weight: bold;
+}
+.registration .form__error,
+.registration .input__error,
+.registration .error-message {
+    color: #cc0000;
+    margin: 0 0 10px;
+    transition: 10s;
+    opacity: 1;
+    visibility: initial;
+}
+.registration .form__error {
+    margin-bottom: 1.7em;
+    text-align: center;
+}
+.form__error:empty,
+.input__error:empty {
+    display: none;
+}
+.form__error b,
+.input__error b,
+.error-message b {
+    font-weight: bold;
+}
+.input__error:not(:empty) ~ .input__field,
+.input__error:not(:empty) ~ .input__select,
+.has-error input,
+.has-error .nice-select {
+    border-color: #cc0000;
+}
+.input__hint {
+    padding-left: 1.5em;
+    font-size: smaller;
+    color: #3d3c3c;
+}
+.input__field {
+    box-sizing: border-box;
+    width: 100%;
+    height: auto;
+    min-height: 44px;
+    padding: 10px;
+    border: none;
+    border-bottom: 4px solid #d8d8d8;
+    border-radius: 0;
+    font-family: inherit;
+    font-size: 1em;
+    line-height: 1.2;
+    color: #000;
+    -webkit-appearance: none;
+}
+.input__field:hover {
+    border-color: #c3c3c3;
+}
+.input__field:focus {
+    border-color: #3b8ced;
+    outline: none;
+}
+.input__field:disabled {
+    background: #eee;
+}
+.input__field:not(:last-child) {
+    margin-bottom: .5em;
+}
+.input__field:invalid {
+    outline: none;
+    border-color: #cc0000;
+    box-shadow: none;
+}
+.input__row {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: .2em;
+}
+.input__col {
+    flex: 1 1 auto;
+}
+.input__col:not(:last-child) {
+    margin-right: 2px;
+    margin-bottom: 2px;
+}
+.input__radio,
+.input__checkbox {
+    display: inline-block;
+}
+.input__radio input,
+.input__checkbox input {
+    vertical-align: top;
+    width: 20px;
+    height: 20px;
+    margin: 0 3px 0 0;
+}
+.input__radio-text,
+.input__checkbox--text {
+    cursor: pointer;
+}
+.input__radio input:not(checked),
+.input__checkbox input:not(checked) {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+    margin: 10px 0 0 7px;
+}
+.input__radio-text,
+.input__checkbox-text {
+    position: relative;
+    padding: 0 0 0 32px;
+}
+.input__radio-text:before,
+.input__checkbox-text:before {
+    content: '';
+    position: absolute;
+    top: -7px;
+    left: 0;
+    border: 3px solid #d8d8d8;
+    background: #fff;
+}
+.input__radio-text:before {
+    top: -5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+.input__checkbox-text:before {
+    width: 20px;
+    height: 20px;
+}
+.input__radio-text:after,
+.input__checkbox-text:after {
+    content: '';
+    position: absolute;
+    opacity: 0;
+    transition: .1s;
+}
+.input__radio-text:after {
+    top: 2px;
+    left: 7px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #3b8ced;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.15);
+}
+.input__checkbox-text:after {
+    top: 1px;
+    left: 4px;
+    width: 15px;
+    height: 5px;
+    border-left: 3px solid;
+    border-bottom: 3px solid;
+    border-color: #358af0;
+    transform: rotate(-47deg);
+}
+.input__radio-text:hover:after {
+    opacity: .5;
+}
+.input__radio input:checked + .input__radio-text:after,
+.input__checkbox input:checked + .input__checkbox-text:after {
+    opacity: 1;
+}
+.input__radio input:focus + .input__radio-text:before,
+.input__checkbox input:focus + .input__checkbox-text:before {
+    border-color: #3b8ced;
+}
+.input__checkbox input:focus + .input__checkbox-text:before {
+    border-color: #aaa;
+}
+.input__checkbox:hover .input__checkbox-text:before {
+    border-color: #d2d2d2;
+}
+.has-error .input__radio-text:before,
+.has-error .input__checkbox-text:before {
+    border-color: #c00;
+}
+.input__col-group {
+    display: flex;
+    flex-direction: column;
+}
+.input__col-group > * {
+    margin-bottom: .5em;
+}
+.input__day {
+    min-width: 30%;
+}
+.input__month {
+    min-width: 40%;
+}
+.registration {
+    min-width: 500px;
+    margin: 0 auto 40px;
+    background: #fff;
+    font-size: 16px;
+    line-height: 20px;
+}
+.registration--short form {
+    max-width: 600px;
+    margin: 2em auto;
+    padding: 0 .5em;
+}
+.registration--additional {
+    max-width: 1000px;
+}
+.registration--additional .container {
+    padding: 0 10px;
+}
+.registration__steps {
+    margin-bottom: 40px;
+}
+.registration__step {
+    display: inline-block;
+    color: #3b8ced;
+}
+.registration__step:not(:last-of-type) {
+    margin-right: 100px;
+}
+.registration__step.active {
+    color: #fc1053;
+}
+.registration-form form {
+    padding-top: 0;
+}
+.registration__form {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 0 40px;
+}
+.form__info {
+    margin: 0 0 2em;
+}
+.row {
+    display: flex;
+    flex-flow: row wrap;
+}
+.col {
+    flex: 1 0 calc(50% - 2em);
+    max-width: 50%;
+    margin: initial;
+}
+.registration__row {
+    display: flex;
+    flex-flow: row wrap;
+}
+.registration__col {
+    flex: 1 0 calc(50% - 2em);
+    max-width: 50%;
+    margin: initial;
+}
+.registration__col:not(:last-child) {
+    margin-right: 2em;
+}
+.input--study_dates .input__col {
+    max-width: 50%;
+}
+.form__socials .input__row {
+    flex-wrap: nowrap;
+    width: 100%;
+}
+.form__socials .input__col {
+    flex: none;
+}
+.socials__item .input__col:nth-child(1) {
+    width: calc(40% - 2px);
+}
+.socials__item .input__col:nth-child(2) {
+    width: calc(60% - 3em - 2px);
+}
+.socials__item .input__col:nth-child(3) {
+    width: 3em;
+}
+.socials__item--first .input__col:nth-child(1) {
+    width: calc(40% - 2px);
+}
+.socials__item--first .input__col:nth-child(2) {
+    width: 60%;
+    max-width: 60%;
+}
+.form__socials .button {
+    height: auto;
+    min-height: 44px;
+    padding: 0;
+    font-size: inherit;
+}
+.form__socials .socials__add_button {
+    min-width: 40%;
+}
+.form__socials .socials__remove_button {
+    padding: 0;
+    width: 100%;
+    min-width: auto;
+}
+.form__actions {
+    margin: 1em auto;
+    display: flex;
+    justify-content: center;
+}
+.form__button {
+    box-sizing: border-box;
+    min-height: 44px;
+    width: auto;
+    min-width: 200px;
+    padding: 0 2em;
+}
+.form__button:focus {
+    outline: none;
+    background-color: #fff;
+    border: 4px solid #fc1053;
+    color: #fc1053;
+}
+.form__button:disabled {
+    background: #e2e2e2;
+    border-color: #d4d4d4;
+    color: #fff;
+}
+.js-add-social-form {
+    display: none;
+}
+
+@media screen and (max-width: 1023px) {
+    .registration {
+        min-width: initial;
+        max-width: 100%;
+    }
+    .registration__row {
+        flex-direction: column;
+    }
+    .registration__col {
+        max-width: 100%;
+    }
+    .registration__col,
+    .registration__col:not(:last-child) {
+        margin-right: initial;
+    }
+
+
+    .registration .form__button--primary {
+        width: 100%;
+    }
+}

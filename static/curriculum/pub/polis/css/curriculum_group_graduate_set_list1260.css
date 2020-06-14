@@ -1,0 +1,17 @@
+a.tabs__control-link:link {
+    text-decoration: inherit;
+    color: inherit;
+}
+
+a.tabs__control-link:visited {
+    text-decoration: inherit;
+    color: inherit;
+}
+
+.graduate-set__title {
+    margin: .5em 0 .8em;
+}
+
+.graduate-set__year {
+    text-align: center;
+}

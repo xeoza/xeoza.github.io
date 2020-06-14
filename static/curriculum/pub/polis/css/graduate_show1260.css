@@ -1,0 +1,57 @@
+.graduate-left {
+    float: left;
+    width: 20%;
+    text-align: center;
+}
+.graduate-right {
+    float: right;
+    width: 80%;
+}
+.graduate-name {
+    margin-left: 50px;
+}
+.graduate-image {
+    max-width: 100%;
+    width: auto\9;
+    height: auto;
+    vertical-align: middle;
+    border: 0;
+    -ms-interpolation-mode: bicubic
+}
+.graduate-container {
+    overflow: hidden;
+}
+.graduate-program-name {
+    margin-left: 50px;
+    margin-top: 20px;
+}
+.graduate-marks {
+    width: 80%;
+    margin-left: 50px;
+    margin-top: 50px;
+}
+.graduate-marks__header {
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+.graduate-marks__header__title {
+    float: left;
+}
+.graduate-marks__header__mark {
+    float: right;
+}
+.graduate-marks__list {
+    margin-left: 0;
+    padding: 0;
+}
+.graduate-marks__list__row {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 10px;
+}
+.graduate-marks__list__row__subject {
+    float: left;
+}
+.graduate-marks__list__row__mark {
+    float: right;
+}

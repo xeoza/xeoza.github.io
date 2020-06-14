@@ -1,620 +1,380 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
+<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
 <head>
-	<meta charset="UTF-8">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-	<title>Title</title>
-</head>
-<body>
-<header>
-	
-</header>
-<h1> COCOMO 1 </h1>
-	<!-- -->
-	<div>
-		<label for="kloc">kLOC (Количество строк кода)</label>
-		<input id="kloc" type="text" value="430" required/>
-		<label for="lang">Язык программирования</label>
-		<select id="lang">
-			<option value="1"> Ассемблер</option>
-			<option value="2.5"> С</option>
-			<option value="3"> Кобол</option>
-			<option value="3"> Фортран</option>
-			<option value="3.5"> Паскаль</option>
-			<option value="6" selected> С++</option>
-			<option value="6"> Java</option>
-			<option value="6.5"> Ada 95</option>
-			<option value="8.5"> Access</option>
-			<option value="11"> Delphi</option>
-			<option value="16"> COBRA</option>
-		</select><br>
-		<br>
-		<h2>Атрибуты программного продукта</h2>
-		<label for="RELY">RELY (Требуемая надежность)</label>
-		<select id="RELY">
-			<option value="0.75"> Очень низкий</option>
-			<option value="0.86"> Низкий</option>
-			<option value="1"> Номинальный</option>
-			<option value="1.15"selected> Высокий</option>
-			<option value="1.4"> Очень высокий</option>
-		</select><br>
-		<label for="DATA">DATA (Размер базы данных)</label>
-		<select id="DATA">
-			<option value="0.94"> Низкий</option>
-			<option value="1" selected> Номинальный</option>
-			<option value="1.08"> Высокий</option>
-			<option value="1.16"> Очень высокий</option>
-		</select><br>
-		<label for="CPLX">CPLX (Сложность продукта)</label>
-		<select id="CPLX">
-			<option value="0.7"> Очень низкий</option>
-			<option value="0.85"> Низкий</option>
-			<option value="1.0" selected> Номинальный</option>
-			<option value="1.15"> Высокий</option>
-			<option value="1.3"> Очень высокий</option>
-		</select><br>
-		<h2>Атрибуты компьютера</h2>
-		<label for="TIME">TIME (Огранечение времени выполнения)</label>
-		<select id="TIME">
-			<option value="1"> Номинальный</option>
-			<option value="1.11"selected> Высокий</option>
-			<option value="1.5"> Очень высокий</option>
-		</select><br>
-		<label for="STOR">STOR (Огранечение объема основной памяти)</label>
-		<select id="STOR">
-			<option value="1"selected> Номинальный</option>
-			<option value="1.06"> Высокий</option>
-			<option value="1.21"> Очень высокий</option>
-		</select><br>
-		<label for="VIRT">VIRT (Изменчивость виртуальной машины)</label>
-		<select id="VIRT">
-			<option value="0.87"> Низкий</option>
-			<option value="1"selected> Номинальный</option>
-			<option value="1.15"> Высокий</option>
-			<option value="1.3" > Очень высокий</option>
-		</select><br>
-		<label for="TURN">TURN (Время реакции компьютера)</label>
-		<select id="TURN">
-			<option value="0.87"> Низкий</option>
-			<option value="1"selected> Номинальный</option>
-			<option value="1.07"> Высокий</option>
-			<option value="1.15" > Очень высокий</option>
-		</select><br>
-		<h2>Атрибуты персонала</h2>
-		<label for="ACAP">ACAP (Способности аналитика)</label>
-		<select id="ACAP">
-			<option value="1.46"> Очень низкий</option>
-			<option value="1.19"> Низкий</option>
-			<option value="1"selected> Номинальный</option>
-			<option value="0.86"> Высокий</option>
-			<option value="0.71" > Очень высокий</option>
-		</select><br>
-		<label for="AEXP">AEXP (Знание приложений)</label>
-		<select id="AEXP">
-			<option value="1.29"> Очень низкий</option>
-			<option value="1.15"> Низкий</option>
-			<option value="1"selected> Номинальный</option>
-			<option value="0.91"> Высокий</option>
-			<option value="0.82" > Очень высокий</option>
-		</select><br>
-		<label for="PCAP">PCAP (Способности программиста)</label>
-		<select id="PCAP">
-			<option value="1.42"> Очень низкий</option>
-			<option value="1.17"> Низкий</option>
-			<option value="1"selected> Номинальный</option>
-			<option value="0.86"> Высокий</option>
-			<option value="0.7" > Очень высокий</option>
-		</select><br>
-		<h2>Атрибуты проекта</h2>
-		<label for="VEXP">VEXP (Знание виртуальной машины)</label>
-		<select id="VEXP">
-			<option value="1.21"> Очень низкий</option>
-			<option value="1.1"> Низкий</option>
-			<option value="1"selected> Номинальный</option>
-			<option value="0.9" > Высокий</option>
-		</select><br>
-		<label for="LEXP">LEXP (Знание языка программирования)</label>
-		<select id="LEXP">
-			<option value="1.14"> Очень низкий</option>
-			<option value="1.07"> Низкий</option>
-			<option value="1"selected> Номинальный</option>
-			<option value="0.95" > Высокий</option>
-		</select><br>
-		<label for="MODP">MODP (Использование современных методов)</label>
-		<select id="MODP">
-			<option value="1.24"> Очень низкий</option>
-			<option value="1.1"> Низкий</option>
-			<option value="1"selected> Номинальный</option>
-			<option value="0.91"> Высокий</option>
-			<option value="0.82" > Очень высокий</option>
-		</select><br>
-		<label for="TOOL">TOOL (Использование программных инструментов)</label>
-		<select id="TOOL">
-			<option value="1.24"> Очень низкий</option>
-			<option value="1.1"> Низкий</option>
-			<option value="1"selected> Номинальный</option>
-			<option value="0.91"> Высокий</option>
-			<option value="0.82" > Очень высокий</option>
-		</select><br>
-		<label for="SCED">SCED (Требуемые сроки разработки)</label>
-		<select id="SCED">
-			<option value="1.23"> Очень низкий</option>
-			<option value="1.08"> Низкий</option>
-			<option value="1"> Номинальный</option>
-			<option value="1.04"selected> Высокий</option>
-			<option value="1.1" > Очень высокий</option>
-		</select><br>
-		<br>
-		<label for="mode">Режим модели</label>
-		<select id="mode">
-			<option value="simple"> Обычный</option>
-			<option value="inter" > Промежуточный</option>
-			<option value="buildin"selected> Встроенный</option>
-		</select><br>
-		<br>
-		<button id="countBtn" type="submit">Рассчитать</button>
+    <meta charset="utf-8">
+    <meta property="og:title" content="Технополис Mail.ru"/>
+    <meta property="og:description"
+          content="Образовательный проект «Одноклассников» (Mail.ru), реализующий бесплатную программу дополнительного образования для студентов Санкт-Петербургского Политехнического университета Петра Великого"/>
+    <meta property="og:image" content="./static/core/pub/polis/images/technopolis_logo_preview.png"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="imagetoolbar" content="no">
+    <meta name="msthemecompatible" content="no">
+    <meta name="cleartype" content="on">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="address=no">
+    <meta name="google" value="notranslate">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="application-name" content="">
+    <meta name="msapplication-tooltip" content="">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="theme-color" content="#358af0"/>
+    <meta name="msapplication-navbutton-color" content="#358af0">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#358af0">
+    <meta name="cmsmagazine" content="6b918355ad4ec31e713e8eefe2a5b74c"/>
 
-		<h2>Декомпозиция работ по созданию ПО</h2>
-		<table>
-			<tr>
-				<th>
-					Вид деятельности
-				</th>
-				<th>
-					Бюджет
-				</th>
-			</tr>
-			<tr>
-				<td>
-					Анализ требований (4%)
-				</td>
-				<td id="tAn">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					Проектирование продукта (12%)
-				</td>
-				<td id="tProj">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					Программирование (44%)
-				</td>
-				<td id="tProg">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					Тестирование (6%)
-				</td>
-				<td id="tTest">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					Верификация и аттестация (14%)
-				</td>
-				<td id="tVer">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					Канцелярия проекта (7%)
-				</td>
-				<td id="tOff">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					Управление конфигурацией и обеспечение качества (7%)
-				</td>
-				<td id="tManag">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					Создание руководств (6%)
-				</td>
-				<td id="tCreat">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					Всего
-				</td>
-				<td id="tTotal">
-				</td>
-			</tr>
-		</table>
-	</div>
-	<div style="width: 300px; height: 300px;">
-		<canvas id="chart" width="300" height="300"></canvas>
-	</div>
-	<div>
-		<h2>Распределение работ и времени по стадиям жизненного цикла</h2>
-		<h5>Снаружи - человеко/месяцы, внутри - месяцы</h5>
-		<table>
-			<tr>
-				<th>Вид деятельности</th>
-				<th>Трудозатраты</th>
-				<th>Время</th>
-			</tr>
-			<tr>
-				<td>Планирование и определение требований</td>
-				<td id="j1"></td>
-				<td id="t1"></td>
-			</tr>
-			<tr>
-				<td>Проектирование продукта</td>
-				<td id="j2"></td>
-				<td id="t2"></td>
-			</tr>
-			<tr>
-				<td>Детальное проектирование</td>
-				<td id="j3"></td>
-				<td id="t3"></td>
-			</tr>
-			<tr>
-				<td>Кодирование и тестирование отдельных модулей</td>
-				<td id="j4"></td>
-				<td id="t4"></td>
-			</tr>
-			<tr>
-				<td>Интеграция и тестирование</td>
-				<td id="j5"></td>
-				<td id="t5"></td>
-			</tr>
-			<tr>
-				<td>Итого без планирования</td>
-				<td id="wPj"></td>
-				<td id="wPt"></td>
-			</tr>
-			<tr>
-				<td>Итого</td>
-				<td id="j"></td>
-				<td id="t"></td>
-			</tr>
-		</table>
-	</div>
-	<div style="width: 300px; height: 300px;">
-		<canvas id="timejob" width="300" height="300"></canvas>
-	</div>
-	<h3> Диаграмма привлечения сотрудников </h3>
-	<div style="width: 700px; height: 300px;">
-		<canvas id="dia"></canvas>
-	</div>
-<h1>COCOMO II</h1>
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <h2>Метод функциональных точек</h2>
-            <label for="fp1">Передачи данных</label>
-            <input id="fp1" type="number" min="0" max="5"/><br>
-            <label for="fp2">Распределенная обработка данных</label>
-            <input id="fp2" type="number" min="0" max="5"/><br>
-            <label for="fp3">Производительность</label>
-            <input id="fp3" type="number" min="0" max="5"/><br>
-            <label for="fp4">Эксплутационные ограничения</label>
-            <input id="fp4" type="number" min="0" max="5"/><br>
-            <label for="fp5">Частота транзакций</label>
-            <input id="fp5" type="number" min="0" max="5"/><br>
-            <label for="fp6">Оперативный ввод данных</label>
-            <input id="fp6" type="number" min="0" max="5"/><br>
-            <label for="fp7">Эффективность работы конечных пользователей</label>
-            <input id="fp7" type="number" min="0" max="5"/><br>
-            <label for="fp8">Оперативное обновление</label>
-            <input id="fp8" type="number" min="0" max="5"/><br>
-            <label for="fp9">Сложность обработки</label>
-            <input id="fp9" type="number" min="0" max="5"/><br>
-            <label for="fp10">Повторная используемость</label>
-            <input id="fp10" type="number" min="0" max="5"/><br>
-            <label for="fp11">Легкость инсталляции</label>
-            <input id="fp11" type="number" min="0" max="5"/><br>
-            <label for="fp12">Легкость эксплуатации</label>
-            <input id="fp12" type="number" min="0" max="5"/><br>
-            <label for="fp13">Количество возможных установок на различных платформах</label>
-            <input id="fp13" type="number" min="0" max="5"/><br>
-            <label for="fp14">Простота изменений</label>
-            <input id="fp14" type="number" min="0" max="5"/><br>
-            <button type="submit" id="fpBtn">Рассчитать</button>
-            <h2 id="fi"></h2>
-            <h2 id="ufp"></h2>
-            <h2 id="fp"></h2>
+    <link rel="icon" href="./static/core/pub/polis/images/favicon.ico">
+    <title>Danila Zykin</title>
+    <link href="./static/core/pub/polis/css/jquery.notifier1260.css?v=5.41.28" media="screen" rel="stylesheet"/>
+    <link href="./static/core/pub/polis/css/app.min.css" rel="stylesheet">
+    <link href="./static/core/pub/polis/css/custom.css" rel="stylesheet">
+</head>
+
+<div class="popups-container"></div>
+<body class="page">
+<header style="background-image: url(
+            ./static/core/pub/polis/images/header/main_bg.svg)"
+        class="header header_inner">
+    <div class="header__left-hands"></div>
+    <div class="header__right-hands"></div>
+    <div class="container">
+        <div class="header__wrap js-header-wrap">
+            <div class="header__logo">
+                <a href="./index.html" class="logo">
+                <span class="logo__icon">
+                    <span class="logo__line">
+                        <span class="logo__line-inner"></span>
+                    </span>
+                    <svg viewbox="0 0 338.94 49.1" class="logo__logo-svg">
+                        <polygon <text class="logo__letter logo__letter_2">Danila</text>
+                        <polygon
+                                points="61.16 14.38 61.16 6.96 37.03 6.96 37.03 42.04 61.16 42.04 61.16 34.58 46.15 34.58 46.15 27.63 58.92 27.63 58.92 20.48 46.15 20.48 46.15 14.38 61.16 14.38"
+                                class="logo__letter logo__letter_2"></polygon>
+                        <polygon
+                                points="118.54 6.96 118.54 19.78 109 19.78 109 6.96 99.88 6.96 99.88 42.04 109 42.04 109 27.63 118.54 27.63 118.54 42.04 127.66 42.04 127.66 6.96 118.54 6.96"
+                                class="logo__letter logo__letter_4"></polygon>
+                        <polygon
+                                points="288.31 6.96 277.62 25.43 277.62 6.96 268.5 6.96 268.5 42.04 276.36 42.04 287.16 23.52 287.16 42.04 296.28 42.04 296.28 6.96 288.31 6.96"
+                                class="logo__letter logo__letter_9"></polygon>
+                        <polygon
+                                points="167.78 6.96 167.78 6.96 167.78 6.96 167.78 42.04 176.9 42.04 176.9 14.38 185.88 14.38 185.88 42.04 195 42.04 195 14.03 195 6.96 195 6.96 167.78 6.96"
+                                class="logo__letter logo__letter_6"></polygon>
+                        <polygon
+                                points="32.69 21 32.69 6.96 0 6.96 0 21 7.01 21 7.01 14.38 11.78 14.38 11.78 34.58 6.17 34.58 6.17 42.04 26.51 42.04 26.51 34.58 20.9 34.58 20.9 14.38 25.67 14.38 25.67 21 32.69 21"
+                                class="logo__letter logo__letter_1"></polygon>
+                        <polygon
+                                points="85.67 23.96 95.41 6.96 85.36 6.96 80.13 17.78 74.9 6.96 64.85 6.96 74.59 23.96 64.01 42.04 74.06 42.04 80.13 31.07 86.2 42.04 96.25 42.04 85.67 23.96"
+                                class="logo__letter logo__letter_3"></polygon>
+                        <path d="M321.58,60.42H297v7h0c0,6.45,0,10.86,0,12,0,5.92-2,8.42-4.79,8.56v8.09s0.86,0,1.21,0c7.49-.32,12.12-5.45,12.12-16.11V67.84h6.87V95.5h9.12V67.44h0v-7Z"
+                              transform="translate(-60.09 -53.46)"
+                              class="logo__letter logo__letter_8"></path>
+                        <path d="M380.92,81.47v6.17a6.34,6.34,0,0,1-4.24,1.15c-1.4,0-3.58-.43-4.59-1.71-1.43-1.79-1.41-3.67-1.41-6.45V75.81c0-2.8,0-4.69,1.41-6.51a5.94,5.94,0,0,1,4.59-2c2.84,0,3.68.82,4.24,1.22v4.72h7.65V63.64a19.7,19.7,0,0,0-11.89-3.75c-1.82,0-7.74,0-11.61,4.61-2.47,2.92-3.51,6.72-3.51,10.92v5.19c0,4.22,1.05,8.07,3.53,11,3.88,4.58,9.31,4.51,11.56,4.51a19.26,19.26,0,0,0,12.24-4.21V81.47h-8Z"
+                              transform="translate(-60.09 -53.46)"
+                              class="logo__letter logo__letter_10"></path>
+                        <path d="M218.63,64.51a15.32,15.32,0,0,0-21.92,0c-2.47,2.92-3.49,6.72-3.49,10.92v5.19c0,4.22,1.05,8.07,3.52,11,3.88,4.58,8.68,4.51,10.92,4.51s7,0.08,10.92-4.51c2.47-2.93,3.52-6.77,3.52-11V75.44C222.12,71.23,221.09,67.43,218.63,64.51Zm-7,21.85a5.46,5.46,0,0,1-7.88,0c-1.43-1.79-1.39-3.69-1.39-6.48V75.27c0-2.8,0-4.31,1.41-6.11a5.11,5.11,0,0,1,7.85,0C213,71,213,72.46,213,75.27v5C213,83.06,213,84.56,211.61,86.36Z"
+                              transform="translate(-60.09 -53.46)"
+                              class="logo__letter logo__letter_5"></path>
+                        <path d="M286.24,64.51a15.32,15.32,0,0,0-21.92,0c-2.47,2.92-3.49,6.72-3.49,10.92v5.19c0,4.22,1.05,8.07,3.52,11,3.88,4.58,8.68,4.51,10.92,4.51s7,0.08,10.92-4.51c2.47-2.93,3.52-6.77,3.52-11V75.44C289.73,71.23,288.71,67.43,286.24,64.51Zm-7,21.85a5.46,5.46,0,0,1-7.88,0c-1.43-1.79-1.39-3.69-1.39-6.48V75.27c0-2.8,0-4.31,1.41-6.11a5.11,5.11,0,0,1,7.85,0c1.43,1.8,1.41,3.31,1.41,6.11v5C280.61,83.06,280.65,84.56,279.22,86.36Z"
+                              transform="translate(-60.09 -53.46)"
+                              class="logo__letter logo__letter_7"></path>
+                    </svg>
+                </span>
+                </a>
+            </div>
         </div>
-        <div class="col">
-            <h4>Внешние вводы EI</h4>
-            <table border="1">
-                <tr>
-                    <th></th>
-                    <th> 1-4 </th>
-                    <th> 5-15 </th>
-                    <th> >15 </th>
-                </tr>
-                <tr>
-                    <td> 0-1</td>
-                    <td><input id="EI00" type="text" /></td>
-                    <td><input id="EI01" type="text" /></td>
-                    <td><input id="EI02" type="text" /></td>
-                </tr>
-                <tr>
-                    <td> 2 </td>
-                    <td><input id="EI10" type="text" /></td>
-                    <td><input id="EI11" type="text" /></td>
-                    <td><input id="EI12" type="text" /></td>
-                </tr>
-                <tr>
-                    <td> >2 </td>
-                    <td><input id="EI20" type="text" /></td>
-                    <td><input id="EI21" type="text" /></td>
-                    <td><input id="EI22" type="text" /></td>
-                </tr>
-            </table>
-            <h4>Внешние выводы EO</h4>
-            <table border="1">
-                <tr>
-                    <th></th>
-                    <th> 1-4 </th>
-                    <th> 5-19 </th>
-                    <th> >19 </th>
-                </tr>
-                <tr>
-                    <td> 0-1</td>
-                    <td><input id="EO00" type="text" /></td>
-                    <td><input id="EO01" type="text" /></td>
-                    <td><input id="EO02" type="text" /></td>
-                </tr>
-                <tr>
-                    <td> 2-3 </td>
-                    <td><input id="EO10" type="text" /></td>
-                    <td><input id="EO11" type="text" /></td>
-                    <td><input id="EO12" type="text" /></td>
-                </tr>
-                <tr>
-                    <td> >3 </td>
-                    <td><input id="EO20" type="text" /></td>
-                    <td><input id="EO21" type="text" /></td>
-                    <td><input id="EO22" type="text" /></td>
-                </tr>
-            </table>
-            <h4>Внутренние логические файлы ILF</h4>
-            <table border="1">
-                <tr>
-                    <th></th>
-                    <th> 1-19 </th>
-                    <th> 20-50 </th>
-                    <th> >50 </th>
-                </tr>
-                <tr>
-                    <td> 1</td>
-                    <td><input id="ILF00" type="text" /></td>
-                    <td><input id="ILF01" type="text" /></td>
-                    <td><input id="ILF02" type="text" /></td>
-                </tr>
-                <tr>
-                    <td> 2-5 </td>
-                    <td><input id="ILF10" type="text" /></td>
-                    <td><input id="ILF11" type="text" /></td>
-                    <td><input id="ILF12" type="text" /></td>
-                </tr>
-                <tr>
-                    <td> >5 </td>
-                    <td><input id="ILF20" type="text" /></td>
-                    <td><input id="ILF21" type="text" /></td>
-                    <td><input id="ILF22" type="text" /></td>
-                </tr>
-            </table>
-            <h4>Внешние интерфейсные файлы EIF</h4>
-            <table border="1">
-                <tr>
-                    <th></th>
-                    <th> 1-19 </th>
-                    <th> 20-50 </th>
-                    <th> >50 </th>
-                </tr>
-                <tr>
-                    <td> 1</td>
-                    <td><input id="EIF00" type="text" /></td>
-                    <td><input id="EIF01" type="text" /></td>
-                    <td><input id="EIF02" type="text" /></td>
-                </tr>
-                <tr>
-                    <td> 2-5 </td>
-                    <td><input id="EIF10" type="text" /></td>
-                    <td><input id="EIF11" type="text" /></td>
-                    <td><input id="EIF12" type="text" /></td>
-                </tr>
-                <tr>
-                    <td> >5 </td>
-                    <td><input id="EIF20" type="text" /></td>
-                    <td><input id="EIF21" type="text" /></td>
-                    <td><input id="EIF22" type="text" /></td>
-                </tr>
-            </table>
-            <h4>Внешние запросы EQ</h4>
-            <table border="1">
-                <tr>
-                    <th></th>
-                    <th> 1-4 </th>
-                    <th> 5-19 </th>
-                    <th> >19 </th>
-                </tr>
-                <tr>
-                    <td> 0-1</td>
-                    <td><input id="EQ00" type="text" /></td>
-                    <td><input id="EQ01" type="text" /></td>
-                    <td><input id="EQ02" type="text" /></td>
-                </tr>
-                <tr>
-                    <td> 2-3 </td>
-                    <td><input id="EQ10" type="text" /></td>
-                    <td><input id="EQ11" type="text" /></td>
-                    <td><input id="EQ12" type="text" /></td>
-                </tr>
-                <tr>
-                    <td> >3 </td>
-                    <td><input id="EQ20" type="text" /></td>
-                    <td><input id="EQ21" type="text" /></td>
-                    <td><input id="EQ22" type="text" /></td>
-                </tr>
-            </table>
+        <div class="header__wrap js-header-wrap">
+            <div class="code">
+                <div class="code__public">module Main where <br/>
+                    import "base" Data.Traversable <br/>
+                    import "transformers" Data.Functor.Reverse <br/>
+                    import "transformers" Control.Monad.Trans.State <br/>
+                    type Current = Int <br/>
+                    type Max = Int <br/>
+                    walls :: [Current] <br/>
+                    walls = [2,5,1,2,3,4,7,7,6] <br/>
+                    themax :: Current -> State Max Max <br/>
+                    themax x = modify (max x) *> get <br/>
+                    <span>main = </span> do
+                </div>
+                <div class="code__system">let lms = evalState (for walls themax) 0 <br/>
+                    let Reverse rms = evalState (for (Reverse walls) themax) 0 <br/>
+                    print . sum $ zipWith3 (\l x r -> min l r - x) lms walls rms <br/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</header>
+<main class="content" role="main">
+    <div class="howto">
+        <div class="container">
+            <section class="howto__info">
+                <div class="howto__title-wrap">
+                    <h1 class="title title_h1">Как поступить</h1>
+                </div>
+                <div class="howto__about row row_start">
+                    <div class="howto__info-text typography col col_7">
+                        <p>
+                            <strong>Оцени свои силы, учиться сложно. Но круто</strong>
+                        </p>
+                        <p>
+                            <b>Будет не так просто учиться, у нас интенсивно, один день в неделю выходной. К этому надо
+                                быть готовым, чтобы дойти
+                                до конца учёбы. Для подготовки смотри материалы и задания прошлого года.</b>
+                        </p>
+                    </div>
+                    <div class="howto__description col col_4 col_offset_1">
+                        <h2 class="title title_h2">Зачисление в конце сентября</h2>
+                        <div class="description">
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="howto__stages-wrap">
+                <div class="howto__stages-info">
+                    <h1 class="title title_h2">Три этапа до Технополиса</h1>
+                </div>
+                <ul class="stages">
+                    <li class="stage">
+                        <div class="stage__image-wrap">
+                            <img src="./static/core/pub/polis/images/stages/hands.png" class="stage__image"
+                                 alt="" role="presentation">
+                        </div>
+                        <div class="stage__content-wrap">
+                            <div class="stage__title">
+                                <h4 class="title title_h3"> I этап. Заявка</h4>
+                            </div>
+                            <div class="stage__subtitle">Заполни анкету, ответив на 60 вопросов о себе, знаниях и
+                                представлениях будущей профессии.
+                            </div>
+                            <div class="stage__description">
+                                <div class="typography">
+                                    <span>В личном кабинете находятся материалы для подготовки и инструкции для прохождения тестирования. </span>
+                                </div>
+                            </div>
+                            <div class="stage__button">
+
+
+                                <a href="./registration/short/index.html" class="button button-wide">
+                                    <span class=" button__text">Зарегистрироваться</span>
+                                </a>
+
+
+                            </div>
+                        </div>
+                    </li>
+                    <li class="stage">
+                        <div class="stage__image-wrap">
+                            <img src="./static/core/pub/polis/images/stages/xameleon.png" class="stage__image"
+                                 alt="" role="presentation">
+                        </div>
+                        <div class="stage__content-wrap">
+                            <div class="stage__title">
+                                <h4 class="title title_h3">II этап. Онлайн-тест</h4>
+                            </div>
+                            <div class="stage__subtitle">В день начала отбора отправим на почту ссылку на тест. В нём
+                                130 вопросов на 6 тем. На выполнение — 3 дня. Результат
+                                оцениваем в баллах, которые учитываем при поступлении.
+                            </div>
+                            <div class="stage__list">
+                                <div class="list">
+                                    <h6 class="list__title paragraph paragraph_bold">Проверяем основы:</h6>
+                                    <ul class="list__items list__items_col-2 signature">
+                                        <li class="list__item">логические тесты</li>
+                                        <li class="list__item"> веб-технологии</li>
+                                        <li class="list__item"> алгоритмы и структуры данных</li>
+                                        <li class="list__item"> администрирование Linux</li>
+                                        <li class="list__item"> программирование</li>
+                                        <li class="list__item"> высшая математика</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="stage">
+                        <div class="stage__image-wrap">
+                            <img src="./static/core/pub/polis/images/stages/brains.png" class="stage__image"
+                                 alt="" role="presentation">
+                        </div>
+                        <div class="stage__content-wrap">
+                            <div class="stage__title">
+                                <h4 class="title title_h3">III этап. Собеседование</h4>
+                            </div>
+                            <div class="stage__subtitle">Пригласим поговорить, если будет достаточно баллов после теста.
+                                Будет 45 минут на беседу. Рекомендуем подумать над
+                                своими вопросами — что интересно узнать о проекте и Mail.ru.
+                            </div>
+                            <div class="stage__list">
+                                <div class="list">
+                                    <h6 class="list__title paragraph paragraph_bold">Как проходит:</h6>
+                                    <ul class="list__items signature">
+                                        <li class="list__item">Чтение и написание кода на Java</li>
+                                        <li class="list__item"> Проверка домашнего задания</li>
+                                        <li class="list__item"> Разговор с преподавателем курса</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <h5 class="title title_h5 top-spacer__middle">Для подготовки к разделу теста
+                                «программирование», а также к собеседованию, регистрируйся и готовься к
+                                тестированию.</h5>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+        </div>
+        <section class="howto__training-wrap">
+            <div class="training">
+                <div class="training__list">
+                    <div class="list list_big">
+                        <h3 class="title title_h3 list__title list__title_crimson">Как подготовиться</h3>
+                        <ul class="list__items paragraph paragraph_bold">
+                            <li class="list__item">Решить примерные задания онлайн-теста</li>
+
+                            <li class="list__item">Прочитать литературу по теме</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="training__box">
+                    <div class="training__button">
+
+
+                        <a href="./registration/short/index.html" class="button button-wide">
+                            <span class="button__text">Зарегистрироваться</span>
+                        </a>
+
+
+                    </div>
+                    <div class="training__description">
+                        <span>Мы собрали материалы для подготовки в личном кабинете абитуриента, регистрируйся.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer__wrap">
+            <div class="footer__copy-col">
+                <div class="footer__copy">© Danila Zykin,
+                    <span class="footer__years">2016–2020</span>
+                </div>
+                <a href="mailto:xeozax@gmail.com" class="footer__mail">xeozax@gmail.com</a>
+            </div>
+            <div class="footer__socials">
+                <div class="socials socials_short">
+                    <ul class="socials__list">
+                        <li class="socials__item">
+                            <div class="socials__btn-wrap">
+                                <div class="socials__btn">
+                                    <svg width="55%" height="31.6666%" class="socials__icon">
+                                        <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                             xlink:href="./static/core/pub/polis/images/icon.svg#icon_vk"></use>
+                                    </svg>
+                                </div>
+                            </div>
+                            <a href="https://vk.com/technopolis_ok" class="socials__link"></a></li>
+                        <li class="socials__item">
+                            <div class="socials__btn-wrap">
+                                <div class="socials__btn">
+                                    <svg width="33.3333%" height="56.6666%" class="socials__icon">
+                                        <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                             xlink:href="./static/core/pub/polis/images/icon.svg#icon_ok"></use>
+                                    </svg>
+                                </div>
+                            </div>
+                            <a href="https://ok.ru/group/53245288710321" class="socials__link"></a></li>
+                        <li class="socials__item">
+                            <div class="socials__btn-wrap">
+                                <div class="socials__btn">
+                                    <svg width="41.6666%" height="51.6666%" class="socials__icon">
+                                        <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                             xlink:href="./static/core/pub/polis/images/icon.svg#icon_youtube"></use>
+                                    </svg>
+                                </div>
+                            </div>
+                            <a href="https://www.youtube.com/user/TPMGTU" class="socials__link"></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer__right-col">
+                <div class="footer__site footer__version">
+                    Version - 5.41.28
+                </div>
+            </div>
         </div>
     </div>
-    <hr>
-    <hr>
-    <div class="row">
-        <div class="col">
-            <h2>Факторы, влияющие на показатель степени в модели</h2>
-            <label for="prec">Новизна (PREC)</label>
-            <select id="prec">
-                <option value="6.2">Полное отсуствие прецедентов, полностью непредсказуемый проект</option>
-                <option value="4.96">Почти полное отсутсвие прецедентов, в значительной мере непредсказуемый проект</option>
-                <option value="3.72">Наличие некоторого количества прецедентов</option>
-                <option value="2.48">Общее знакомство с проектом</option>
-                <option value="1.24">Значительное знакомство с проектом</option>
-                <option value="0">Полное знакомство с проектом</option>
-            </select><br>
-            <label for="Flex">Гибкость разработки (FLEX)</label>
-            <select id="Flex">
-                <option value="5.07">Точный, строгий процесс разработки</option>
-                <option value="4.05">Случайные послабления в процессе</option>
-                <option value="3.04">Некоторые послабления в процессе</option>
-                <option value="2.03">Большей частью согласованный процесс</option>
-                <option value="1.01">Некоторое согласование процесса</option>
-                <option value="0">Заказчик определил только общие цели</option>
-            </select><br>
-            <label for="Risk">Разрешение рисков в архитектуре системы (RESL)</label>
-            <select id="Risk">
-                <option value="7">Малое (20%)</option>
-                <option value="5.65">Некоторое (40%)</option>
-                <option value="4.24">Частое (60%)</option>
-                <option value="2.83">В целом (75%)</option>
-                <option value="1.41">Почти полное (90%)</option>
-                <option value="0">Полное (100%)</option>
-            </select><br>
-            <label for="team">Сплоченность команды (TEAM)</label>
-            <select id="team">
-                <option value="5.48">Сильно затрудненное взаимодействие</option>
-                <option value="4.38">Несколько затрудненное взаимодействие</option>
-                <option value="3.29">Некоторая согласованность</option>
-                <option value="2.19">Повышенная согласованность</option>
-                <option value="1.1">Высокая согласованность</option>
-                <option value="0">Взаимодействие как в едином целом</option>
-            </select><br>
-            <label for="pmat">Уровень зрелости процесса разработки (PMAT)</label>
-            <select id="pmat">
-                <option value="7">Уровень 1 СММ</option>
-                <option value="6.24">Уровень 1+ СММ</option>
-                <option value="4.68">Уровень 2 СММ</option>
-                <option value="1.12">Уровень 3 СММ</option>
-                <option value="1.56">Уровень 7 СММ</option>
-                <option value="0">Уровень 5 СММ</option>
-            </select><br>
-            <h3 id="p"></h3>
+</footer>
+<article data-type="ask" class="popup js-popup">
+    <div class="popup__wrap">
+        <header class="popup__header">
+            <div class="popup__title">
+                <h1 class="title title_h1">Задай свой вопрос</h1>
+            </div>
+            <div class="popup__close js-close js-popup-close">
+                <svg class="popup__icon">
+                    <use xlink:href="./static/core/pub/polis/images/icon.svg#icon_cross"></use>
+                </svg>
+            </div>
+        </header>
+        <div class="popup__subtitle typography">
+            <p>Спрашивай о Технополисе, открытых курсах, и вообще о чем хочешь – постараемся ответить быстро и с
+                пользой.</p>
         </div>
-        <div class="col">
-            <h2>Модель ранней разработки архитектуры</h2>
-            <label for="PERS">PERS</label>
-            <select id="PERS">
-                <option value="1.62">Очень низкий</option>
-                <option value="1.26">Низкий</option>
-                <option value="1">Номинальный</option>
-                <option value="0.83">Высокий</option>
-                <option value="0.63">Очень высокий</option>
-                <option value="0.5">Сверхвысокий</option>
-            </select><br>
-            <label for="RCPX">RCPX</label>
-            <select id="RCPX">
-                <option value="0.6">Очень низкий</option>
-                <option value="0.83">Низкий</option>
-                <option value="1">Номинальный</option>
-                <option value="1.33">Высокий</option>
-                <option value="1.91">Очень высокий</option>
-                <option value="2.72">Сверхвысокий</option>
-            </select><br>
-            <label for="RUSE">RUSE</label>
-            <select id="RUSE">
-                <option value="0.95">Низкий</option>
-                <option value="1">Номинальный</option>
-                <option value="1.07">Высокий</option>
-                <option value="1.15">Очень высокий</option>
-                <option value="1.24">Сверхвысокий</option>
-            </select><br>
-            <label for="PDIF">PDIF</label>
-            <select id="PDIF">
-                <option value="0.87">Низкий</option>
-                <option value="1">Номинальный</option>
-                <option value="1.29">Высокий</option>
-                <option value="1.81">Очень высокий</option>
-                <option value="2.61">Сверхвысокий</option>
-            </select><br>
-            <label for="PREX">PREX</label>
-            <select id="PREX">
-                <option value="1.33">Очень низкий</option>
-                <option value="1.22">Низкий</option>
-                <option value="1">Номинальный</option>
-                <option value="0.87">Высокий</option>
-                <option value="0.74">Очень высокий</option>
-                <option value="0.62">Сверхвысокий</option>
-            </select><br>
-            <label for="FCIL">FCIL</label>
-            <select id="FCIL">
-                <option value="1.30">Очень низкий</option>
-                <option value="1.10">Низкий</option>
-                <option value="1">Номинальный</option>
-                <option value="0.87">Высокий</option>
-                <option value="0.73">Очень высокий</option>
-                <option value="0.62">Сверхвысокий</option>
-            </select><br>
-            <label for="SCED">SCED</label>
-            <select id="SCED">
-                <option value="1.43">Очень низкий</option>
-                <option value="1.14">Низкий</option>
-                <option value="1">Номинальный</option>
-                <option value="1">Высокий</option>
-                <option value="1">Очень высокий</option>
-            </select><br>
-            <button type="submit" id="meda">Рассчитать</button>
-            <h3 id="jobResultMeda"></h3>
-            <h3 id="timeResultMeda"></h3>
-        </div>
-        <div class="col">
-            <h2>Модель композиции изображения</h2>
-            <label for="rusePr">%RUSE:</label>
-            <input id="rusePr" type="text" placeholder="0"/><br>
-            <label for="exp">Опытность команды\разработчика</label>
-            <select id="exp">
-                <option value="4">Очень низкая</option>
-                <option value="7">Низкая</option>
-                <option value="13">Номинальная</option>
-                <option value="25">Высокая</option>
-                <option value="50">Очень высокая</option>
-            </select><br>
-            <h5>Экранные формы</h5>
-            <label for="sS">Простые</label>
-            <input id="sS" type="text" placeholder="0"/><br>
-            <label for="mS">Средние</label>
-            <input id="mS" type="text" placeholder="0"/><br>
-            <label for="hS">Сложные</label>
-            <input id="hS" type="text" placeholder="0"/><br>
-            <h5>Отчеты</h5>
-            <label for="sD">Простые</label>
-            <input id="sD" type="text" placeholder="0"/><br>
-            <label for="mD">Средние</label>
-            <input id="mD" type="text" placeholder="0"/><br>
-            <label for="hD">Сложные</label>
-            <input id="hD" type="text" placeholder="0"/><br>
-            <label for="mod">Модули на языках 3 поколения</label>
-            <input id="mod" type="text" placeholder="0"/><br>
-            <h3 id="jobResultMdp"></h3>
-            <h3 id="timeResultMdp"></h3>
+        <div class="popup__content">
+            <div class="popup__form">
+                <div class="form_js-form popup-bug-report__content">
+                </div>
+                <div class="popup__success">
+                    <div class="popup__success-text">
+                        <p>System.out.println</p>
+                        <p>("Ответ получишь ты скоро.</p>
+                        <p>Жди и не соступай с пути намеченного.");</p>
+                        <p> }</p>
+                        <p> }</p>
+                    </div>
+                    <div class="popup__success-btn">
+                        <button class="button js-popup-close">
+                            <span class="button__text">Спасибо</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="popup__image js-popup-image">
+                <img src="./static/core/pub/polis/images/popup/popup-image.png"/>
+            </div>
         </div>
     </div>
-</div>
-<script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
-<script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/randomcolor/0.5.4/randomColor.js"></script>
-<script async src="cocomo2.js"></script>
-<script src="index.js"></script>
+</article>
+<script src="./static/core/pub/polis/js/app.min.js"></script>
+<script type="text/javascript" src="./static/lib/js/jquery/jquery1260.js?v=5.41.28"></script>
+<script type="text/javascript" src="./static/core/pub/polis/js/f1260.js?v=5.41.28"></script>
+<script type="text/javascript" src="./static/lib/js/jquery/jquery.cookie1260.js?v=5.41.28"></script>
+<script type="text/javascript" src="./static/lib/js/jquery/jquery.tmpl.min1260.js?v=5.41.28"></script>
+<script type="text/javascript" src="./static/lib/js/jquery/jquery.form1260.js?v=5.41.28"></script>
+<script type="text/javascript" src="./static/lib/js/jquery/jquery.notifier1260.js?v=5.41.28"></script>
+<script type="text/javascript" src="./static/lib/js/msg1260.js?v=5.41.28"></script>
+<script type="text/javascript" src="./static/lib/js/jquery/jquery.notifier1260.js?v=5.41.28"></script>
+<script type="text/javascript"
+        src="./static/lib/js/jquery.maskedinput/jquery.maskedinput.min1260.js?v=5.41.28"></script>
+<script type="text/javascript" src="./static/lib/js/jquery/jquery.form1260.js?v=5.41.28"></script>
+<script src="./static/core/pub/polis/js/jquery.formstyler.min1260.js?v=5.41.28"></script>
+<script src="./static/core/pub/polis/js/base1260.js?v=5.41.28"></script>
+
+<script>
+    $(function () {
+        $('#logout_front').on('click', function (e) {
+            e.preventDefault();
+            $('#logout_front_form').submit();
+        });
+    });
+</script>
 </body>
 </html>
