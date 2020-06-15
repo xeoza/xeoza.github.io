@@ -3495,7 +3495,7 @@ table {
 }
 
 .stage:nth-child(2) .stage__content-wrap {
-    margin-top: 56px;
+    margin-top: 6px;
     margin-right: 169px;
     margin-left: 0
 }
@@ -3545,7 +3545,7 @@ table {
 }
 
 .stage__description {
-    max-width: 565px
+    /*max-width: 865px*/
 }
 
 .stage__button {
@@ -4598,7 +4598,7 @@ table {
     .header_inner .code {
         padding-top: 30px;
         padding-bottom: 42px;
-        font-size: 2.4vw;
+        font-size: 2.5vw;
         line-height: 2.5vw
     }
 
@@ -4854,8 +4854,8 @@ table {
     }
 
     .stage__subtitle {
-        font-size: 30px;
-        line-height: 36px
+        font-size: 25px;
+        line-height: 25px
     }
 
     .subheader__logo .logo {
