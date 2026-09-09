@@ -98,7 +98,7 @@ rm -f "$ROOT/nojs-check.html"
 
 **Files:**
 - Delete: `index.html`, `index.js`, `cocomo2.js` (файлы COCOMO, уже удалены в рабочей копии — нужно закоммитить удаление)
-- Delete: `screnshots/` (референс, в продакшене не нужен), `photos/` (после переноса)
+- Gitignore (НЕ удалять): `screnshots/`, `photos/` — обеих папок нет в истории git, удаление безвозвратно
 - Create: `assets/cover.jpg`, `assets/outro.jpg`, `assets/venue.jpg`, `assets/venue.webp`, `.nojekyll`
 
 **Interfaces:**
@@ -152,9 +152,11 @@ ls -la assets/
 cd /Users/dan/Documents/xeoza.github.io
 git rm --cached -q index.js cocomo2.js index.html 2>/dev/null || true
 rm -f index.js cocomo2.js index.html
-rm -rf screnshots photos
+printf 'screnshots/\nphotos/\n' >> .gitignore
 touch .nojekyll
 ```
+
+`screnshots/` и `photos/` НЕ удаляются. Ни одна из этих папок никогда не коммитилась — в истории git их нет, и `rm -rf` уничтожил бы 52 МБ референсных скриншотов и оригиналы фотографий безвозвратно. `.gitignore` решает задачу полностью: GitHub Pages публикует только закоммиченное.
 
 - [ ] **Step 6: Проверить состояние репозитория**
 
@@ -164,7 +166,7 @@ git status --short
 ls -la
 ```
 
-Ожидается: в корне остались `README.md`, `task.md`, `.gitignore`, `.nojekyll`, `assets/`, `docs/`. Каталогов `photos/` и `screnshots/` нет. В `git status` — удаление трёх файлов COCOMO и новые `assets/`, `.nojekyll`.
+Ожидается: в корне лежат `README.md`, `task.md`, `.gitignore`, `.nojekyll`, `assets/`, `docs/`, а также `photos/` и `screnshots/` — они остаются на диске, но в `git status --short` больше не показываются, потому что попали в `.gitignore`. В `git status` — удаление трёх файлов COCOMO и новые `assets/`, `.nojekyll`.
 
 - [ ] **Step 7: Коммит**
 
