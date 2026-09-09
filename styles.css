@@ -124,6 +124,8 @@ img { max-width: 100%; display: block; }
 
 .section--night .h2 { color: #f2ece2; }
 
+.headline + .h2 { margin-top: 26px; }
+
 .body-text {
   text-align: center;
   margin: 0;
