@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Тесты обратного отсчёта</title>
+<style>
+  body { font: 14px/1.6 ui-monospace, Menlo, monospace; padding: 24px; background: #14150f; color: #ddd; }
+  h1 { font-size: 17px; }
+  .pass { color: #7dc46f; }
+  .fail { color: #ef6a5c; font-weight: 700; }
+  #summary { margin-top: 18px; padding-top: 12px; border-top: 1px solid #444; font-size: 15px; }
+</style>
+</head>
+<body>
+<h1>Тесты обратного отсчёта</h1>
+<div id="out"></div>
+<div id="summary"></div>
+
+<script src="countdown.js"></script>
+<script>
+var passed = 0, failed = 0;
+var out = document.getElementById('out');
+
+function check(name, actual, expected) {
+  var ok = JSON.stringify(actual) === JSON.stringify(expected);
+  var line = document.createElement('div');
+  line.className = ok ? 'pass' : 'fail';
+  line.textContent = (ok ? '✓ ' : '✗ ') + name +
+    (ok ? '' : '  — получено ' + JSON.stringify(actual) + ', ожидалось ' + JSON.stringify(expected));
+  out.appendChild(line);
+  ok ? passed++ : failed++;
+}
+
+var D = ['день', 'дня', 'дней'];
+var H = ['час', 'часа', 'часов'];
+var M = ['минута', 'минуты', 'минут'];
+
+/* --- склонение числительных --- */
+check('pluralRu 0',   pluralRu(0, D),   'дней');
+check('pluralRu 1',   pluralRu(1, D),   'день');
+check('pluralRu 2',   pluralRu(2, D),   'дня');
+check('pluralRu 5',   pluralRu(5, D),   'дней');
+check('pluralRu 11',  pluralRu(11, D),  'дней');
+check('pluralRu 12',  pluralRu(12, D),  'дней');
+check('pluralRu 14',  pluralRu(14, D),  'дней');
+check('pluralRu 21',  pluralRu(21, D),  'день');
+check('pluralRu 22',  pluralRu(22, D),  'дня');
+check('pluralRu 25',  pluralRu(25, D),  'дней');
+check('pluralRu 101', pluralRu(101, D), 'день');
+check('pluralRu 111', pluralRu(111, D), 'дней');
+check('pluralRu 1 час',    pluralRu(1, H),  'час');
+check('pluralRu 2 часа',   pluralRu(2, H),  'часа');
+check('pluralRu 21 минута', pluralRu(21, M), 'минута');
+check('pluralRu 25 минут',  pluralRu(25, M), 'минут');
+
+/* --- разбор остатка --- */
+check('breakdown за сутки',  breakdown(86400000), {days: 1, hours: 0, minutes: 0, seconds: 0});
+check('breakdown за час',    breakdown(3600000),  {days: 0, hours: 1, minutes: 0, seconds: 0});
+check('breakdown за минуту', breakdown(60000),    {days: 0, hours: 0, minutes: 1, seconds: 0});
+check('breakdown за секунду', breakdown(1000),    {days: 0, hours: 0, minutes: 0, seconds: 1});
+check('breakdown смешанный', breakdown(90061000), {days: 1, hours: 1, minutes: 1, seconds: 1});
+check('breakdown ровно в момент', breakdown(0),   null);
+check('breakdown после',     breakdown(-1000),    null);
+
+/* --- целевая дата --- */
+check('WEDDING_MS константа', WEDDING_MS, 1791547200000);
+check('WEDDING_MS равен разбору строки со смещением МСК',
+      Date.parse('2026-10-09T15:00:00+03:00'), WEDDING_MS);
+
+var s = document.getElementById('summary');
+s.textContent = 'Пройдено: ' + passed + ', провалено: ' + failed;
+s.className = failed ? 'fail' : 'pass';
+</script>
+</body>
+</html>
