@@ -81,8 +81,7 @@ rm -f "$ROOT/nojs-check.html"
 | `tests.html` | Браузерный прогон тестов чистых функций из `countdown.js` |
 | `assets/cover.jpg` | Фото на обложку, 960×1280 |
 | `assets/outro.jpg` | Фото в завершение, 960×1280 |
-| `assets/venue.webp` | Фасад дома Пушкина, 1600×800 |
-| `assets/venue.jpg` | Запасной формат для `<picture>` |
+| `assets/venue.jpg` | Фасад дома Пушкина, 1240×620 |
 | `assets/og-preview.jpg` | Превью ссылки для мессенджеров, 1200×630 |
 | `.nojekyll` | Отключает обработку Jekyll на GitHub Pages |
 
@@ -99,11 +98,11 @@ rm -f "$ROOT/nojs-check.html"
 **Files:**
 - Delete: `index.html`, `index.js`, `cocomo2.js` (файлы COCOMO, уже удалены в рабочей копии — нужно закоммитить удаление)
 - Gitignore (НЕ удалять): `screnshots/`, `photos/` — обеих папок нет в истории git, удаление безвозвратно
-- Create: `assets/cover.jpg`, `assets/outro.jpg`, `assets/venue.jpg`, `assets/venue.webp`, `.nojekyll`
+- Create: `assets/cover.jpg`, `assets/outro.jpg`, `assets/venue.jpg`, `.nojekyll`
 
 **Interfaces:**
 - Consumes: ничего
-- Produces: пути `assets/cover.jpg`, `assets/outro.jpg`, `assets/venue.jpg`, `assets/venue.webp` — на них ссылаются задачи 2, 3 и 5
+- Produces: пути `assets/cover.jpg`, `assets/outro.jpg`, `assets/venue.jpg` — на них ссылаются задачи 2, 3 и 5
 
 - [ ] **Step 1: Убедиться, что исходники на месте**
 
@@ -131,9 +130,12 @@ cp "photos/photo_2026-09-09 11.42.37.jpeg" assets/outro.jpg
 
 ```bash
 cd /Users/dan/Documents/xeoza.github.io
-sips -s format jpeg -s formatOptions 72 "photos/Пушкина.jpg copy.jpg" --out assets/venue.jpg
-cp "photos/Пушкина.jpg.webp" assets/venue.webp
+sips -Z 1240 -s format jpeg -s formatOptions 62 "photos/Пушкина.jpg copy.jpg" --out assets/venue.jpg
 ```
+
+WebP не делается: `sips` на этой машине не умеет его записывать, а готовый `photos/Пушкина.jpg.webp` весит 344 КБ против 285 КБ у этого JPEG — тяжелее, а не легче. Файл `assets/venue.webp` создавать не нужно; если он остался от прежнего прогона — удалить: `rm -f assets/venue.webp`.
+
+Ширина 1240 не случайна: снимок показывается в колонке 620 px, на экране двойной плотности это ровно 1240 физических пикселей. Полное разрешение 1600×800 через `sips` не ужимается — даже качество 55 даёт 477 КБ.
 
 - [ ] **Step 4: Проверить веса**
 
@@ -142,9 +144,16 @@ cd /Users/dan/Documents/xeoza.github.io
 ls -la assets/
 ```
 
-Ожидается: `venue.jpg` ≤ 200 КБ, `venue.webp` ≤ 150 КБ, `cover.jpg` ≈ 76 КБ, `outro.jpg` ≈ 96 КБ.
+Ожидается ровно три файла: `cover.jpg` ≈ 76 КБ (960×1280), `outro.jpg` ≈ 96 КБ (960×1280), `venue.jpg` ≈ 285 КБ (1240×620). Файла `venue.webp` быть не должно.
 
-Если `venue.jpg` вышел больше 200 КБ — повторить Step 3 с `formatOptions 60`. Если `venue.webp` больше 150 КБ — пережать: `sips -s format webp -s formatOptions 65 assets/venue.jpg --out assets/venue.webp`.
+Проверить и размеры в пикселях, а не только вес — прошлый прогон молча уменьшил снимок вдвое:
+
+```bash
+cd /Users/dan/Documents/xeoza.github.io
+for f in assets/*.jpg; do printf "%-24s %8s байт  " "$f" "$(stat -f%z "$f")"; sips -g pixelWidth -g pixelHeight "$f" | tail -2 | tr -d '\n' | tr -s ' '; echo; done
+```
+
+`venue.jpg` обязан быть 1240×620. Если вышло другое разрешение или вес заметно выше 300 КБ — повторить Step 3 и показать вывод снова.
 
 - [ ] **Step 5: Удалить COCOMO, референсы и исходники фото**
 
@@ -486,7 +495,7 @@ EOF
 - Modify: `styles.css` (добавить стили календаря и тайминга)
 
 **Interfaces:**
-- Consumes: классы `.section`, `.section--alt`, `.wrap`, `.h2`, `.rule`, `.body-text`, `.btn`, `.photo`, `.kicker` из Task 2; `assets/venue.webp`, `assets/venue.jpg` из Task 1
+- Consumes: классы `.section`, `.section--alt`, `.wrap`, `.h2`, `.rule`, `.body-text`, `.btn`, `.photo`, `.kicker` из Task 2; `assets/venue.jpg` из Task 1
 - Produces: ничего, на что опираются следующие задачи
 
 - [ ] **Step 1: Добавить стили календаря и тайминга в styles.css**
@@ -628,11 +637,8 @@ EOF
     <hr class="rule">
     <a class="btn" href="https://yandex.ru/maps/?text=Москва, Спартаковская улица, 9с3" target="_blank" rel="noopener">Как добраться</a>
     <figure class="photo">
-      <picture>
-        <source srcset="assets/venue.webp" type="image/webp">
-        <img src="assets/venue.jpg" width="1600" height="800"
-             alt="Фасад библиотеки-читальни имени А.С. Пушкина, красной рамкой и стрелкой отмечен вход">
-      </picture>
+      <img src="assets/venue.jpg" width="1240" height="620"
+           alt="Фасад библиотеки-читальни имени А.С. Пушкина, красной рамкой и стрелкой отмечен вход">
       <figcaption>Вход в библиотеку отмечен на снимке</figcaption>
     </figure>
   </div>
@@ -1345,10 +1351,10 @@ open index.html
 
 ```bash
 cd /Users/dan/Documents/xeoza.github.io
-du -ch index.html styles.css countdown.js assets/cover.jpg assets/outro.jpg assets/venue.webp | tail -1
+du -ch index.html styles.css countdown.js assets/cover.jpg assets/outro.jpg assets/venue.jpg | tail -1
 ```
 
-Ожидается: не больше 400 КБ без учёта шрифтов. Если больше — пережать `venue.webp` сильнее.
+Ожидается: не больше 600 КБ без учёта шрифтов.
 
 - [ ] **Step 8: Обновить README**
 
