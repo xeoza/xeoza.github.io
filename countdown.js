@@ -2,9 +2,9 @@
    Чистые функции сверху — они покрыты тестами в tests.html.
    Слой DOM снизу — проверяется руками. */
 
-/* 2026-10-09T15:00:00+03:00 — смещение МСК указано явно,
+/* 2026-10-09T15:30:00+03:00 — смещение МСК указано явно,
    иначе гость в другом часовом поясе увидит неверный отсчёт. */
-var WEDDING_MS = 1791547200000;
+var WEDDING_MS = 1791549000000;
 
 /* Склонение русских числительных.
    forms — [для 1, для 2-4, для 5-20].
@@ -50,6 +50,8 @@ function breakdown(msLeft) {
     var left = breakdown(WEDDING_MS - Date.now());
 
     if (!left) {
+      var title = document.getElementById('countdown-title');
+      if (title) title.textContent = 'Мы поженились';
       root.innerHTML = '<p class="countdown-done">Мы поженились!<br>Спасибо, что были с нами</p>';
       return true; /* сигнал остановить таймер */
     }

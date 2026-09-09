@@ -63,9 +63,9 @@ check('breakdown ровно в момент', breakdown(0),   null);
 check('breakdown после',     breakdown(-1000),    null);
 
 /* --- целевая дата --- */
-check('WEDDING_MS константа', WEDDING_MS, 1791547200000);
+check('WEDDING_MS константа', WEDDING_MS, 1791549000000);
 check('WEDDING_MS равен разбору строки со смещением МСК',
-      Date.parse('2026-10-09T15:00:00+03:00'), WEDDING_MS);
+      Date.parse('2026-10-09T15:30:00+03:00'), WEDDING_MS);
 
 var s = document.getElementById('summary');
 s.textContent = 'Пройдено: ' + passed + ', провалено: ' + failed;
