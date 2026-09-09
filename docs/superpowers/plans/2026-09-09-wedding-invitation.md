@@ -25,6 +25,50 @@
 - **Коммиты — да, push — только по явному разрешению заказчика.** Ни одна задача этого плана не делает `git push`.
 - **Тексты копируются из спеки дословно.** Не переписывать, не «улучшать», не исправлять пунктуацию.
 
+## Стенд проверки
+
+Исполнитель — субагент без глаз и без интерактивного браузера. Все проверки
+выполняются командами и оставляют артефакт (текст или файл), который прикладывается
+к отчёту. Визуальную оценку скриншотов делает контролёр, не исполнитель.
+
+```bash
+CHROME="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+ROOT=/Users/dan/Documents/xeoza.github.io
+SHOTS="$ROOT/.superpowers/sdd/2026-09-09-wedding-invitation/shots"
+mkdir -p "$SHOTS"
+```
+
+**Скриншот страницы на заданной ширине** (высота 3000 берёт страницу целиком):
+
+```bash
+"$CHROME" --headless --disable-gpu --no-sandbox --hide-scrollbars   --window-size=390,3000 --screenshot="$SHOTS/index-390.png"   "file://$ROOT/index.html" 2>/dev/null
+```
+
+**Прогон тестов:**
+
+```bash
+"$CHROME" --headless --disable-gpu --no-sandbox --virtual-time-budget=3000   --dump-dom "file://$ROOT/tests.html" 2>/dev/null   | grep -oE "Пройдено: [0-9]+, провалено: [0-9]+"
+```
+
+**Проверка страницы без JavaScript.** Флаги Chrome для этого не годятся:
+`--disable-javascript` в версии 149 игнорируется, `--blink-settings=scriptEnabled=false`
+отдаёт пустой DOM. Вместо флага — копия страницы с вырезанным тегом `<script>`:
+
+```bash
+sed '/<script src="countdown.js"><\/script>/d' "$ROOT/index.html" > "$ROOT/nojs-check.html"
+"$CHROME" --headless --disable-gpu --no-sandbox --virtual-time-budget=2000   --dump-dom "file://$ROOT/nojs-check.html" 2>/dev/null | grep -c "9 октября 2026, 15:00"
+rm -f "$ROOT/nojs-check.html"
+```
+
+Ожидается `1` — запасная дата на месте. Временный файл обязательно удаляется.
+
+**Правило замены.** Где в шагах написано «открыть в браузере и проверить глазами»,
+исполнитель вместо этого снимает скриншот приведённой командой, кладёт его в `$SHOTS`
+и указывает путь в отчёте. Проверки, формулируемые как условие на текст (наличие
+строки, число вхождений, размер файла), выполняются через `grep`, `sips` и `ls`
+и приводятся в отчёте вместе с выводом команды.
+
+
 ---
 
 ## Файловая структура
@@ -44,7 +88,7 @@
 
 Разделение по ответственности, а не по слоям: весь текст живёт в одном файле, потому что править его будут целиком и редко. `countdown.js` отделён от разметки, потому что это единственный код с логикой, и только он поддаётся автотестам.
 
-**Порядок задач:** 1 → 2 → 3 → 4 → 5 → 6. Задача 4 (таймер) не зависит от 3 и может идти параллельно, если исполнителей несколько.
+**Порядок задач:** строго 1 → 2 → 3 → 4 → 5 → 6. Параллелить нельзя: задачи 3, 4 и 5 по очереди дописывают один и тот же `index.html`, каждая вставляя свою разметку после секции, созданной предыдущей.
 
 ---
 
@@ -942,9 +986,20 @@ open index.html
 
 - [ ] **Step 8: Проверить работу с отключённым JavaScript**
 
-В браузере отключить JavaScript (Chrome: DevTools → Settings → Debugger → Disable JavaScript), перезагрузить страницу.
+Флаги Chrome для этого не годятся (см. «Стенд проверки»). Проверяется копией страницы с вырезанным тегом скрипта.
 
-Ожидается: вместо цифр в тёмной секции стоит «9 октября 2026, 15:00». Остальная страница выглядит без изменений. Включить JavaScript обратно.
+```bash
+cd /Users/dan/Documents/xeoza.github.io
+CHROME="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+sed '/<script src="countdown.js"><\/script>/d' index.html > nojs-check.html
+"$CHROME" --headless --disable-gpu --no-sandbox --virtual-time-budget=2000 \
+  --dump-dom "file://$PWD/nojs-check.html" 2>/dev/null | grep -c "9 октября 2026, 15:00"
+rm -f nojs-check.html
+```
+
+Ожидается `1` — запасная дата на месте. Если `0`, значит запасной текст пропал из разметки или `sed` не нашёл тег скрипта: проверить, что тег записан ровно как `<script src="countdown.js"></script>`.
+
+Убедиться, что временный файл удалён: `ls nojs-check.html` должен вернуть ошибку.
 
 - [ ] **Step 9: Проверить состояние после свадьбы**
 
@@ -1229,21 +1284,21 @@ EOF
 </html>
 ```
 
-- [ ] **Step 2: Снять скриншот превью**
+- [ ] **Step 2: Снять превью через headless Chrome**
+
+Ручной скриншот здесь не нужен: окно задаётся точно 1200×630, и Chrome отдаёт кадр ровно этого размера.
 
 ```bash
 cd /Users/dan/Documents/xeoza.github.io
-open og-source.html
+CHROME="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+"$CHROME" --headless --disable-gpu --no-sandbox --hide-scrollbars \
+  --window-size=1200,630 --screenshot="$PWD/og-raw.png" \
+  "file://$PWD/og-source.html" 2>/dev/null
+sips -s format jpeg -s formatOptions 82 og-raw.png --out assets/og-preview.jpg
+rm -f og-raw.png
 ```
 
-Снять скриншот области ровно 1200×630 (macOS: Cmd+Shift+4, при выделении зажать пробел для перемещения рамки; размер показывается рядом с курсором). Сохранить на рабочий стол.
-
-Альтернатива, если ручной скриншот не даёт точный размер — снять любой скриншот блока и привести к нужному размеру:
-
-```bash
-cd /Users/dan/Documents/xeoza.github.io
-sips -z 630 1200 ~/Desktop/og-raw.png --out assets/og-preview.jpg -s format jpeg -s formatOptions 82
-```
+Шрифты Google Fonts подгружаются по сети. Если превью вышло набранным системным шрифтом вместо Playfair Display — добавить `--virtual-time-budget=5000` перед `--screenshot`, чтобы дать шрифтам время загрузиться, и снять заново.
 
 - [ ] **Step 3: Проверить превью**
 
