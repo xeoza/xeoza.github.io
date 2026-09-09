@@ -38,11 +38,46 @@ SHOTS="$ROOT/.superpowers/sdd/2026-09-09-wedding-invitation/shots"
 mkdir -p "$SHOTS"
 ```
 
-**Скриншот страницы на заданной ширине** (высота 3000 берёт страницу целиком):
+**Скриншот страницы на заданной ширине.** Напрямую через `--window-size` снимать
+НЕЛЬЗЯ: headless Chrome игнорирует `<meta name="viewport">` и верстает страницу в
+десктопной ширине независимо от размера окна. Кадр выходит обрезанным справа, и по
+нему легко сделать ложный вывод о переполнении. Страница открывается в `iframe`
+нужной ширины — внутри рамки viewport настоящий:
 
 ```bash
-"$CHROME" --headless --disable-gpu --no-sandbox --hide-scrollbars   --window-size=390,3000 --screenshot="$SHOTS/index-390.png"   "file://$ROOT/index.html" 2>/dev/null
+W=390
+cat > /tmp/frame$W.html <<HTML
+<!doctype html><html><head><meta charset="utf-8"><style>
+html,body{margin:0;background:#666}
+iframe{width:${W}px;height:1500px;border:0;display:block;margin:0 auto;background:#fff}
+</style></head><body><iframe src="$ROOT/index.html"></iframe></body></html>
+HTML
+"$CHROME" --headless --disable-gpu --no-sandbox --hide-scrollbars --allow-file-access-from-files --virtual-time-budget=6000 --window-size=$((W+80)),1500 --screenshot="$SHOTS/mob-$W.png" "file:///tmp/frame$W.html" 2>/dev/null
 ```
+
+Окно берётся на 80 px шире рамки, иначе iframe подрезается по краю. Высоту
+подбирать под длину страницы. `--virtual-time-budget=6000` обязателен: без паузы
+шрифты Google Fonts не успевают загрузиться и кадр выходит набранным системным.
+
+**Проверка переполнения по ширине** — измерением, а не глазами по скриншоту:
+
+```bash
+cat > /tmp/probe-width.html <<HTML
+<!doctype html><html><body><pre id="r">…</pre>
+<iframe id="f" src="$ROOT/index.html" style="width:390px;height:800px;border:0"></iframe>
+<script>
+setTimeout(function(){
+ var d=document.getElementById('f').contentDocument;
+ document.getElementById('r').textContent =
+  'scrollWidth='+d.documentElement.scrollWidth+' clientWidth='+d.documentElement.clientWidth;
+},3000);
+</script></body></html>
+HTML
+"$CHROME" --headless --disable-gpu --no-sandbox --allow-file-access-from-files --virtual-time-budget=6000 --dump-dom "file:///tmp/probe-width.html" 2>/dev/null | grep -oE "scrollWidth=[0-9]+ clientWidth=[0-9]+"
+```
+
+Ожидается равенство двух чисел. `scrollWidth` больше `clientWidth` — есть
+переполнение.
 
 **Прогон тестов:**
 
