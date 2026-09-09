@@ -50,9 +50,12 @@ img { max-width: 100%; display: block; }
     linear-gradient(rgba(14, 13, 12, 0.72), rgba(14, 13, 12, 0.72)),
     url("assets/timer-bg.jpg");
   background-size: auto, cover;
-  background-position: center, center 22%;
+  background-position: center, center 18%;
   background-repeat: no-repeat;
   color: #ddd6cc;
+  /* секция выше обычной: при плоском соотношении сторон фотографию
+     обрезало по головам, а нужен воздух над ними */
+  padding: 62px 0;
 }
 
 .wrap {
@@ -187,6 +190,7 @@ img { max-width: 100%; display: block; }
 /* ---------- Календарь ---------- */
 .calendar {
   width: 100%;
+  table-layout: fixed;
   border-collapse: collapse;
   margin: 18px 0 0;
   font-family: var(--font-body);
@@ -216,19 +220,12 @@ img { max-width: 100%; display: block; }
   color: var(--ink);
 }
 
+/* Сердечко выведено из потока: иначе его ширина раздувала колонку «Пт»
+   и вся сетка съезжала. Ячейка остаётся такой же, как соседние. */
 .calendar .is-wedding {
+  position: relative;
   color: var(--wine);
   font-weight: 700;
-  padding: 0;
-}
-
-.calendar .heart {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 38px;
-  height: 38px;
 }
 
 .calendar .heart svg {
@@ -237,17 +234,20 @@ img { max-width: 100%; display: block; }
   top: 50%;
   width: 38px;
   height: 38px;
+  margin-top: -1px;
   transform: translate(-50%, -50%);
   fill: none;
   stroke: var(--wine);
   stroke-width: 1.7;
   stroke-linejoin: round;
+  pointer-events: none;
 }
 
 /* цифра садится чуть выше центра — у сердца низ острый */
 .calendar .heart-num {
   position: relative;
-  padding-bottom: 3px;
+  display: inline-block;
+  transform: translateY(-1px);
 }
 
 /* ---------- Тайминг ---------- */
@@ -408,5 +408,6 @@ img { max-width: 100%; display: block; }
 @media (min-width: 720px) {
   body { font-size: 17px; }
   .section { padding: 64px 0; }
+  .section--night { padding: 160px 0; }
   :root { --pad: 32px; }
 }
