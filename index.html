@@ -1,620 +1,184 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="ru">
 <head>
-	<meta charset="UTF-8">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-	<title>Title</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Данила &amp; Анастасия — 9 октября 2026</title>
+<meta name="description" content="Приглашение на свадьбу Данилы и Анастасии. 9 октября 2026 года, дом Пушкина, Москва.">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://xeoza.github.io/">
+<meta property="og:title" content="Данила &amp; Анастасия · 9 октября 2026">
+<meta property="og:description" content="Приглашаем вас стать частью нашего знаменательного события — торжественной церемонии в доме Пушкина.">
+<meta property="og:image" content="https://xeoza.github.io/assets/og-preview.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Old+Standard+TT:wght@400;700&family=PT+Serif:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<header>
-	
-</header>
-<h1> COCOMO 1 </h1>
-	<!-- -->
-	<div>
-		<label for="kloc">kLOC (Количество строк кода)</label>
-		<input id="kloc" type="text" value="430" required/>
-		<label for="lang">Язык программирования</label>
-		<select id="lang">
-			<option value="1"> Ассемблер</option>
-			<option value="2.5"> С</option>
-			<option value="3"> Кобол</option>
-			<option value="3"> Фортран</option>
-			<option value="3.5"> Паскаль</option>
-			<option value="6" selected> С++</option>
-			<option value="6"> Java</option>
-			<option value="6.5"> Ada 95</option>
-			<option value="8.5"> Access</option>
-			<option value="11"> Delphi</option>
-			<option value="16"> COBRA</option>
-		</select><br>
-		<br>
-		<h2>Атрибуты программного продукта</h2>
-		<label for="RELY">RELY (Требуемая надежность)</label>
-		<select id="RELY">
-			<option value="0.75"> Очень низкий</option>
-			<option value="0.86"> Низкий</option>
-			<option value="1"> Номинальный</option>
-			<option value="1.15"selected> Высокий</option>
-			<option value="1.4"> Очень высокий</option>
-		</select><br>
-		<label for="DATA">DATA (Размер базы данных)</label>
-		<select id="DATA">
-			<option value="0.94"> Низкий</option>
-			<option value="1" selected> Номинальный</option>
-			<option value="1.08"> Высокий</option>
-			<option value="1.16"> Очень высокий</option>
-		</select><br>
-		<label for="CPLX">CPLX (Сложность продукта)</label>
-		<select id="CPLX">
-			<option value="0.7"> Очень низкий</option>
-			<option value="0.85"> Низкий</option>
-			<option value="1.0" selected> Номинальный</option>
-			<option value="1.15"> Высокий</option>
-			<option value="1.3"> Очень высокий</option>
-		</select><br>
-		<h2>Атрибуты компьютера</h2>
-		<label for="TIME">TIME (Огранечение времени выполнения)</label>
-		<select id="TIME">
-			<option value="1"> Номинальный</option>
-			<option value="1.11"selected> Высокий</option>
-			<option value="1.5"> Очень высокий</option>
-		</select><br>
-		<label for="STOR">STOR (Огранечение объема основной памяти)</label>
-		<select id="STOR">
-			<option value="1"selected> Номинальный</option>
-			<option value="1.06"> Высокий</option>
-			<option value="1.21"> Очень высокий</option>
-		</select><br>
-		<label for="VIRT">VIRT (Изменчивость виртуальной машины)</label>
-		<select id="VIRT">
-			<option value="0.87"> Низкий</option>
-			<option value="1"selected> Номинальный</option>
-			<option value="1.15"> Высокий</option>
-			<option value="1.3" > Очень высокий</option>
-		</select><br>
-		<label for="TURN">TURN (Время реакции компьютера)</label>
-		<select id="TURN">
-			<option value="0.87"> Низкий</option>
-			<option value="1"selected> Номинальный</option>
-			<option value="1.07"> Высокий</option>
-			<option value="1.15" > Очень высокий</option>
-		</select><br>
-		<h2>Атрибуты персонала</h2>
-		<label for="ACAP">ACAP (Способности аналитика)</label>
-		<select id="ACAP">
-			<option value="1.46"> Очень низкий</option>
-			<option value="1.19"> Низкий</option>
-			<option value="1"selected> Номинальный</option>
-			<option value="0.86"> Высокий</option>
-			<option value="0.71" > Очень высокий</option>
-		</select><br>
-		<label for="AEXP">AEXP (Знание приложений)</label>
-		<select id="AEXP">
-			<option value="1.29"> Очень низкий</option>
-			<option value="1.15"> Низкий</option>
-			<option value="1"selected> Номинальный</option>
-			<option value="0.91"> Высокий</option>
-			<option value="0.82" > Очень высокий</option>
-		</select><br>
-		<label for="PCAP">PCAP (Способности программиста)</label>
-		<select id="PCAP">
-			<option value="1.42"> Очень низкий</option>
-			<option value="1.17"> Низкий</option>
-			<option value="1"selected> Номинальный</option>
-			<option value="0.86"> Высокий</option>
-			<option value="0.7" > Очень высокий</option>
-		</select><br>
-		<h2>Атрибуты проекта</h2>
-		<label for="VEXP">VEXP (Знание виртуальной машины)</label>
-		<select id="VEXP">
-			<option value="1.21"> Очень низкий</option>
-			<option value="1.1"> Низкий</option>
-			<option value="1"selected> Номинальный</option>
-			<option value="0.9" > Высокий</option>
-		</select><br>
-		<label for="LEXP">LEXP (Знание языка программирования)</label>
-		<select id="LEXP">
-			<option value="1.14"> Очень низкий</option>
-			<option value="1.07"> Низкий</option>
-			<option value="1"selected> Номинальный</option>
-			<option value="0.95" > Высокий</option>
-		</select><br>
-		<label for="MODP">MODP (Использование современных методов)</label>
-		<select id="MODP">
-			<option value="1.24"> Очень низкий</option>
-			<option value="1.1"> Низкий</option>
-			<option value="1"selected> Номинальный</option>
-			<option value="0.91"> Высокий</option>
-			<option value="0.82" > Очень высокий</option>
-		</select><br>
-		<label for="TOOL">TOOL (Использование программных инструментов)</label>
-		<select id="TOOL">
-			<option value="1.24"> Очень низкий</option>
-			<option value="1.1"> Низкий</option>
-			<option value="1"selected> Номинальный</option>
-			<option value="0.91"> Высокий</option>
-			<option value="0.82" > Очень высокий</option>
-		</select><br>
-		<label for="SCED">SCED (Требуемые сроки разработки)</label>
-		<select id="SCED">
-			<option value="1.23"> Очень низкий</option>
-			<option value="1.08"> Низкий</option>
-			<option value="1"> Номинальный</option>
-			<option value="1.04"selected> Высокий</option>
-			<option value="1.1" > Очень высокий</option>
-		</select><br>
-		<br>
-		<label for="mode">Режим модели</label>
-		<select id="mode">
-			<option value="simple"> Обычный</option>
-			<option value="inter" > Промежуточный</option>
-			<option value="buildin"selected> Встроенный</option>
-		</select><br>
-		<br>
-		<button id="countBtn" type="submit">Рассчитать</button>
 
-		<h2>Декомпозиция работ по созданию ПО</h2>
-		<table>
-			<tr>
-				<th>
-					Вид деятельности
-				</th>
-				<th>
-					Бюджет
-				</th>
-			</tr>
-			<tr>
-				<td>
-					Анализ требований (4%)
-				</td>
-				<td id="tAn">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					Проектирование продукта (12%)
-				</td>
-				<td id="tProj">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					Программирование (44%)
-				</td>
-				<td id="tProg">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					Тестирование (6%)
-				</td>
-				<td id="tTest">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					Верификация и аттестация (14%)
-				</td>
-				<td id="tVer">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					Канцелярия проекта (7%)
-				</td>
-				<td id="tOff">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					Управление конфигурацией и обеспечение качества (7%)
-				</td>
-				<td id="tManag">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					Создание руководств (6%)
-				</td>
-				<td id="tCreat">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					Всего
-				</td>
-				<td id="tTotal">
-				</td>
-			</tr>
-		</table>
-	</div>
-	<div style="width: 300px; height: 300px;">
-		<canvas id="chart" width="300" height="300"></canvas>
-	</div>
-	<div>
-		<h2>Распределение работ и времени по стадиям жизненного цикла</h2>
-		<h5>Снаружи - человеко/месяцы, внутри - месяцы</h5>
-		<table>
-			<tr>
-				<th>Вид деятельности</th>
-				<th>Трудозатраты</th>
-				<th>Время</th>
-			</tr>
-			<tr>
-				<td>Планирование и определение требований</td>
-				<td id="j1"></td>
-				<td id="t1"></td>
-			</tr>
-			<tr>
-				<td>Проектирование продукта</td>
-				<td id="j2"></td>
-				<td id="t2"></td>
-			</tr>
-			<tr>
-				<td>Детальное проектирование</td>
-				<td id="j3"></td>
-				<td id="t3"></td>
-			</tr>
-			<tr>
-				<td>Кодирование и тестирование отдельных модулей</td>
-				<td id="j4"></td>
-				<td id="t4"></td>
-			</tr>
-			<tr>
-				<td>Интеграция и тестирование</td>
-				<td id="j5"></td>
-				<td id="t5"></td>
-			</tr>
-			<tr>
-				<td>Итого без планирования</td>
-				<td id="wPj"></td>
-				<td id="wPt"></td>
-			</tr>
-			<tr>
-				<td>Итого</td>
-				<td id="j"></td>
-				<td id="t"></td>
-			</tr>
-		</table>
-	</div>
-	<div style="width: 300px; height: 300px;">
-		<canvas id="timejob" width="300" height="300"></canvas>
-	</div>
-	<h3> Диаграмма привлечения сотрудников </h3>
-	<div style="width: 700px; height: 300px;">
-		<canvas id="dia"></canvas>
-	</div>
-<h1>COCOMO II</h1>
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <h2>Метод функциональных точек</h2>
-            <label for="fp1">Передачи данных</label>
-            <input id="fp1" type="number" min="0" max="5"/><br>
-            <label for="fp2">Распределенная обработка данных</label>
-            <input id="fp2" type="number" min="0" max="5"/><br>
-            <label for="fp3">Производительность</label>
-            <input id="fp3" type="number" min="0" max="5"/><br>
-            <label for="fp4">Эксплутационные ограничения</label>
-            <input id="fp4" type="number" min="0" max="5"/><br>
-            <label for="fp5">Частота транзакций</label>
-            <input id="fp5" type="number" min="0" max="5"/><br>
-            <label for="fp6">Оперативный ввод данных</label>
-            <input id="fp6" type="number" min="0" max="5"/><br>
-            <label for="fp7">Эффективность работы конечных пользователей</label>
-            <input id="fp7" type="number" min="0" max="5"/><br>
-            <label for="fp8">Оперативное обновление</label>
-            <input id="fp8" type="number" min="0" max="5"/><br>
-            <label for="fp9">Сложность обработки</label>
-            <input id="fp9" type="number" min="0" max="5"/><br>
-            <label for="fp10">Повторная используемость</label>
-            <input id="fp10" type="number" min="0" max="5"/><br>
-            <label for="fp11">Легкость инсталляции</label>
-            <input id="fp11" type="number" min="0" max="5"/><br>
-            <label for="fp12">Легкость эксплуатации</label>
-            <input id="fp12" type="number" min="0" max="5"/><br>
-            <label for="fp13">Количество возможных установок на различных платформах</label>
-            <input id="fp13" type="number" min="0" max="5"/><br>
-            <label for="fp14">Простота изменений</label>
-            <input id="fp14" type="number" min="0" max="5"/><br>
-            <button type="submit" id="fpBtn">Рассчитать</button>
-            <h2 id="fi"></h2>
-            <h2 id="ufp"></h2>
-            <h2 id="fp"></h2>
-        </div>
-        <div class="col">
-            <h4>Внешние вводы EI</h4>
-            <table border="1">
-                <tr>
-                    <th></th>
-                    <th> 1-4 </th>
-                    <th> 5-15 </th>
-                    <th> >15 </th>
-                </tr>
-                <tr>
-                    <td> 0-1</td>
-                    <td><input id="EI00" type="text" /></td>
-                    <td><input id="EI01" type="text" /></td>
-                    <td><input id="EI02" type="text" /></td>
-                </tr>
-                <tr>
-                    <td> 2 </td>
-                    <td><input id="EI10" type="text" /></td>
-                    <td><input id="EI11" type="text" /></td>
-                    <td><input id="EI12" type="text" /></td>
-                </tr>
-                <tr>
-                    <td> >2 </td>
-                    <td><input id="EI20" type="text" /></td>
-                    <td><input id="EI21" type="text" /></td>
-                    <td><input id="EI22" type="text" /></td>
-                </tr>
-            </table>
-            <h4>Внешние выводы EO</h4>
-            <table border="1">
-                <tr>
-                    <th></th>
-                    <th> 1-4 </th>
-                    <th> 5-19 </th>
-                    <th> >19 </th>
-                </tr>
-                <tr>
-                    <td> 0-1</td>
-                    <td><input id="EO00" type="text" /></td>
-                    <td><input id="EO01" type="text" /></td>
-                    <td><input id="EO02" type="text" /></td>
-                </tr>
-                <tr>
-                    <td> 2-3 </td>
-                    <td><input id="EO10" type="text" /></td>
-                    <td><input id="EO11" type="text" /></td>
-                    <td><input id="EO12" type="text" /></td>
-                </tr>
-                <tr>
-                    <td> >3 </td>
-                    <td><input id="EO20" type="text" /></td>
-                    <td><input id="EO21" type="text" /></td>
-                    <td><input id="EO22" type="text" /></td>
-                </tr>
-            </table>
-            <h4>Внутренние логические файлы ILF</h4>
-            <table border="1">
-                <tr>
-                    <th></th>
-                    <th> 1-19 </th>
-                    <th> 20-50 </th>
-                    <th> >50 </th>
-                </tr>
-                <tr>
-                    <td> 1</td>
-                    <td><input id="ILF00" type="text" /></td>
-                    <td><input id="ILF01" type="text" /></td>
-                    <td><input id="ILF02" type="text" /></td>
-                </tr>
-                <tr>
-                    <td> 2-5 </td>
-                    <td><input id="ILF10" type="text" /></td>
-                    <td><input id="ILF11" type="text" /></td>
-                    <td><input id="ILF12" type="text" /></td>
-                </tr>
-                <tr>
-                    <td> >5 </td>
-                    <td><input id="ILF20" type="text" /></td>
-                    <td><input id="ILF21" type="text" /></td>
-                    <td><input id="ILF22" type="text" /></td>
-                </tr>
-            </table>
-            <h4>Внешние интерфейсные файлы EIF</h4>
-            <table border="1">
-                <tr>
-                    <th></th>
-                    <th> 1-19 </th>
-                    <th> 20-50 </th>
-                    <th> >50 </th>
-                </tr>
-                <tr>
-                    <td> 1</td>
-                    <td><input id="EIF00" type="text" /></td>
-                    <td><input id="EIF01" type="text" /></td>
-                    <td><input id="EIF02" type="text" /></td>
-                </tr>
-                <tr>
-                    <td> 2-5 </td>
-                    <td><input id="EIF10" type="text" /></td>
-                    <td><input id="EIF11" type="text" /></td>
-                    <td><input id="EIF12" type="text" /></td>
-                </tr>
-                <tr>
-                    <td> >5 </td>
-                    <td><input id="EIF20" type="text" /></td>
-                    <td><input id="EIF21" type="text" /></td>
-                    <td><input id="EIF22" type="text" /></td>
-                </tr>
-            </table>
-            <h4>Внешние запросы EQ</h4>
-            <table border="1">
-                <tr>
-                    <th></th>
-                    <th> 1-4 </th>
-                    <th> 5-19 </th>
-                    <th> >19 </th>
-                </tr>
-                <tr>
-                    <td> 0-1</td>
-                    <td><input id="EQ00" type="text" /></td>
-                    <td><input id="EQ01" type="text" /></td>
-                    <td><input id="EQ02" type="text" /></td>
-                </tr>
-                <tr>
-                    <td> 2-3 </td>
-                    <td><input id="EQ10" type="text" /></td>
-                    <td><input id="EQ11" type="text" /></td>
-                    <td><input id="EQ12" type="text" /></td>
-                </tr>
-                <tr>
-                    <td> >3 </td>
-                    <td><input id="EQ20" type="text" /></td>
-                    <td><input id="EQ21" type="text" /></td>
-                    <td><input id="EQ22" type="text" /></td>
-                </tr>
-            </table>
-        </div>
+<!-- 1. Обложка -->
+<section class="section">
+  <div class="wrap">
+    <h1 class="masthead">Свадебный Вестник</h1>
+    <hr class="rule rule--thick">
+    <hr class="rule rule--tight">
+    <p class="dateline"><span>Приглашение на свадьбу</span><span>09 октября 2026</span></p>
+    <hr class="rule">
+    <p class="headline">ДАНИЛА &amp; АНАСТАСИЯ<br>ЖЕНЯТСЯ!</p>
+    <hr class="rule">
+    <p class="kicker">Главная свадьба года</p>
+    <figure class="photo">
+      <img src="assets/cover.jpg" width="960" height="1280"
+           alt="Данила и Анастасия складывают руки сердечком">
+    </figure>
+  </div>
+</section>
+
+<!-- 2. Обращение -->
+<section class="section section--alt">
+  <div class="wrap">
+    <h2 class="h2">Дорогие близкие!</h2>
+    <hr class="rule">
+    <p class="body-text">Это официальное приглашение на нашу свадьбу! Приглашаем вас стать частью нашего знаменательного события — торжественной церемонии в доме Пушкина. После церемонии вас будет ждать вкусный ужин в ресторане недалеко от локации.</p>
+    <hr class="rule">
+  </div>
+</section>
+
+<!-- 3. Календарь -->
+<section class="section">
+  <div class="wrap">
+    <table class="calendar">
+      <caption>Октябрь 2026</caption>
+      <thead>
+        <tr><th scope="col">Пн</th><th scope="col">Вт</th><th scope="col">Ср</th><th scope="col">Чт</th><th scope="col">Пт</th><th scope="col">Сб</th><th scope="col">Вс</th></tr>
+      </thead>
+      <tbody>
+        <tr><td></td><td></td><td></td><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+        <tr><td>5</td><td>6</td><td>7</td><td>8</td><td class="is-wedding">9</td><td>10</td><td>11</td></tr>
+        <tr><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td></tr>
+        <tr><td>19</td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td></tr>
+        <tr><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 4. Площадка -->
+<section class="section section--alt">
+  <div class="wrap">
+    <p class="headline">09 ОКТЯБРЯ 2026<br>Сбор в 14:45</p>
+    <h2 class="h2">Место проведения</h2>
+    <hr class="rule">
+    <p class="body-text">Библиотека-читальня имени А.С. Пушкина<br>Спартаковская ул., 9, стр. 3<br>Москва</p>
+    <hr class="rule">
+    <a class="btn" href="https://yandex.ru/maps/?text=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D0%A1%D0%BF%D0%B0%D1%80%D1%82%D0%B0%D0%BA%D0%BE%D0%B2%D1%81%D0%BA%D0%B0%D1%8F%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%2C%209%D1%813" target="_blank" rel="noopener">Как добраться</a>
+    <figure class="photo">
+      <img src="assets/venue.jpg" width="1240" height="620"
+           alt="Фасад библиотеки-читальни имени А.С. Пушкина, красной рамкой и стрелкой отмечен вход">
+      <figcaption>Вход в библиотеку отмечен на снимке</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- 5. Тайминг -->
+<section class="section">
+  <div class="wrap">
+    <h2 class="h2">Тайминг</h2>
+    <hr class="rule">
+    <table class="timing">
+      <tbody>
+        <tr><td>Сбор гостей у входа</td><td>14:45</td></tr>
+        <tr><td>Вход в дом Пушкина</td><td>15:00</td></tr>
+        <tr><td>Церемония регистрации</td><td>15:30</td></tr>
+        <tr><td>Ужин в ресторане</td><td>17:00</td></tr>
+        <tr><td>Завершение вечера</td><td>20:00</td></tr>
+      </tbody>
+    </table>
+    <p class="note">Просьба не опаздывать — церемония длится всего 10 минут</p>
+  </div>
+</section>
+
+<!-- 6. Дресс-код -->
+<section class="section section--alt">
+  <div class="wrap">
+    <h2 class="h2">Дресс-код</h2>
+    <hr class="rule">
+    <p class="body-text">Мы очень ждём и готовимся к нашему незабываемому дню! Поддержите нас вашими улыбками и объятиями, а также красивыми вечерними нарядами.</p>
+    <hr class="rule">
+  </div>
+</section>
+
+<!-- 7. Таймер -->
+<section class="section section--night">
+  <div class="wrap">
+    <h2 class="h2" id="countdown-title">До свадьбы осталось</h2>
+    <hr class="rule">
+    <div class="countdown" id="countdown" aria-live="off">
+      <p class="countdown-fallback">9 октября 2026, 15:30</p>
     </div>
-    <hr>
-    <hr>
-    <div class="row">
-        <div class="col">
-            <h2>Факторы, влияющие на показатель степени в модели</h2>
-            <label for="prec">Новизна (PREC)</label>
-            <select id="prec">
-                <option value="6.2">Полное отсуствие прецедентов, полностью непредсказуемый проект</option>
-                <option value="4.96">Почти полное отсутсвие прецедентов, в значительной мере непредсказуемый проект</option>
-                <option value="3.72">Наличие некоторого количества прецедентов</option>
-                <option value="2.48">Общее знакомство с проектом</option>
-                <option value="1.24">Значительное знакомство с проектом</option>
-                <option value="0">Полное знакомство с проектом</option>
-            </select><br>
-            <label for="Flex">Гибкость разработки (FLEX)</label>
-            <select id="Flex">
-                <option value="5.07">Точный, строгий процесс разработки</option>
-                <option value="4.05">Случайные послабления в процессе</option>
-                <option value="3.04">Некоторые послабления в процессе</option>
-                <option value="2.03">Большей частью согласованный процесс</option>
-                <option value="1.01">Некоторое согласование процесса</option>
-                <option value="0">Заказчик определил только общие цели</option>
-            </select><br>
-            <label for="Risk">Разрешение рисков в архитектуре системы (RESL)</label>
-            <select id="Risk">
-                <option value="7">Малое (20%)</option>
-                <option value="5.65">Некоторое (40%)</option>
-                <option value="4.24">Частое (60%)</option>
-                <option value="2.83">В целом (75%)</option>
-                <option value="1.41">Почти полное (90%)</option>
-                <option value="0">Полное (100%)</option>
-            </select><br>
-            <label for="team">Сплоченность команды (TEAM)</label>
-            <select id="team">
-                <option value="5.48">Сильно затрудненное взаимодействие</option>
-                <option value="4.38">Несколько затрудненное взаимодействие</option>
-                <option value="3.29">Некоторая согласованность</option>
-                <option value="2.19">Повышенная согласованность</option>
-                <option value="1.1">Высокая согласованность</option>
-                <option value="0">Взаимодействие как в едином целом</option>
-            </select><br>
-            <label for="pmat">Уровень зрелости процесса разработки (PMAT)</label>
-            <select id="pmat">
-                <option value="7">Уровень 1 СММ</option>
-                <option value="6.24">Уровень 1+ СММ</option>
-                <option value="4.68">Уровень 2 СММ</option>
-                <option value="1.12">Уровень 3 СММ</option>
-                <option value="1.56">Уровень 7 СММ</option>
-                <option value="0">Уровень 5 СММ</option>
-            </select><br>
-            <h3 id="p"></h3>
-        </div>
-        <div class="col">
-            <h2>Модель ранней разработки архитектуры</h2>
-            <label for="PERS">PERS</label>
-            <select id="PERS">
-                <option value="1.62">Очень низкий</option>
-                <option value="1.26">Низкий</option>
-                <option value="1">Номинальный</option>
-                <option value="0.83">Высокий</option>
-                <option value="0.63">Очень высокий</option>
-                <option value="0.5">Сверхвысокий</option>
-            </select><br>
-            <label for="RCPX">RCPX</label>
-            <select id="RCPX">
-                <option value="0.6">Очень низкий</option>
-                <option value="0.83">Низкий</option>
-                <option value="1">Номинальный</option>
-                <option value="1.33">Высокий</option>
-                <option value="1.91">Очень высокий</option>
-                <option value="2.72">Сверхвысокий</option>
-            </select><br>
-            <label for="RUSE">RUSE</label>
-            <select id="RUSE">
-                <option value="0.95">Низкий</option>
-                <option value="1">Номинальный</option>
-                <option value="1.07">Высокий</option>
-                <option value="1.15">Очень высокий</option>
-                <option value="1.24">Сверхвысокий</option>
-            </select><br>
-            <label for="PDIF">PDIF</label>
-            <select id="PDIF">
-                <option value="0.87">Низкий</option>
-                <option value="1">Номинальный</option>
-                <option value="1.29">Высокий</option>
-                <option value="1.81">Очень высокий</option>
-                <option value="2.61">Сверхвысокий</option>
-            </select><br>
-            <label for="PREX">PREX</label>
-            <select id="PREX">
-                <option value="1.33">Очень низкий</option>
-                <option value="1.22">Низкий</option>
-                <option value="1">Номинальный</option>
-                <option value="0.87">Высокий</option>
-                <option value="0.74">Очень высокий</option>
-                <option value="0.62">Сверхвысокий</option>
-            </select><br>
-            <label for="FCIL">FCIL</label>
-            <select id="FCIL">
-                <option value="1.30">Очень низкий</option>
-                <option value="1.10">Низкий</option>
-                <option value="1">Номинальный</option>
-                <option value="0.87">Высокий</option>
-                <option value="0.73">Очень высокий</option>
-                <option value="0.62">Сверхвысокий</option>
-            </select><br>
-            <label for="SCED">SCED</label>
-            <select id="SCED">
-                <option value="1.43">Очень низкий</option>
-                <option value="1.14">Низкий</option>
-                <option value="1">Номинальный</option>
-                <option value="1">Высокий</option>
-                <option value="1">Очень высокий</option>
-            </select><br>
-            <button type="submit" id="meda">Рассчитать</button>
-            <h3 id="jobResultMeda"></h3>
-            <h3 id="timeResultMeda"></h3>
-        </div>
-        <div class="col">
-            <h2>Модель композиции изображения</h2>
-            <label for="rusePr">%RUSE:</label>
-            <input id="rusePr" type="text" placeholder="0"/><br>
-            <label for="exp">Опытность команды\разработчика</label>
-            <select id="exp">
-                <option value="4">Очень низкая</option>
-                <option value="7">Низкая</option>
-                <option value="13">Номинальная</option>
-                <option value="25">Высокая</option>
-                <option value="50">Очень высокая</option>
-            </select><br>
-            <h5>Экранные формы</h5>
-            <label for="sS">Простые</label>
-            <input id="sS" type="text" placeholder="0"/><br>
-            <label for="mS">Средние</label>
-            <input id="mS" type="text" placeholder="0"/><br>
-            <label for="hS">Сложные</label>
-            <input id="hS" type="text" placeholder="0"/><br>
-            <h5>Отчеты</h5>
-            <label for="sD">Простые</label>
-            <input id="sD" type="text" placeholder="0"/><br>
-            <label for="mD">Средние</label>
-            <input id="mD" type="text" placeholder="0"/><br>
-            <label for="hD">Сложные</label>
-            <input id="hD" type="text" placeholder="0"/><br>
-            <label for="mod">Модули на языках 3 поколения</label>
-            <input id="mod" type="text" placeholder="0"/><br>
-            <h3 id="jobResultMdp"></h3>
-            <h3 id="timeResultMdp"></h3>
-        </div>
-    </div>
-</div>
-<script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
-<script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/randomcolor/0.5.4/randomColor.js"></script>
-<script async src="cocomo2.js"></script>
-<script src="index.js"></script>
+    <hr class="rule">
+  </div>
+</section>
+
+<!-- 8. Ограничения -->
+<section class="section">
+  <div class="wrap">
+    <h2 class="h2">Ограничения</h2>
+    <hr class="rule">
+    <ul class="rules">
+      <li>На территории библиотеки запрещается распитие алкогольных напитков.</li>
+      <li>Запрещена церемония «битья бокалов и фужеров на счастье».</li>
+      <li>Запрещено использование в поздравлении монет, риса, хлопушек, конфетти, лепестков цветов.</li>
+    </ul>
+    <p class="parking">Автомобиль можно оставить на ближайшей платной городской парковке.</p>
+  </div>
+</section>
+
+<!-- 9. Контакты -->
+<section class="section section--alt">
+  <div class="wrap">
+    <h2 class="h2">Контакты</h2>
+    <hr class="rule">
+    <p class="body-text">По всем вопросам, связанным с мероприятием, вы можете обратиться к нам.</p>
+    <p class="contact-name">Данила</p>
+    <p class="contact-phone">+7 933 277-42-29</p>
+    <a class="btn" href="tel:+79332774229">Позвонить</a>
+  </div>
+</section>
+
+<!-- 10. Анкета гостя -->
+<section class="section">
+  <div class="wrap">
+    <h2 class="h2">Анкета гостя</h2>
+    <hr class="rule">
+    <p class="body-text">Пожалуйста, подтвердите своё присутствие до:</p>
+    <p class="deadline">16 СЕНТЯБРЯ 2026</p>
+    <a class="btn" href="https://t.me/xeoza" target="_blank" rel="noopener">Написать Даниле</a>
+    <a class="btn" href="https://t.me/prodnasty" target="_blank" rel="noopener">Написать Анастасии</a>
+  </div>
+</section>
+
+<!-- 11. Завершение -->
+<section class="section section--alt">
+  <div class="wrap">
+    <h2 class="h2">До скорой встречи!</h2>
+    <hr class="rule">
+    <p class="kicker">С любовью</p>
+    <hr class="rule">
+    <p class="signature">ДАНИЛА &amp; АНАСТАСИЯ</p>
+    <figure class="photo">
+      <img src="assets/outro.jpg" width="960" height="1280"
+           alt="Данила и Анастасия, он поправляет ей шляпу">
+    </figure>
+  </div>
+</section>
+
+<script src="countdown.js"></script>
 </body>
 </html>

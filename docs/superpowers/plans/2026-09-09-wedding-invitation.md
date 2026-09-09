@@ -2,6 +2,13 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
+> **Внимание: план отражает состояние до финального ревью.** Тайминг и целевой
+> момент таймера были исправлены после того, как финальное ревью сверило сайт
+> с черновиком заказчика в `screnshots/`. Актуальные значения — сбор 14:45,
+> вход 15:00, церемония **15:30**, ужин **17:00**, завершение 20:00, константа
+> `WEDDING_MS = 1791549000000`. Ниже по тексту встречаются прежние 15:00 и
+> `1791547200000` — это исторический след, источник истины теперь спека.
+
 **Goal:** Собрать статический сайт-приглашение на свадьбу Данилы и Анастасии 9 октября 2026 года, оформленный как выпуск старой газеты, и опубликовать его на https://xeoza.github.io/
 
 **Architecture:** Одна страница `index.html` со всем текстом прямо в разметке, рядом `styles.css` и единственный скрипт `countdown.js`. Никакой сборки, никаких зависимостей, никакого генератора статики — GitHub Pages отдаёт файлы как есть. Логика обратного отсчёта разделена на чистые функции (тестируются) и тонкий слой обновления DOM (проверяется руками).
@@ -25,6 +32,85 @@
 - **Коммиты — да, push — только по явному разрешению заказчика.** Ни одна задача этого плана не делает `git push`.
 - **Тексты копируются из спеки дословно.** Не переписывать, не «улучшать», не исправлять пунктуацию.
 
+## Стенд проверки
+
+Исполнитель — субагент без глаз и без интерактивного браузера. Все проверки
+выполняются командами и оставляют артефакт (текст или файл), который прикладывается
+к отчёту. Визуальную оценку скриншотов делает контролёр, не исполнитель.
+
+```bash
+CHROME="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+ROOT=/Users/dan/Documents/xeoza.github.io
+SHOTS="$ROOT/.superpowers/sdd/2026-09-09-wedding-invitation/shots"
+mkdir -p "$SHOTS"
+```
+
+**Скриншот страницы на заданной ширине.** Напрямую через `--window-size` снимать
+НЕЛЬЗЯ: headless Chrome игнорирует `<meta name="viewport">` и верстает страницу в
+десктопной ширине независимо от размера окна. Кадр выходит обрезанным справа, и по
+нему легко сделать ложный вывод о переполнении. Страница открывается в `iframe`
+нужной ширины — внутри рамки viewport настоящий:
+
+```bash
+W=390
+cat > /tmp/frame$W.html <<HTML
+<!doctype html><html><head><meta charset="utf-8"><style>
+html,body{margin:0;background:#666}
+iframe{width:${W}px;height:1500px;border:0;display:block;margin:0 auto;background:#fff}
+</style></head><body><iframe src="$ROOT/index.html"></iframe></body></html>
+HTML
+"$CHROME" --headless --disable-gpu --no-sandbox --hide-scrollbars --allow-file-access-from-files --virtual-time-budget=6000 --window-size=$((W+80)),1500 --screenshot="$SHOTS/mob-$W.png" "file:///tmp/frame$W.html" 2>/dev/null
+```
+
+Окно берётся на 80 px шире рамки, иначе iframe подрезается по краю. Высоту
+подбирать под длину страницы. `--virtual-time-budget=6000` обязателен: без паузы
+шрифты Google Fonts не успевают загрузиться и кадр выходит набранным системным.
+
+**Проверка переполнения по ширине** — измерением, а не глазами по скриншоту:
+
+```bash
+cat > /tmp/probe-width.html <<HTML
+<!doctype html><html><body><pre id="r">…</pre>
+<iframe id="f" src="$ROOT/index.html" style="width:390px;height:800px;border:0"></iframe>
+<script>
+setTimeout(function(){
+ var d=document.getElementById('f').contentDocument;
+ document.getElementById('r').textContent =
+  'scrollWidth='+d.documentElement.scrollWidth+' clientWidth='+d.documentElement.clientWidth;
+},3000);
+</script></body></html>
+HTML
+"$CHROME" --headless --disable-gpu --no-sandbox --allow-file-access-from-files --virtual-time-budget=6000 --dump-dom "file:///tmp/probe-width.html" 2>/dev/null | grep -oE "scrollWidth=[0-9]+ clientWidth=[0-9]+"
+```
+
+Ожидается равенство двух чисел. `scrollWidth` больше `clientWidth` — есть
+переполнение.
+
+**Прогон тестов:**
+
+```bash
+"$CHROME" --headless --disable-gpu --no-sandbox --virtual-time-budget=3000   --dump-dom "file://$ROOT/tests.html" 2>/dev/null   | grep -oE "Пройдено: [0-9]+, провалено: [0-9]+"
+```
+
+**Проверка страницы без JavaScript.** Флаги Chrome для этого не годятся:
+`--disable-javascript` в версии 149 игнорируется, `--blink-settings=scriptEnabled=false`
+отдаёт пустой DOM. Вместо флага — копия страницы с вырезанным тегом `<script>`:
+
+```bash
+sed '/<script src="countdown.js"><\/script>/d' "$ROOT/index.html" > "$ROOT/nojs-check.html"
+"$CHROME" --headless --disable-gpu --no-sandbox --virtual-time-budget=2000   --dump-dom "file://$ROOT/nojs-check.html" 2>/dev/null | grep -c "9 октября 2026, 15:00"
+rm -f "$ROOT/nojs-check.html"
+```
+
+Ожидается `1` — запасная дата на месте. Временный файл обязательно удаляется.
+
+**Правило замены.** Где в шагах написано «открыть в браузере и проверить глазами»,
+исполнитель вместо этого снимает скриншот приведённой командой, кладёт его в `$SHOTS`
+и указывает путь в отчёте. Проверки, формулируемые как условие на текст (наличие
+строки, число вхождений, размер файла), выполняются через `grep`, `sips` и `ls`
+и приводятся в отчёте вместе с выводом команды.
+
+
 ---
 
 ## Файловая структура
@@ -37,14 +123,13 @@
 | `tests.html` | Браузерный прогон тестов чистых функций из `countdown.js` |
 | `assets/cover.jpg` | Фото на обложку, 960×1280 |
 | `assets/outro.jpg` | Фото в завершение, 960×1280 |
-| `assets/venue.webp` | Фасад дома Пушкина, 1600×800 |
-| `assets/venue.jpg` | Запасной формат для `<picture>` |
+| `assets/venue.jpg` | Фасад дома Пушкина, 1240×620 |
 | `assets/og-preview.jpg` | Превью ссылки для мессенджеров, 1200×630 |
 | `.nojekyll` | Отключает обработку Jekyll на GitHub Pages |
 
 Разделение по ответственности, а не по слоям: весь текст живёт в одном файле, потому что править его будут целиком и редко. `countdown.js` отделён от разметки, потому что это единственный код с логикой, и только он поддаётся автотестам.
 
-**Порядок задач:** 1 → 2 → 3 → 4 → 5 → 6. Задача 4 (таймер) не зависит от 3 и может идти параллельно, если исполнителей несколько.
+**Порядок задач:** строго 1 → 2 → 3 → 4 → 5 → 6. Параллелить нельзя: задачи 3, 4 и 5 по очереди дописывают один и тот же `index.html`, каждая вставляя свою разметку после секции, созданной предыдущей.
 
 ---
 
@@ -54,12 +139,12 @@
 
 **Files:**
 - Delete: `index.html`, `index.js`, `cocomo2.js` (файлы COCOMO, уже удалены в рабочей копии — нужно закоммитить удаление)
-- Delete: `screnshots/` (референс, в продакшене не нужен), `photos/` (после переноса)
-- Create: `assets/cover.jpg`, `assets/outro.jpg`, `assets/venue.jpg`, `assets/venue.webp`, `.nojekyll`
+- Gitignore (НЕ удалять): `screnshots/`, `photos/` — обеих папок нет в истории git, удаление безвозвратно
+- Create: `assets/cover.jpg`, `assets/outro.jpg`, `assets/venue.jpg`, `.nojekyll`
 
 **Interfaces:**
 - Consumes: ничего
-- Produces: пути `assets/cover.jpg`, `assets/outro.jpg`, `assets/venue.jpg`, `assets/venue.webp` — на них ссылаются задачи 2, 3 и 5
+- Produces: пути `assets/cover.jpg`, `assets/outro.jpg`, `assets/venue.jpg` — на них ссылаются задачи 2, 3 и 5
 
 - [ ] **Step 1: Убедиться, что исходники на месте**
 
@@ -87,9 +172,12 @@ cp "photos/photo_2026-09-09 11.42.37.jpeg" assets/outro.jpg
 
 ```bash
 cd /Users/dan/Documents/xeoza.github.io
-sips -s format jpeg -s formatOptions 72 "photos/Пушкина.jpg copy.jpg" --out assets/venue.jpg
-cp "photos/Пушкина.jpg.webp" assets/venue.webp
+sips -Z 1240 -s format jpeg -s formatOptions 62 "photos/Пушкина.jpg copy.jpg" --out assets/venue.jpg
 ```
+
+WebP не делается: `sips` на этой машине не умеет его записывать, а готовый `photos/Пушкина.jpg.webp` весит 344 КБ против 285 КБ у этого JPEG — тяжелее, а не легче. Файл `assets/venue.webp` создавать не нужно; если он остался от прежнего прогона — удалить: `rm -f assets/venue.webp`.
+
+Ширина 1240 не случайна: снимок показывается в колонке 620 px, на экране двойной плотности это ровно 1240 физических пикселей. Полное разрешение 1600×800 через `sips` не ужимается — даже качество 55 даёт 477 КБ.
 
 - [ ] **Step 4: Проверить веса**
 
@@ -98,9 +186,16 @@ cd /Users/dan/Documents/xeoza.github.io
 ls -la assets/
 ```
 
-Ожидается: `venue.jpg` ≤ 200 КБ, `venue.webp` ≤ 150 КБ, `cover.jpg` ≈ 76 КБ, `outro.jpg` ≈ 96 КБ.
+Ожидается ровно три файла: `cover.jpg` ≈ 76 КБ (960×1280), `outro.jpg` ≈ 96 КБ (960×1280), `venue.jpg` ≈ 285 КБ (1240×620). Файла `venue.webp` быть не должно.
 
-Если `venue.jpg` вышел больше 200 КБ — повторить Step 3 с `formatOptions 60`. Если `venue.webp` больше 150 КБ — пережать: `sips -s format webp -s formatOptions 65 assets/venue.jpg --out assets/venue.webp`.
+Проверить и размеры в пикселях, а не только вес — прошлый прогон молча уменьшил снимок вдвое:
+
+```bash
+cd /Users/dan/Documents/xeoza.github.io
+for f in assets/*.jpg; do printf "%-24s %8s байт  " "$f" "$(stat -f%z "$f")"; sips -g pixelWidth -g pixelHeight "$f" | tail -2 | tr -d '\n' | tr -s ' '; echo; done
+```
+
+`venue.jpg` обязан быть 1240×620. Если вышло другое разрешение или вес заметно выше 300 КБ — повторить Step 3 и показать вывод снова.
 
 - [ ] **Step 5: Удалить COCOMO, референсы и исходники фото**
 
@@ -108,9 +203,11 @@ ls -la assets/
 cd /Users/dan/Documents/xeoza.github.io
 git rm --cached -q index.js cocomo2.js index.html 2>/dev/null || true
 rm -f index.js cocomo2.js index.html
-rm -rf screnshots photos
+printf 'screnshots/\nphotos/\n' >> .gitignore
 touch .nojekyll
 ```
+
+`screnshots/` и `photos/` НЕ удаляются. Ни одна из этих папок никогда не коммитилась — в истории git их нет, и `rm -rf` уничтожил бы 52 МБ референсных скриншотов и оригиналы фотографий безвозвратно. `.gitignore` решает задачу полностью: GitHub Pages публикует только закоммиченное.
 
 - [ ] **Step 6: Проверить состояние репозитория**
 
@@ -120,7 +217,7 @@ git status --short
 ls -la
 ```
 
-Ожидается: в корне остались `README.md`, `task.md`, `.gitignore`, `.nojekyll`, `assets/`, `docs/`. Каталогов `photos/` и `screnshots/` нет. В `git status` — удаление трёх файлов COCOMO и новые `assets/`, `.nojekyll`.
+Ожидается: в корне лежат `README.md`, `task.md`, `.gitignore`, `.nojekyll`, `assets/`, `docs/`, а также `photos/` и `screnshots/` — они остаются на диске, но в `git status --short` больше не показываются, потому что попали в `.gitignore`. В `git status` — удаление трёх файлов COCOMO и новые `assets/`, `.nojekyll`.
 
 - [ ] **Step 7: Коммит**
 
@@ -440,7 +537,7 @@ EOF
 - Modify: `styles.css` (добавить стили календаря и тайминга)
 
 **Interfaces:**
-- Consumes: классы `.section`, `.section--alt`, `.wrap`, `.h2`, `.rule`, `.body-text`, `.btn`, `.photo`, `.kicker` из Task 2; `assets/venue.webp`, `assets/venue.jpg` из Task 1
+- Consumes: классы `.section`, `.section--alt`, `.wrap`, `.h2`, `.rule`, `.body-text`, `.btn`, `.photo`, `.kicker` из Task 2; `assets/venue.jpg` из Task 1
 - Produces: ничего, на что опираются следующие задачи
 
 - [ ] **Step 1: Добавить стили календаря и тайминга в styles.css**
@@ -582,11 +679,8 @@ EOF
     <hr class="rule">
     <a class="btn" href="https://yandex.ru/maps/?text=Москва, Спартаковская улица, 9с3" target="_blank" rel="noopener">Как добраться</a>
     <figure class="photo">
-      <picture>
-        <source srcset="assets/venue.webp" type="image/webp">
-        <img src="assets/venue.jpg" width="1600" height="800"
-             alt="Фасад библиотеки-читальни имени А.С. Пушкина, красной рамкой и стрелкой отмечен вход">
-      </picture>
+      <img src="assets/venue.jpg" width="1240" height="620"
+           alt="Фасад библиотеки-читальни имени А.С. Пушкина, красной рамкой и стрелкой отмечен вход">
       <figcaption>Вход в библиотеку отмечен на снимке</figcaption>
     </figure>
   </div>
@@ -649,7 +743,7 @@ git commit -m "$(cat <<'EOF'
 Блоки обращения, календаря, площадки, тайминга и дресс-кода
 
 Календарь октября 2026 с отметкой на 9-м числе, тайминг с разделителем
-и просьбой не опаздывать, фото площадки через picture с webp.
+и просьбой не опаздывать, фото площадки через обычный img (webp на проекте не используется).
 
 Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>
 EOF
@@ -942,9 +1036,20 @@ open index.html
 
 - [ ] **Step 8: Проверить работу с отключённым JavaScript**
 
-В браузере отключить JavaScript (Chrome: DevTools → Settings → Debugger → Disable JavaScript), перезагрузить страницу.
+Флаги Chrome для этого не годятся (см. «Стенд проверки»). Проверяется копией страницы с вырезанным тегом скрипта.
 
-Ожидается: вместо цифр в тёмной секции стоит «9 октября 2026, 15:00». Остальная страница выглядит без изменений. Включить JavaScript обратно.
+```bash
+cd /Users/dan/Documents/xeoza.github.io
+CHROME="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+sed '/<script src="countdown.js"><\/script>/d' index.html > nojs-check.html
+"$CHROME" --headless --disable-gpu --no-sandbox --virtual-time-budget=2000 \
+  --dump-dom "file://$PWD/nojs-check.html" 2>/dev/null | grep -c "9 октября 2026, 15:00"
+rm -f nojs-check.html
+```
+
+Ожидается `1` — запасная дата на месте. Если `0`, значит запасной текст пропал из разметки или `sed` не нашёл тег скрипта: проверить, что тег записан ровно как `<script src="countdown.js"></script>`.
+
+Убедиться, что временный файл удалён: `ls nojs-check.html` должен вернуть ошибку.
 
 - [ ] **Step 9: Проверить состояние после свадьбы**
 
@@ -1229,21 +1334,21 @@ EOF
 </html>
 ```
 
-- [ ] **Step 2: Снять скриншот превью**
+- [ ] **Step 2: Снять превью через headless Chrome**
+
+Ручной скриншот здесь не нужен: окно задаётся точно 1200×630, и Chrome отдаёт кадр ровно этого размера.
 
 ```bash
 cd /Users/dan/Documents/xeoza.github.io
-open og-source.html
+CHROME="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+"$CHROME" --headless --disable-gpu --no-sandbox --hide-scrollbars \
+  --window-size=1200,630 --screenshot="$PWD/og-raw.png" \
+  "file://$PWD/og-source.html" 2>/dev/null
+sips -s format jpeg -s formatOptions 82 og-raw.png --out assets/og-preview.jpg
+rm -f og-raw.png
 ```
 
-Снять скриншот области ровно 1200×630 (macOS: Cmd+Shift+4, при выделении зажать пробел для перемещения рамки; размер показывается рядом с курсором). Сохранить на рабочий стол.
-
-Альтернатива, если ручной скриншот не даёт точный размер — снять любой скриншот блока и привести к нужному размеру:
-
-```bash
-cd /Users/dan/Documents/xeoza.github.io
-sips -z 630 1200 ~/Desktop/og-raw.png --out assets/og-preview.jpg -s format jpeg -s formatOptions 82
-```
+Шрифты Google Fonts подгружаются по сети. Если превью вышло набранным системным шрифтом вместо Playfair Display — добавить `--virtual-time-budget=5000` перед `--screenshot`, чтобы дать шрифтам время загрузиться, и снять заново.
 
 - [ ] **Step 3: Проверить превью**
 
@@ -1288,10 +1393,10 @@ open index.html
 
 ```bash
 cd /Users/dan/Documents/xeoza.github.io
-du -ch index.html styles.css countdown.js assets/cover.jpg assets/outro.jpg assets/venue.webp | tail -1
+du -ch index.html styles.css countdown.js assets/cover.jpg assets/outro.jpg assets/venue.jpg | tail -1
 ```
 
-Ожидается: не больше 400 КБ без учёта шрифтов. Если больше — пережать `venue.webp` сильнее.
+Ожидается: не больше 600 КБ без учёта шрифтов.
 
 - [ ] **Step 8: Обновить README**
 
