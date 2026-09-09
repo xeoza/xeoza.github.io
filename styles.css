@@ -5,7 +5,6 @@
   --ink: #111;
   --ink-soft: #3a3a3a;
   --wine: #6e1417;
-  --night: #1a1917;
 
   --col: 620px;
   --pad: 22px;
@@ -43,11 +42,6 @@ img { max-width: 100%; display: block; }
 
 .section--alt { background-color: var(--paper-alt); }
 
-.section--night {
-  background-color: var(--night);
-  color: #ddd6cc;
-}
-
 .wrap {
   max-width: var(--col);
   margin: 0 auto;
@@ -67,8 +61,6 @@ img { max-width: 100%; display: block; }
 }
 
 .rule--tight { margin: 6px 0 16px; }
-
-.section--night .rule { border-top-color: #6b645a; }
 
 /* ---------- Типографика ---------- */
 .masthead {
@@ -122,8 +114,6 @@ img { max-width: 100%; display: block; }
   margin: 0 0 4px;
 }
 
-.section--night .h2 { color: #f2ece2; }
-
 .headline + .h2 { margin-top: 26px; }
 
 .body-text {
@@ -131,8 +121,6 @@ img { max-width: 100%; display: block; }
   margin: 0;
   color: var(--ink-soft);
 }
-
-.section--night .body-text { color: #c8c0b5; }
 
 /* ---------- Кнопка ---------- */
 .btn {
@@ -180,6 +168,7 @@ img { max-width: 100%; display: block; }
 /* ---------- Календарь ---------- */
 .calendar {
   width: 100%;
+  table-layout: fixed;
   border-collapse: collapse;
   margin: 18px 0 0;
   font-family: var(--font-body);
@@ -209,21 +198,34 @@ img { max-width: 100%; display: block; }
   color: var(--ink);
 }
 
+/* Сердечко выведено из потока: иначе его ширина раздувала колонку «Пт»
+   и вся сетка съезжала. Ячейка остаётся такой же, как соседние. */
 .calendar .is-wedding {
   position: relative;
   color: var(--wine);
   font-weight: 700;
 }
 
-.calendar .is-wedding::before {
-  content: "";
+.calendar .heart svg {
   position: absolute;
-  inset: 50% auto auto 50%;
-  width: 34px;
-  height: 34px;
+  left: 50%;
+  top: 50%;
+  width: 38px;
+  height: 38px;
+  margin-top: -1px;
   transform: translate(-50%, -50%);
-  border: 1.5px solid var(--wine);
-  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  fill: none;
+  stroke: var(--wine);
+  stroke-width: 1.7;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+
+/* цифра садится чуть выше центра — у сердца низ острый */
+.calendar .heart-num {
+  position: relative;
+  display: inline-block;
+  transform: translateY(-1px);
 }
 
 /* ---------- Тайминг ---------- */
@@ -240,9 +242,25 @@ img { max-width: 100%; display: block; }
   vertical-align: middle;
 }
 
-.timing td:first-child {
+.timing td:nth-child(2) {
   text-align: left;
   padding-right: 18px;
+}
+
+.timing .tico-cell {
+  width: 46px;
+  padding-right: 12px;
+  line-height: 0;
+}
+
+.timing .tico {
+  width: 34px;
+  height: 34px;
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .timing td:last-child {
@@ -267,6 +285,52 @@ img { max-width: 100%; display: block; }
 }
 
 /* ---------- Таймер ---------- */
+
+/* Фотография — обычный элемент в колонке, а не background-size: cover.
+   Cover кадрирует по-разному под каждое соотношение сторон, поэтому на
+   телефоне и на десктопе выходили разные куски снимка и срезало головы.
+   Здесь пропорцию задаёт сам файл: композиция одинаковая на любой ширине.
+   Секция при этом остаётся светлой, как все прочие, — тёмная только
+   сама фотография под вуалью, иначе чёрная полоса рвала ритм страницы. */
+.countdown-box {
+  position: relative;
+  margin: 22px 0 0;
+  overflow: hidden;
+}
+
+.countdown-photo {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.countdown-box::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(12, 11, 10, 0.55);
+}
+
+.countdown-inner {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 6%;
+}
+
+.countdown-inner .h2 {
+  font-size: clamp(20px, 6.4vw, 34px);
+  color: #f4eee5;
+  margin: 0;
+}
+
+.countdown-inner .rule {
+  border-top-color: rgba(244, 238, 229, 0.5);
+  margin: 3% 0;
+}
 .countdown {
   display: flex;
   justify-content: space-between;
@@ -282,9 +346,9 @@ img { max-width: 100%; display: block; }
 .countdown-num {
   display: block;
   font-family: var(--font-display);
-  font-size: clamp(28px, 9vw, 40px);
+  font-size: clamp(22px, 7.2vw, 38px);
   line-height: 1.1;
-  color: #f2ece2;
+  color: #f4eee5;
 }
 
 .countdown-label {
@@ -292,7 +356,7 @@ img { max-width: 100%; display: block; }
   font-family: var(--font-caps);
   font-size: 12px;
   letter-spacing: 0.06em;
-  color: #b0a89c;
+  color: #c4bcb0;
   margin-top: 4px;
 }
 
