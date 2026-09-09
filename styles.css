@@ -175,6 +175,95 @@ img { max-width: 100%; display: block; }
   }
 }
 
+/* ---------- Календарь ---------- */
+.calendar {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 18px 0 0;
+  font-family: var(--font-body);
+}
+
+.calendar caption {
+  font-family: var(--font-display);
+  font-size: 24px;
+  color: var(--ink);
+  padding-bottom: 12px;
+}
+
+.calendar th {
+  font-family: var(--font-caps);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #7d786f;
+  padding: 6px 0;
+}
+
+.calendar td {
+  text-align: center;
+  padding: 8px 0;
+  font-size: 17px;
+  color: var(--ink);
+}
+
+.calendar .is-wedding {
+  position: relative;
+  color: var(--wine);
+  font-weight: 700;
+}
+
+.calendar .is-wedding::before {
+  content: "";
+  position: absolute;
+  inset: 50% auto auto 50%;
+  width: 34px;
+  height: 34px;
+  transform: translate(-50%, -50%);
+  border: 1.5px solid var(--wine);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+}
+
+/* ---------- Тайминг ---------- */
+.timing {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 18px 0 0;
+}
+
+.timing td {
+  padding: 14px 0;
+  font-size: 17px;
+  color: var(--ink);
+  vertical-align: middle;
+}
+
+.timing td:first-child {
+  text-align: left;
+  padding-right: 18px;
+}
+
+.timing td:last-child {
+  text-align: right;
+  font-family: var(--font-display);
+  font-size: 22px;
+  white-space: nowrap;
+  border-left: 1px solid var(--ink);
+  padding-left: 18px;
+  width: 92px;
+}
+
+.timing tr + tr td { border-top: 1px solid #b9b4ac; }
+
+.note {
+  margin: 24px 0 0;
+  padding: 14px 16px;
+  border: 1px solid var(--wine);
+  color: var(--wine);
+  font-size: 15px;
+  text-align: center;
+}
+
 /* ---------- Десктоп ---------- */
 @media (min-width: 720px) {
   body { font-size: 17px; }
