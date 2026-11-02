@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /
+
+# Pre-launch: indexing is disabled (INDEXING = false).
+# To open the site for indexing, replace the two lines above with:
+#   User-agent: *
+#   Allow: /
+# and remove <meta name="robots" content="noindex, nofollow"> from the pages.

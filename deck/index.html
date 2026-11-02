@@ -1,0 +1,1518 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Celikkol &amp; Zykin Advisory — презентация</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0E1E33">
+<style>
+:root {
+  --base: #0e1e33;
+  --base-2: #16283f;
+  --accent: #c8a464;
+  --accent-soft: #e7d6b4;
+  --bg: #f6f4ef;
+  --surface: #ffffff;
+  --ink: #1f2933;
+  --muted: #5b6672;
+  --line: #ded7c9;
+  --font: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: #0b1522;
+  font-family: var(--font);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+[hidden] { display: none !important; }
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip {
+  position: absolute;
+  left: 16px; top: -60px;
+  z-index: 100;
+  padding: 10px 16px;
+  background: var(--accent);
+  color: var(--base);
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.skip:focus { top: 16px; }
+
+/* ---------- Stage ---------- */
+
+.stage-wrap { position: fixed; inset: 0; overflow: hidden; }
+
+.stage {
+  position: absolute;
+  width: 1280px;
+  height: 720px;
+  transform-origin: top left;
+  background: var(--bg);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 52px 72px 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  background: var(--bg);
+}
+.slide.is-active { opacity: 1; visibility: visible; transform: none; }
+
+.slide-inner { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; justify-content: center; }
+.slide-cover .slide-inner { justify-content: flex-start; }
+
+.slide-foot {
+  flex: 0 0 auto;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 24px;
+  padding: 12px 0 16px;
+  border-top: 1px solid var(--line);
+  font-size: 9px;
+  line-height: 1.4;
+  color: var(--muted);
+}
+.foot-brand { letter-spacing: 0.16em; white-space: nowrap; font-weight: 600; }
+.foot-note { text-align: center; opacity: 0.85; }
+.foot-right { display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; }
+.foot-lang {
+  position: absolute;
+  top: 20px;
+  right: 72px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+}
+.slide-cover .foot-lang { color: var(--accent); }
+.foot-page { letter-spacing: 0.08em; }
+
+/* ---------- Typography ---------- */
+
+.kicker {
+  margin: 0 0 12px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.kicker::before {
+  content: "";
+  display: inline-block;
+  width: 26px; height: 1px;
+  margin-right: 10px;
+  vertical-align: middle;
+  background: var(--accent);
+}
+
+.h2 {
+  margin: 0 0 10px;
+  font-size: 42px;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+  color: var(--base);
+}
+
+.lead {
+  margin: 0 0 26px;
+  font-size: 19px;
+  line-height: 1.45;
+  color: var(--muted);
+  max-width: 62ch;
+}
+
+/* ---------- Cover ---------- */
+
+.slide-cover { background: var(--base); color: #e7ecf2; padding-top: 64px; }
+.slide-cover .kicker { color: #9fb0c4; }
+.slide-cover .kicker::before { background: var(--accent); }
+.slide-cover .wordmark {
+  margin: 0;
+  font-size: 54px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: #fff;
+  line-height: 1.1;
+}
+.slide-cover .wordmark .amp { color: var(--accent); font-weight: 400; }
+.slide-cover .wordmark-sub {
+  margin: 6px 0 40px;
+  font-size: 14px;
+  letter-spacing: 0.52em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.slide-cover h1 {
+  margin: 0 0 14px;
+  font-size: 40px;
+  line-height: 1.12;
+  font-weight: 600;
+  color: #fff;
+  max-width: 20ch;
+}
+.slide-cover .lead { color: #c3cddb; font-size: 21px; margin-bottom: 0; max-width: 46ch; }
+.slide-cover .lang-note { margin-top: 26px; font-size: 12px; letter-spacing: 0.06em; color: #8ea0b6; }
+.slide-cover .slide-foot { border-top-color: rgba(255, 255, 255, 0.14); color: #8ea0b6; }
+
+.cover-mark {
+  position: absolute;
+  right: 48px;
+  top: 50%;
+  width: 380px;
+  transform: translateY(-50%);
+  opacity: 0.9;
+  pointer-events: none;
+}
+.cover-mark svg { width: 100%; height: auto; display: block; }
+
+/* ---------- Grids & cards ---------- */
+
+.grid { display: grid; gap: 18px; }
+.g2 { grid-template-columns: repeat(2, 1fr); }
+.g3 { grid-template-columns: repeat(3, 1fr); }
+.g4 { grid-template-columns: repeat(4, 1fr); }
+.g5 { grid-template-columns: repeat(5, 1fr); }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 20px 22px;
+  min-height: 0;
+}
+.card h3 { margin: 0 0 6px; font-size: 19px; line-height: 1.2; color: var(--base); font-weight: 600; }
+.card p { margin: 0; font-size: 15px; line-height: 1.42; color: var(--muted); }
+
+.card-num {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--accent);
+}
+
+.card-row { display: flex; gap: 16px; align-items: flex-start; }
+.card-row .card-num { flex: 0 0 auto; margin: 2px 0 0; }
+.card-row h3 { font-size: 18px; }
+.card-row p { font-size: 14.5px; }
+
+/* ---------- Split do / don't ---------- */
+
+.split { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 18px; }
+.panel { border-radius: 14px; padding: 22px 24px; border: 1px solid var(--line); background: var(--surface); }
+.panel h3 {
+  margin: 0 0 14px;
+  font-size: 13px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--base);
+}
+.panel-dont { background: #fbf8f2; }
+.panel-dont h3 { color: #8a6b33; }
+.panel ul { margin: 0; padding: 0; list-style: none; }
+.panel li {
+  position: relative;
+  padding-left: 26px;
+  margin-bottom: 9px;
+  font-size: 16px;
+  line-height: 1.35;
+}
+.panel li:last-child { margin-bottom: 0; }
+.panel-do li::before { content: "✓"; position: absolute; left: 0; top: -1px; color: #4a7a5a; font-weight: 700; }
+.panel-dont li::before { content: "—"; position: absolute; left: 0; top: -1px; color: #a2763a; font-weight: 700; }
+
+/* ---------- Table ---------- */
+
+.flow-table { width: 100%; border-collapse: collapse; font-size: 16px; }
+.flow-table th {
+  padding: 10px 14px;
+  text-align: left;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-bottom: 1px solid var(--line);
+  font-weight: 600;
+}
+.flow-table td {
+  padding: 14px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+  line-height: 1.35;
+}
+.flow-table tr:last-child td { border-bottom: 0; }
+.flow-table td:first-child { font-weight: 600; color: var(--base); width: 38%; }
+.flow-table .cell-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px; height: 22px;
+  margin-right: 10px;
+  border-radius: 50%;
+  background: var(--base);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  vertical-align: middle;
+}
+.table-wrap { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 6px 8px; }
+
+/* ---------- Steps ---------- */
+
+.steps { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin: 8px 0 0; padding: 0; list-style: none; counter-reset: st; }
+.steps li { position: relative; counter-increment: st; padding-top: 46px; }
+.steps li::before {
+  content: counter(st);
+  position: absolute;
+  top: 0; left: 0;
+  width: 34px; height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--base);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+}
+.steps li::after {
+  content: "";
+  position: absolute;
+  top: 17px; left: 42px; right: -8px;
+  height: 1px;
+  background: var(--line);
+}
+.steps li:last-child::after { display: none; }
+.steps h3 { margin: 0 0 4px; font-size: 15px; line-height: 1.25; color: var(--base); }
+.steps p { margin: 0; font-size: 13px; line-height: 1.4; color: var(--muted); }
+
+.note-line {
+  margin-top: 26px;
+  padding: 14px 18px;
+  border-left: 3px solid var(--accent);
+  background: #fbf8f2;
+  font-size: 15px;
+  color: var(--muted);
+  border-radius: 0 8px 8px 0;
+}
+.tag {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #f3ead9;
+  color: #7a5a24;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  font-weight: 600;
+}
+
+/* ---------- Money ---------- */
+
+.money { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.money-box { border-radius: 14px; padding: 24px 26px; border: 1px solid var(--line); background: var(--surface); }
+.money-box.accent { background: var(--base); border-color: var(--base); }
+.money-box.accent h3, .money-box.accent p { color: #fff; }
+.money-box.accent p { color: #c3cddb; }
+.money-box h3 { margin: 0 0 8px; font-size: 20px; color: var(--base); }
+.money-box p { margin: 0; font-size: 15px; line-height: 1.45; color: var(--muted); }
+.money-label { display: block; margin-bottom: 10px; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); }
+
+/* ---------- Segments ---------- */
+
+.seg {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 18px 16px;
+  font-size: 15px;
+  line-height: 1.35;
+  color: var(--base);
+  font-weight: 600;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.seg::before {
+  content: "";
+  flex: 0 0 auto;
+  width: 6px; height: 6px;
+  margin-top: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* ---------- Definition columns ---------- */
+
+.dl { margin: 0; display: grid; gap: 14px; }
+.dl dt {
+  margin: 0 0 3px;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+}
+.dl dd { margin: 0; font-size: 15px; line-height: 1.4; color: var(--ink); }
+
+/* ---------- Phases ---------- */
+
+.phase { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; }
+.phase .when { font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin: 0 0 6px; }
+.phase p { margin: 0; font-size: 15px; line-height: 1.4; color: var(--muted); }
+
+.bar {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-top: 18px;
+  padding: 16px 20px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #fbf8f2;
+  font-size: 14px;
+  line-height: 1.4;
+}
+.bar strong { display: block; margin-bottom: 3px; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+.bar .stop { color: #7a4a1e; }
+
+/* ---------- Risks ---------- */
+
+.risk { border-left: 2px solid var(--accent); padding-left: 16px; }
+.risk h3 { margin: 0 0 6px; font-size: 16px; color: var(--base); }
+.risk p { margin: 0; font-size: 14.5px; line-height: 1.42; color: var(--muted); }
+
+.contacts-line {
+  margin-top: 22px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  font-size: 14px;
+  color: var(--muted);
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+}
+.contacts-line strong { color: var(--base); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; }
+
+/* ---------- Chrome ---------- */
+
+.topbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 18px;
+  color: #c3cddb;
+  font-size: 12px;
+  background: rgba(11, 21, 34, 0.94);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  pointer-events: none;
+}
+.topbar > * { pointer-events: auto; }
+.top-brand { flex: 0 0 auto; letter-spacing: 0.2em; font-weight: 600; opacity: 0.75; }
+.top-hint { flex: 1 1 auto; text-align: center; font-size: 10px; letter-spacing: 0.04em; color: #6f8095; white-space: nowrap; }
+.top-actions { flex: 0 0 auto; display: flex; align-items: center; gap: 10px; }
+
+.langs { display: flex; gap: 2px; padding: 2px; border-radius: 999px; background: rgba(255, 255, 255, 0.08); }
+.langs button {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: #c3cddb;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  padding: 6px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.langs button:hover { color: #fff; }
+.langs button[aria-pressed="true"] { background: var(--accent); color: var(--base); }
+
+.btn-notes {
+  appearance: none;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: transparent;
+  color: #c3cddb;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  padding: 7px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.btn-notes:hover, .btn-notes[aria-pressed="true"] { border-color: var(--accent); color: #fff; }
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+}
+.controls button {
+  appearance: none;
+  width: 30px; height: 30px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #e7ecf2;
+  font-size: 15px;
+  cursor: pointer;
+}
+.controls button:hover { background: rgba(255, 255, 255, 0.1); }
+.controls button:disabled { opacity: 0.3; cursor: default; }
+.counter { padding: 0 6px; font-size: 11px; letter-spacing: 0.08em; color: #c3cddb; font-variant-numeric: tabular-nums; }
+
+.progress { position: fixed; left: 0; right: 0; bottom: 0; height: 3px; background: rgba(255, 255, 255, 0.1); z-index: 41; }
+.progress span { display: block; height: 100%; width: 0; background: var(--accent); transition: width 0.2s ease; }
+
+.notes-panel {
+  position: fixed;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: min(880px, calc(100% - 32px));
+  max-height: 46vh;
+  overflow: auto;
+  z-index: 60;
+  background: #0f2138;
+  color: #dfe6ee;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-bottom: 0;
+  border-radius: 16px 16px 0 0;
+  padding: 18px 22px 22px;
+  box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.4);
+}
+.notes-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
+.notes-head span { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); font-weight: 700; }
+.notes-close { appearance: none; border: 0; background: transparent; color: #c3cddb; font-size: 22px; line-height: 1; cursor: pointer; padding: 0 4px; }
+.notes-body { margin: 0; font-size: 15px; line-height: 1.55; }
+
+@media (max-width: 1100px) {
+  .top-hint { display: none; }
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .slide { transition: none; }
+  .progress span { transition: none; }
+}
+
+/* ---------- Print ---------- */
+
+@page { size: 13.333in 7.5in; margin: 0; }
+
+@media print {
+  html, body { overflow: visible; height: auto; background: #fff; }
+  .topbar, .progress, .notes-panel, .skip { display: none !important; }
+  .stage-wrap { position: static; overflow: visible; }
+  .stage {
+    position: static;
+    transform: none !important;
+    width: 1280px;
+    height: auto;
+    box-shadow: none;
+  }
+  .slide {
+    position: relative;
+    display: flex !important;
+    width: 1280px;
+    height: 720px;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    break-after: page;
+    page-break-after: always;
+    break-inside: avoid;
+  }
+  .slide:last-child { break-after: auto; page-break-after: auto; }
+  .slide-notes { display: none !important; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#deck">К содержанию</a>
+
+<div class="stage-wrap" id="deck">
+  <div class="stage" id="stage">
+<section class="slide slide-cover is-active" id="s1" data-slide="1" aria-roledescription="slide" aria-label="Слайд 1 из 15">
+      <div class="cover-mark" aria-hidden="true">
+        <svg viewBox="0 0 400 400" focusable="false">
+          <circle cx="200" cy="200" r="150" fill="none" stroke="#C8A464" stroke-width="1" opacity="0.5"/>
+          <circle cx="200" cy="200" r="96" fill="none" stroke="#FFFFFF" stroke-width="1" opacity="0.12"/>
+          <path d="M200 20v70M200 310v70M20 200h70M310 200h70" stroke="#FFFFFF" stroke-width="1" opacity="0.22"/>
+          <circle cx="200" cy="200" r="7" fill="#C8A464"/>
+          <circle cx="330" cy="118" r="4" fill="#C8A464" opacity="0.8"/>
+          <circle cx="96" cy="292" r="4" fill="#FFFFFF" opacity="0.35"/>
+          <circle cx="268" cy="312" r="3" fill="#FFFFFF" opacity="0.25"/>
+        </svg>
+      </div>
+      <div class="slide-inner">
+        <div class="lang-block" data-lang="ru">
+          <p class="kicker">Pre-launch · Анталья · RU / EN / TR</p>
+          <p class="wordmark">CELİKKOL <span class="amp">&amp;</span> ZYKIN</p>
+          <p class="wordmark-sub">Advisory</p>
+          <h1>Координационная компания в Турции</h1>
+          <p class="lead">Организуем правовую поддержку русскоязычных клиентов и компаний.</p>
+        </div>
+        <div class="lang-block" data-lang="en" hidden>
+          <p class="kicker">Pre-launch · Antalya · RU / EN / TR</p>
+          <p class="wordmark">CELİKKOL <span class="amp">&amp;</span> ZYKIN</p>
+          <p class="wordmark-sub">Advisory</p>
+          <h1>A coordination company in Türkiye</h1>
+          <p class="lead">We organise legal support for Russian-speaking clients and companies.</p>
+        </div>
+        <div class="lang-block" data-lang="tr" hidden>
+          <p class="kicker">Pre-launch · Antalya · RU / EN / TR</p>
+          <p class="wordmark">CELİKKOL <span class="amp">&amp;</span> ZYKIN</p>
+          <p class="wordmark-sub">Advisory</p>
+          <h1>Türkiye'de koordinasyon şirketi</h1>
+          <p class="lead">Rusça konuşan müşteriler ve şirketler için hukuki destek organize ediyoruz.</p>
+          <p class="lang-note">TR: slayt 1, 4, 5, 7, 13, 15 · diğer slaytlar EN</p>
+        </div>
+      </div>
+      <footer class="slide-foot">
+        <span class="foot-brand">CELİKKOL &amp; ZYKIN</span>
+        <span class="foot-note" data-disclaimer></span>
+        <span class="foot-right"><span class="foot-lang"></span><span class="foot-page">01 / 15</span></span>
+      </footer>
+      <div class="slide-notes" hidden>
+        <p data-lang="ru">Открываем рамку: проект не оказывает юридических услуг. Компания координирует, адвокаты коллегии ведут дело. Дальше — только проверяемые утверждения, а где цифры — они помечены как гипотеза. Цель встречи — обсудить пилот, а не подписать договор сегодня. Если спросят про сроки запуска, отвечаем: сначала два пилота, потом регистрация.</p>
+        <p data-lang="en">We open with the frame: the project does not provide legal services. The company coordinates; bar-registered attorneys run the case. Everything after this point is a verifiable statement, and any number is marked as a hypothesis. The goal of this meeting is a pilot discussion, not a signed contract today.</p>
+        <p data-lang="tr">Çerçeveyi açarak başlıyoruz: proje hukuki hizmet sunmuyor. Şirket koordine eder, baroya kayıtlı avukatlar dosyayı yürütür. Sonrasındaki her ifade doğrulanabilir; sayılar hipotez olarak işaretlenmiştir. Bu görüşmenin amacı pilot görüşmesidir, bugün sözleşme imzalamak değil. Süre sorulursa dürüst cevap: önce iki pilot, sonra tescil.</p>
+      </div>
+    </section>
+
+    <section class="slide" id="s2" data-slide="2" aria-roledescription="slide" aria-label="Слайд 2 из 15">
+      <div class="slide-inner">
+        <div class="lang-block" data-lang="ru">
+          <p class="kicker">01 — Проблема</p>
+          <h2 class="h2">Четыре разрыва на пути к результату</h2>
+          <p class="lead">Каждый разрыв стоит денег и времени. Никто не отвечает за процесс целиком.</p>
+          <div class="grid g2">
+            <article class="card card-row"><span class="card-num">01</span><div><h3>Сроки и язык</h3><p>Документы на турецком. Ошибка в переводе стоит денег и времени.</p></div></article>
+            <article class="card card-row"><span class="card-num">02</span><div><h3>Проверенный адвокат</h3><p>Посредника без полномочий трудно отличить от адвоката коллегии.</p></div></article>
+            <article class="card card-row"><span class="card-num">03</span><div><h3>Страховые согласования</h3><p>Неясно, действует ли полис в Турции и кто платит.</p></div></article>
+            <article class="card card-row"><span class="card-num">04</span><div><h3>Разрозненные подрядчики</h3><p>Переводчик, адвокат, страховщик и банк не связаны между собой.</p></div></article>
+          </div>
+        </div>
+        <div class="lang-block" data-lang="en" hidden>
+          <p class="kicker">01 — Problem</p>
+          <h2 class="h2">Four gaps between the client and the outcome</h2>
+          <p class="lead">Each gap costs money and time. Nobody owns the whole process.</p>
+          <div class="grid g2">
+            <article class="card card-row"><span class="card-num">01</span><div><h3>Deadlines and language</h3><p>Documents are in Turkish. A translation error costs money and time.</p></div></article>
+            <article class="card card-row"><span class="card-num">02</span><div><h3>A verified attorney</h3><p>An intermediary without authority looks like a bar-registered attorney.</p></div></article>
+            <article class="card card-row"><span class="card-num">03</span><div><h3>Insurance approvals</h3><p>Unclear whether the policy applies in Türkiye and who pays.</p></div></article>
+            <article class="card card-row"><span class="card-num">04</span><div><h3>Scattered contractors</h3><p>Translator, attorney, insurer and bank are not connected.</p></div></article>
+          </div>
+        </div>
+      </div>
+      <footer class="slide-foot">
+        <span class="foot-brand">CELİKKOL &amp; ZYKIN</span>
+        <span class="foot-note" data-disclaimer></span>
+        <span class="foot-right"><span class="foot-lang"></span><span class="foot-page">02 / 15</span></span>
+      </footer>
+      <div class="slide-notes" hidden>
+        <p data-lang="ru">Четыре боли — это не жалобы, а операционные разрывы, каждый из которых стоит денег. Важно проверить на встрече, какой из них партнёр считает главным: от этого зависит, что показывать первым в пилоте. Если партнёр называет боль, которой нет в модели, это повод сузить пилот, а не расширять обещания.</p>
+        <p data-lang="en">These four pains are operational gaps, not complaints, and each one costs money. On the call we check which gap the partner considers primary, because that decides what the pilot shows first. If the partner names a gap outside the model, that is a reason to narrow the pilot, not to widen the promises.</p>
+      </div>
+    </section>
+
+    <section class="slide" id="s3" data-slide="3" aria-roledescription="slide" aria-label="Слайд 3 из 15">
+      <div class="slide-inner">
+        <div class="lang-block" data-lang="ru">
+          <p class="kicker">02 — Почему это не решается само</p>
+          <h2 class="h2">Три разрыва, которые никто не закрывает</h2>
+          <p class="lead">У клиента нет доступа к процессу, у адвоката — к контексту, у страховщика — к отчётности.</p>
+          <div class="grid g3">
+            <article class="card"><span class="card-num">01</span><h3>Язык и процесс</h3><p>Клиент не понимает, что происходит и в какой срок.</p></article>
+            <article class="card"><span class="card-num">02</span><h3>Доступ к адвокату</h3><p>Нет способа проверить регистрацию и договориться о правилах.</p></article>
+            <article class="card"><span class="card-num">03</span><h3>Страховой процесс</h3><p>Согласование, оплата и отчётность живут отдельно от дела.</p></article>
+          </div>
+          <p class="note-line">Координационный слой закрывает стыки, а не заменяет участников.</p>
+        </div>
+        <div class="lang-block" data-lang="en" hidden>
+          <p class="kicker">02 — Why it does not solve itself</p>
+          <h2 class="h2">Three gaps nobody closes</h2>
+          <p class="lead">The client has no access to the process, the attorney no context, the insurer no reporting.</p>
+          <div class="grid g3">
+            <article class="card"><span class="card-num">01</span><h3>Language and procedure</h3><p>The client does not know what is happening or by when.</p></article>
+            <article class="card"><span class="card-num">02</span><h3>Access to an attorney</h3><p>No way to verify registration and agree on the rules.</p></article>
+            <article class="card"><span class="card-num">03</span><h3>Insurance process</h3><p>Approval, payment and reporting live apart from the case.</p></article>
+          </div>
+          <p class="note-line">The coordination layer closes the seams; it does not replace the participants.</p>
+        </div>
+      </div>
+      <footer class="slide-foot">
+        <span class="foot-brand">CELİKKOL &amp; ZYKIN</span>
+        <span class="foot-note" data-disclaimer></span>
+        <span class="foot-right"><span class="foot-lang"></span><span class="foot-page">03 / 15</span></span>
+      </footer>
+      <div class="slide-notes" hidden>
+        <p data-lang="ru">Три разрыва объясняют, почему проблема не решается сама: у клиента нет доступа к процессу, у адвоката — к контексту, у страховщика — к отчётности. Координационный слой закрывает именно стыки, а не заменяет участников. Дальше показываем, как это выглядит в работе. Держим темп: не углубляемся в каждый разрыв, иначе не дойдём до денег.</p>
+        <p data-lang="en">These three gaps explain why the problem does not solve itself: the client has no access to the process, the attorney has no context, the insurer has no reporting. The coordination layer closes exactly the seams; it does not replace the participants. Next we show how that looks in practice.</p>
+      </div>
+    </section>
+
+    <section class="slide" id="s4" data-slide="4" aria-roledescription="slide" aria-label="Слайд 4 из 15">
+      <div class="slide-inner">
+        <div class="lang-block" data-lang="ru">
+          <p class="kicker">03 — Решение</p>
+          <h2 class="h2">Координационный слой между клиентом и адвокатом</h2>
+          <p class="lead">Компания отвечает за процесс. Юридические услуги оказывает адвокат по отдельному договору.</p>
+          <div class="split">
+            <div class="panel panel-do">
+              <h3>Делаем</h3>
+              <ul>
+                <li>Приём и квалификация обращения</li>
+                <li>Проверка полиса и документов</li>
+                <li>Подбор партнёрского адвоката</li>
+                <li>Перевод и документооборот</li>
+                <li>Сроки и коммуникация</li>
+                <li>Отчётность по делу</li>
+              </ul>
+            </div>
+            <div class="panel panel-dont">
+              <h3>Не делаем</h3>
+              <ul>
+                <li>Не оказываем юридические услуги</li>
+                <li>Не заменяем адвоката</li>
+                <li>Не гарантируем результат</li>
+                <li>Не решаем за клиента</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="lang-block" data-lang="en" hidden>
+          <p class="kicker">03 — Solution</p>
+          <h2 class="h2">A coordination layer between client and attorney</h2>
+          <p class="lead">The company owns the process. Legal services are provided by an attorney under a separate agreement.</p>
+          <div class="split">
+            <div class="panel panel-do">
+              <h3>We do</h3>
+              <ul>
+                <li>Intake and qualification</li>
+                <li>Policy and document checks</li>
+                <li>Partner attorney selection</li>
+                <li>Translation and document flow</li>
+                <li>Deadlines and communication</li>
+                <li>Case reporting</li>
+              </ul>
+            </div>
+            <div class="panel panel-dont">
+              <h3>We do not</h3>
+              <ul>
+                <li>Provide legal services</li>
+                <li>Replace the attorney</li>
+                <li>Guarantee an outcome</li>
+                <li>Decide for the client</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="lang-block" data-lang="tr" hidden>
+          <p class="kicker">03 — Çözüm</p>
+          <h2 class="h2">Müşteri ile avukat arasında koordinasyon katmanı</h2>
+          <p class="lead">Süreçten şirket sorumludur. Hukuki hizmeti ayrı sözleşmeyle avukat sunar.</p>
+          <div class="split">
+            <div class="panel panel-do">
+              <h3>Yaptıklarımız</h3>
+              <ul>
+                <li>Başvuru ve değerlendirme</li>
+                <li>Poliçe ve belge kontrolü</li>
+                <li>Partner avukat seçimi</li>
+                <li>Çeviri ve evrak akışı</li>
+                <li>Süreler ve iletişim</li>
+                <li>Dosya raporlaması</li>
+              </ul>
+            </div>
+            <div class="panel panel-dont">
+              <h3>Yapmadıklarımız</h3>
+              <ul>
+                <li>Hukuki hizmet sunmayız</li>
+                <li>Avukatın yerini almayız</li>
+                <li>Sonuç garantisi vermeyiz</li>
+                <li>Müşteri adına karar almayız</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer class="slide-foot">
+        <span class="foot-brand">CELİKKOL &amp; ZYKIN</span>
+        <span class="foot-note" data-disclaimer></span>
+        <span class="foot-right"><span class="foot-lang"></span><span class="foot-page">04 / 15</span></span>
+      </footer>
+      <div class="slide-notes" hidden>
+        <p data-lang="ru">Главный слайд для юриста в зале. Явно проговариваем границу: юридические услуги оказывает адвокат по отдельному договору. Компания отвечает за процесс, перевод, сроки и отчётность. Если у аудитории есть сомнение в допустимости модели, фиксируем его как вопрос к турецкому адвокату. Формулировку границы согласуем с турецким адвокатом до встречи с клиентом.</p>
+        <p data-lang="en">This is the key slide for the lawyer in the room. We state the boundary explicitly: legal services are provided by an attorney under a separate agreement. The company owns the process, translation, deadlines and reporting. If the audience doubts the model is permissible, we record it as a question for a Turkish attorney.</p>
+        <p data-lang="tr">Salondaki avukat için en önemli slayt. Sınırı açıkça söylüyoruz: hukuki hizmeti ayrı sözleşmeyle avukat sunar. Şirket süreç, çeviri, süreler ve raporlamadan sorumludur. Modelin uygunluğuna dair şüphe varsa bunu Türk avukata sorulacak bir soru olarak kaydediyoruz. Sınırı müşteriyle ilk görüşmeden önce Türk avukatla netleştiriyoruz.</p>
+      </div>
+    </section>
+
+    <section class="slide" id="s5" data-slide="5" aria-roledescription="slide" aria-label="Слайд 5 из 15">
+      <div class="slide-inner">
+        <div class="lang-block" data-lang="ru">
+          <p class="kicker">04 — Три потока</p>
+          <h2 class="h2">Три потока — три схемы оплаты</h2>
+          <p class="lead">Потоки различаются двумя параметрами: кто платит и кто ведёт дело.</p>
+          <div class="table-wrap">
+            <table class="flow-table">
+              <thead><tr><th scope="col">Поток</th><th scope="col">Кто платит</th><th scope="col">Кто ведёт дело</th></tr></thead>
+              <tbody>
+                <tr><td><span class="cell-num">1</span>Полис юррасходов (РФ)</td><td>Страховая компания</td><td>Партнёрский адвокат в Турции</td></tr>
+                <tr><td><span class="cell-num">2</span>Без страховки</td><td>Клиент</td><td>Турецкий партнёрский адвокат</td></tr>
+                <tr><td><span class="cell-num">3</span>Дело в России у турецкого клиента</td><td>Клиент</td><td>Партнёрская юрфирма в РФ</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="note-line">Условие запуска страхового потока — подтверждение покрытия по конкретному полису.</p>
+        </div>
+        <div class="lang-block" data-lang="en" hidden>
+          <p class="kicker">04 — Three flows</p>
+          <h2 class="h2">Three flows, three payment schemes</h2>
+          <p class="lead">The flows differ in two parameters: who pays and who handles the case.</p>
+          <div class="table-wrap">
+            <table class="flow-table">
+              <thead><tr><th scope="col">Flow</th><th scope="col">Who pays</th><th scope="col">Who handles the case</th></tr></thead>
+              <tbody>
+                <tr><td><span class="cell-num">1</span>Legal expenses policy (Russia)</td><td>The insurer</td><td>A partner attorney in Türkiye</td></tr>
+                <tr><td><span class="cell-num">2</span>No insurance</td><td>The client</td><td>A Turkish partner attorney</td></tr>
+                <tr><td><span class="cell-num">3</span>Turkish client with a case in Russia</td><td>The client</td><td>A partner law firm in Russia</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="note-line">The launch condition for the insurance flow is confirmed coverage under the specific policy.</p>
+        </div>
+        <div class="lang-block" data-lang="tr" hidden>
+          <p class="kicker">04 — Üç akış</p>
+          <h2 class="h2">Üç akış, üç ödeme şeması</h2>
+          <p class="lead">Akışlar iki parametrede farklıdır: kim öder ve dosyayı kim yürütür.</p>
+          <div class="table-wrap">
+            <table class="flow-table">
+              <thead><tr><th scope="col">Akış</th><th scope="col">Kim öder</th><th scope="col">Dosyayı kim yürütür</th></tr></thead>
+              <tbody>
+                <tr><td><span class="cell-num">1</span>Hukuki koruma poliçesi (Rusya)</td><td>Sigorta şirketi</td><td>Türkiye'de partner avukat</td></tr>
+                <tr><td><span class="cell-num">2</span>Sigortasız</td><td>Müşteri</td><td>Türk partner avukat</td></tr>
+                <tr><td><span class="cell-num">3</span>Rusya'da dosyası olan Türk müşteri</td><td>Müşteri</td><td>Rusya'da partner hukuk bürosu</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="note-line">Sigorta akışının başlangıç koşulu, belirli poliçe kapsamının teyididir.</p>
+        </div>
+      </div>
+      <footer class="slide-foot">
+        <span class="foot-brand">CELİKKOL &amp; ZYKIN</span>
+        <span class="foot-note" data-disclaimer></span>
+        <span class="foot-right"><span class="foot-lang"></span><span class="foot-page">05 / 15</span></span>
+      </footer>
+      <div class="slide-notes" hidden>
+        <p data-lang="ru">Три потока различаются двумя параметрами: кто платит и кто ведёт дело. Не смешиваем их в одну схему — это первая ошибка, которую делают конкуренты. По каждому потоку называем условие запуска: для страхового — подтверждение покрытия по конкретному полису. Если партнёр путает потоки, разбираем его случай по трём колонкам таблицы.</p>
+        <p data-lang="en">The three flows differ in two parameters: who pays and who handles the case. We do not merge them into one scheme, which is the first mistake competitors make. For each flow we name the launch condition: for the insurance flow, confirmation of coverage under the specific policy.</p>
+        <p data-lang="tr">Üç akış iki parametrede farklıdır: kim öder ve dosyayı kim yürütür. Bunları tek şemada birleştirmiyoruz; rakiplerin ilk hatası budur. Her akış için başlangıç koşulunu söylüyoruz: sigorta akışında belirli poliçe kapsamının teyidi. Ortak akışları karıştırırsa, tablodaki üç sütuna göre kendi dosyasını birlikte inceliyoruz.</p>
+      </div>
+    </section>
+
+<section class="slide" id="s6" data-slide="6" aria-roledescription="slide" aria-label="Слайд 6 из 15">
+      <div class="slide-inner">
+        <div class="lang-block" data-lang="ru">
+          <p class="kicker">05 — Процесс</p>
+          <h2 class="h2">Шесть шагов от обращения до закрытия</h2>
+          <p class="lead">Шаги одинаковы для всех потоков.</p>
+          <ol class="steps">
+            <li><h3>Обращение</h3><p>Письмо или звонок с описанием ситуации.</p></li>
+            <li><h3>Квалификация</h3><p>Проверяем модель и конфликт интересов.</p></li>
+            <li><h3>Полис и документы</h3><p>Покрытие, лимиты, франшиза, согласование.</p></li>
+            <li><h3>Подбор адвоката</h3><p>Партнёр с регистрацией в коллегии.</p></li>
+            <li><h3>Ведение и отчётность</h3><p>Адвокат ведёт дело, мы координируем.</p></li>
+            <li><h3>Закрытие</h3><p>Итог, документы и обратная связь.</p></li>
+          </ol>
+          <p class="note-line">Сроки: <span class="tag">гипотеза</span> — замеряем в пилоте, а не обещаем заранее.</p>
+        </div>
+        <div class="lang-block" data-lang="en" hidden>
+          <p class="kicker">05 — Process</p>
+          <h2 class="h2">Six steps from enquiry to closure</h2>
+          <p class="lead">The steps are identical for every flow.</p>
+          <ol class="steps">
+            <li><h3>Enquiry</h3><p>An email or call with a short description.</p></li>
+            <li><h3>Qualification</h3><p>We check fit and conflicts of interest.</p></li>
+            <li><h3>Policy and documents</h3><p>Coverage, limits, deductible, approval.</p></li>
+            <li><h3>Attorney selection</h3><p>A partner attorney registered with the bar.</p></li>
+            <li><h3>Handling and reporting</h3><p>The attorney runs the case; we coordinate.</p></li>
+            <li><h3>Closure</h3><p>Outcome, documents and feedback.</p></li>
+          </ol>
+          <p class="note-line">Timelines: <span class="tag">hypothesis</span> — measured in the pilot, not promised in advance.</p>
+        </div>
+      </div>
+      <footer class="slide-foot">
+        <span class="foot-brand">CELİKKOL &amp; ZYKIN</span>
+        <span class="foot-note" data-disclaimer></span>
+        <span class="foot-right"><span class="foot-lang"></span><span class="foot-page">06 / 15</span></span>
+      </footer>
+      <div class="slide-notes" hidden>
+        <p data-lang="ru">Шесть шагов одинаковы для всех потоков, поэтому их можно показать один раз. Сроки не называем: это гипотеза, которую проверяем в пилоте. Если спросят про сроки, отвечаем честно: замеряем на первых десяти делах и возвращаемся с цифрами. Для пилота достаточно первых трёх шагов: обращение, квалификация, документы.</p>
+        <p data-lang="en">The six steps are identical for every flow, so we show them once. We do not quote timelines: they are a hypothesis we test in the pilot. If asked about timelines, we answer honestly: we measure the first ten cases and come back with numbers.</p>
+      </div>
+    </section>
+
+    <section class="slide" id="s7" data-slide="7" aria-roledescription="slide" aria-label="Слайд 7 из 15">
+      <div class="slide-inner">
+        <div class="lang-block" data-lang="ru">
+          <p class="kicker">06 — Деньги</p>
+          <h2 class="h2">Два разных вознаграждения</h2>
+          <p class="lead">Два договора и два плательщика. Размеры фиксируются до начала работы.</p>
+          <div class="money">
+            <div class="money-box">
+              <span class="money-label">Компании</span>
+              <h3>Координационный сбор</h3>
+              <p>За организацию и сопровождение: приём обращения, перевод, документооборот, сроки, отчётность.</p>
+            </div>
+            <div class="money-box accent">
+              <span class="money-label">Адвокатскому бюро</span>
+              <h3>Гонорар</h3>
+              <p>По отдельному договору с клиентом или страховой компанией. Через компанию гонорар не проходит.</p>
+            </div>
+          </div>
+          <p class="note-line">Два отдельных платежа. Тариф TBB не называем, пока не подтверждён год публикации.</p>
+        </div>
+        <div class="lang-block" data-lang="en" hidden>
+          <p class="kicker">06 — Money</p>
+          <h2 class="h2">Two separate fees</h2>
+          <p class="lead">Two contracts and two payers. Amounts are fixed before work starts.</p>
+          <div class="money">
+            <div class="money-box">
+              <span class="money-label">To the company</span>
+              <h3>Coordination fee</h3>
+              <p>For organisation and support: intake, translation, document flow, deadlines, reporting.</p>
+            </div>
+            <div class="money-box accent">
+              <span class="money-label">To the law office</span>
+              <h3>Attorney fee</h3>
+              <p>Under a separate agreement with the client or the insurer. The fee does not pass through the company.</p>
+            </div>
+          </div>
+          <p class="note-line">Two separate payments. We do not quote the TBB tariff until the publication year is confirmed.</p>
+        </div>
+        <div class="lang-block" data-lang="tr" hidden>
+          <p class="kicker">06 — Para</p>
+          <h2 class="h2">İki ayrı ücret</h2>
+          <p class="lead">İki sözleşme ve iki ödeyen. Tutarlar işe başlamadan önce belirlenir.</p>
+          <div class="money">
+            <div class="money-box">
+              <span class="money-label">Şirkete</span>
+              <h3>Koordinasyon bedeli</h3>
+              <p>Organizasyon ve takip için: başvuru, çeviri, evrak akışı, süreler, raporlama.</p>
+            </div>
+            <div class="money-box accent">
+              <span class="money-label">Hukuk bürosuna</span>
+              <h3>Avukatlık ücreti</h3>
+              <p>Müşteri veya sigorta şirketiyle ayrı sözleşmeyle. Ücret şirket üzerinden geçmez.</p>
+            </div>
+          </div>
+          <p class="note-line">İki ayrı ödeme. TBB tarifesini, yayın yılı teyit edilene kadar söylemiyoruz.</p>
+        </div>
+      </div>
+      <footer class="slide-foot">
+        <span class="foot-brand">CELİKKOL &amp; ZYKIN</span>
+        <span class="foot-note" data-disclaimer></span>
+        <span class="foot-right"><span class="foot-lang"></span><span class="foot-page">07 / 15</span></span>
+      </footer>
+      <div class="slide-notes" hidden>
+        <p data-lang="ru">Ключевой вопрос партнёров — как делятся деньги. Отвечаем структурой, а не процентами: два разных договора, два разных плательщика. Размеры фиксируются до старта. Тариф TBB не называем, пока не подтверждён год публикации: без года это была бы выдуманная цифра. Проценты и маржу не называем: это гипотеза, которую считаем после первых сделок.</p>
+        <p data-lang="en">The key partner question is how the money is split. We answer with structure, not percentages: two contracts, two payers. Amounts are fixed before the start. We do not quote the TBB tariff until the publication year is confirmed; without the year it would be an invented number.</p>
+        <p data-lang="tr">Ortakların temel sorusu paranın nasıl bölündüğüdür. Yüzdeyle değil yapıyla yanıt veriyoruz: iki sözleşme, iki ödeyen. Tutarlar başlamadan önce sabitlenir. TBB tarifesini, yayın yılı teyit edilene kadar söylemiyoruz; yıl olmadan bu uydurma bir sayı olurdu. Yüzdeleri ve marjı söylemiyoruz; ilk işlemlerden sonra hesaplanacak hipotezdir.</p>
+      </div>
+    </section>
+
+    <section class="slide" id="s8" data-slide="8" aria-roledescription="slide" aria-label="Слайд 8 из 15">
+      <div class="slide-inner">
+        <div class="lang-block" data-lang="ru">
+          <p class="kicker">07 — Кому</p>
+          <h2 class="h2">Пять сегментов</h2>
+          <p class="lead">Пять сегментов — не пять бизнесов. Пилот идёт на двух: страховщик и юрфирма.</p>
+          <div class="grid g5">
+            <div class="seg">Русскоязычные резиденты и туристы</div>
+            <div class="seg">Российские компании в Турции</div>
+            <div class="seg">Турецкие граждане с делами в РФ</div>
+            <div class="seg">Страховые компании</div>
+            <div class="seg">Юрфирмы-партнёры</div>
+          </div>
+        </div>
+        <div class="lang-block" data-lang="en" hidden>
+          <p class="kicker">07 — Who</p>
+          <h2 class="h2">Five segments</h2>
+          <p class="lead">Five segments are not five businesses. The pilot runs on two: an insurer and a law firm.</p>
+          <div class="grid g5">
+            <div class="seg">Russian-speaking residents and tourists</div>
+            <div class="seg">Russian companies in Türkiye</div>
+            <div class="seg">Turkish citizens with cases in Russia</div>
+            <div class="seg">Insurers</div>
+            <div class="seg">Partner law firms</div>
+          </div>
+        </div>
+      </div>
+      <footer class="slide-foot">
+        <span class="foot-brand">CELİKKOL &amp; ZYKIN</span>
+        <span class="foot-note" data-disclaimer></span>
+        <span class="foot-right"><span class="foot-lang"></span><span class="foot-page">08 / 15</span></span>
+      </footer>
+      <div class="slide-notes" hidden>
+        <p data-lang="ru">Пять сегментов — не пять бизнесов. Пилот идёт на двух: страховщик и юрфирма. Остальные сегменты описываем, чтобы показать потенциал, но ресурс туда не направляем до результатов пилота. Так честнее и для партнёров: они видят, что мы не распыляемся. Если партнёр из другого сегмента, честно говорим: пилот туда пока не идёт.</p>
+        <p data-lang="en">Five segments are not five businesses. The pilot runs on two: an insurer and a law firm. We describe the other segments to show potential, but we do not allocate resources there until the pilot reports. That is more honest with partners: they see we are not spreading ourselves thin.</p>
+      </div>
+    </section>
+
+    <section class="slide" id="s9" data-slide="9" aria-roledescription="slide" aria-label="Слайд 9 из 15">
+      <div class="slide-inner">
+        <div class="lang-block" data-lang="ru">
+          <p class="kicker">08 — Услуги</p>
+          <h2 class="h2">Четыре линии</h2>
+          <p class="lead">То, что можно начать без найма: координация уже существующих дел.</p>
+          <div class="grid g4">
+            <article class="card"><span class="card-num">01</span><h3>Сопровождение споров</h3><p>Координация дела и работа партнёрского адвоката.</p></article>
+            <article class="card"><span class="card-num">02</span><h3>Консультации</h3><p>Разбор ситуации и следующий шаг.</p></article>
+            <article class="card"><span class="card-num">03</span><h3>Коммерческие договоры</h3><p>Подготовка и проверка договоров для компаний в Турции.</p></article>
+            <article class="card"><span class="card-num">04</span><h3>Страховые случаи</h3><p>Проверка полиса и согласование со страховщиком.</p></article>
+          </div>
+          <p class="note-line">Прайса нет: стоимость зависит от типа дела и объёма перевода.</p>
+        </div>
+        <div class="lang-block" data-lang="en" hidden>
+          <p class="kicker">08 — Services</p>
+          <h2 class="h2">Four lines</h2>
+          <p class="lead">What we can start without hiring: coordinating cases that already exist.</p>
+          <div class="grid g4">
+            <article class="card"><span class="card-num">01</span><h3>Dispute support</h3><p>Case coordination and partner attorney work.</p></article>
+            <article class="card"><span class="card-num">02</span><h3>Consultations</h3><p>Review of the situation and the next step.</p></article>
+            <article class="card"><span class="card-num">03</span><h3>Commercial contracts</h3><p>Drafting and review for companies in Türkiye.</p></article>
+            <article class="card"><span class="card-num">04</span><h3>Insurance cases</h3><p>Policy checks and coordination with the insurer.</p></article>
+          </div>
+          <p class="note-line">No price list: cost depends on the case type and translation volume.</p>
+        </div>
+      </div>
+      <footer class="slide-foot">
+        <span class="foot-brand">CELİKKOL &amp; ZYKIN</span>
+        <span class="foot-note" data-disclaimer></span>
+        <span class="foot-right"><span class="foot-lang"></span><span class="foot-page">09 / 15</span></span>
+      </footer>
+      <div class="slide-notes" hidden>
+        <p data-lang="ru">Четыре линии услуг — это то, что можно начать без найма: координация уже существующих дел. Прайса нет намеренно: стоимость зависит от типа дела и объёма перевода. Называть цену до квалификации — значит обещать то, чего мы не посчитали. Линии — не продукты: это описание того, что уже умеем координировать.</p>
+        <p data-lang="en">The four service lines are what we can start without hiring: coordinating cases that already exist. There is no price list on purpose: cost depends on the case type and translation volume. Quoting before qualification means promising something we have not costed.</p>
+      </div>
+    </section>
+
+    <section class="slide" id="s10" data-slide="10" aria-roledescription="slide" aria-label="Слайд 10 из 15">
+      <div class="slide-inner">
+        <div class="lang-block" data-lang="ru">
+          <p class="kicker">09 — Страховщикам</p>
+          <h2 class="h2">Страховщику: что даём, что нужно, следующий шаг</h2>
+          <div class="grid g3">
+            <article class="card"><h3>Даём</h3><dl class="dl"><dd>Проверку полиса по чек-листу, координацию на месте, отчётность по каждому делу.</dd></dl></article>
+            <article class="card"><h3>Нужно</h3><dl class="dl"><dd>Правила согласования, требования к исполнителю, порядок оплаты.</dd></dl></article>
+            <article class="card"><h3>Следующий шаг</h3><dl class="dl"><dd>Пилот на одном страховщике.</dd></dl></article>
+          </div>
+          <p class="note-line">Не просим менять процессы — встраиваемся в них.</p>
+        </div>
+        <div class="lang-block" data-lang="en" hidden>
+          <p class="kicker">09 — For insurers</p>
+          <h2 class="h2">For an insurer: what we bring, what we need, next step</h2>
+          <div class="grid g3">
+            <article class="card"><h3>We bring</h3><dl class="dl"><dd>Policy checks against a checklist, local coordination, reporting per case.</dd></dl></article>
+            <article class="card"><h3>We need</h3><dl class="dl"><dd>Approval rules, provider requirements, payment procedure.</dd></dl></article>
+            <article class="card"><h3>Next step</h3><dl class="dl"><dd>A pilot with one insurer.</dd></dl></article>
+          </div>
+          <p class="note-line">We do not ask them to change their processes; we fit into them.</p>
+        </div>
+      </div>
+      <footer class="slide-foot">
+        <span class="foot-brand">CELİKKOL &amp; ZYKIN</span>
+        <span class="foot-note" data-disclaimer></span>
+        <span class="foot-right"><span class="foot-lang"></span><span class="foot-page">10 / 15</span></span>
+      </footer>
+      <div class="slide-notes" hidden>
+        <p data-lang="ru">Для страховщика главное — предсказуемость: чек-лист проверки полиса, единая отчётность, один ответственный. Мы не просим менять их процессы, мы встраиваемся в них. Следующий шаг — пилот на одном продукте, а не рамочный договор на всё. Ключевой вопрос страховщика — кто отвечает за сроки; отвечаем: координатор.</p>
+        <p data-lang="en">For an insurer the priority is predictability: a policy checklist, unified reporting, one accountable person. We do not ask them to change their processes; we fit into them. The next step is a pilot on one product, not a framework agreement covering everything.</p>
+      </div>
+    </section>
+
+<section class="slide" id="s11" data-slide="11" aria-roledescription="slide" aria-label="Слайд 11 из 15">
+      <div class="slide-inner">
+        <div class="lang-block" data-lang="ru">
+          <p class="kicker">10 — Московской юрфирме</p>
+          <h2 class="h2">Московской юрфирме: что даём, что нужно, следующий шаг</h2>
+          <div class="grid g3">
+            <article class="card"><h3>Даём</h3><dl class="dl"><dd>Координацию дел в Турции и одного ответственного за процесс.</dd></dl></article>
+            <article class="card"><h3>Нужно</h3><dl class="dl"><dd>Описание потока дел и требования к отчётности.</dd></dl></article>
+            <article class="card"><h3>Следующий шаг</h3><dl class="dl"><dd>Пилот на одном партнёре.</dd></dl></article>
+          </div>
+          <p class="note-line">Разделение ответственности фиксируем письменно: кто отвечает перед клиентом на каждом этапе.</p>
+        </div>
+        <div class="lang-block" data-lang="en" hidden>
+          <p class="kicker">10 — For a Moscow law firm</p>
+          <h2 class="h2">For a Moscow law firm: what we bring, what we need, next step</h2>
+          <div class="grid g3">
+            <article class="card"><h3>We bring</h3><dl class="dl"><dd>Coordination of cases in Türkiye and one owner of the process.</dd></dl></article>
+            <article class="card"><h3>We need</h3><dl class="dl"><dd>A description of the case flow and reporting requirements.</dd></dl></article>
+            <article class="card"><h3>Next step</h3><dl class="dl"><dd>A pilot with one partner.</dd></dl></article>
+          </div>
+          <p class="note-line">We put the split of responsibility in writing: who answers to the client at each stage.</p>
+        </div>
+      </div>
+      <footer class="slide-foot">
+        <span class="foot-brand">CELİKKOL &amp; ZYKIN</span>
+        <span class="foot-note" data-disclaimer></span>
+        <span class="foot-right"><span class="foot-lang"></span><span class="foot-page">11 / 15</span></span>
+      </footer>
+      <div class="slide-notes" hidden>
+        <p data-lang="ru">Московской юрфирме мы даём турецкую часть, которую она не хочет держать внутри. Взамен нужен поток дел и требования к отчётности. Разделение ответственности фиксируем письменно: кто отвечает перед клиентом на каждом этапе. Это снимает главный страх — потерять клиента. Юрфирма боится потерять клиента, поэтому проговариваем, кто ведёт коммуникацию.</p>
+        <p data-lang="en">To a Moscow law firm we offer the Turkish part they do not want to keep in-house. In return we need case flow and reporting requirements. We put the split of responsibility in writing: who answers to the client at each stage. That removes the main fear, which is losing the client.</p>
+      </div>
+    </section>
+
+    <section class="slide" id="s12" data-slide="12" aria-roledescription="slide" aria-label="Слайд 12 из 15">
+      <div class="slide-inner">
+        <div class="lang-block" data-lang="ru">
+          <p class="kicker">11 — Турецкому бюро</p>
+          <h2 class="h2">Турецкому бюро: что даём, что нужно, следующий шаг</h2>
+          <div class="grid g3">
+            <article class="card"><h3>Даём</h3><dl class="dl"><dd>Поток обращений и снятие административной работы.</dd></dl></article>
+            <article class="card"><h3>Нужно</h3><dl class="dl"><dd>Подтверждение регистрации в коллегии и условия по ставкам.</dd></dl></article>
+            <article class="card"><h3>Следующий шаг</h3><dl class="dl"><dd>Рамочное соглашение о сотрудничестве.</dd></dl></article>
+          </div>
+          <p class="note-line">Это разговор о загрузке, а не о рекламе.</p>
+        </div>
+        <div class="lang-block" data-lang="en" hidden>
+          <p class="kicker">11 — For a Turkish law office</p>
+          <h2 class="h2">For a Turkish law office: what we bring, what we need, next step</h2>
+          <div class="grid g3">
+            <article class="card"><h3>We bring</h3><dl class="dl"><dd>A flow of enquiries and relief from administrative work.</dd></dl></article>
+            <article class="card"><h3>We need</h3><dl class="dl"><dd>Confirmation of bar registration and rate terms.</dd></dl></article>
+            <article class="card"><h3>Next step</h3><dl class="dl"><dd>A framework cooperation agreement.</dd></dl></article>
+          </div>
+          <p class="note-line">This is a conversation about workload, not about advertising.</p>
+        </div>
+      </div>
+      <footer class="slide-foot">
+        <span class="foot-brand">CELİKKOL &amp; ZYKIN</span>
+        <span class="foot-note" data-disclaimer></span>
+        <span class="foot-right"><span class="foot-lang"></span><span class="foot-page">12 / 15</span></span>
+      </footer>
+      <div class="slide-notes" hidden>
+        <p data-lang="ru">Турецкому бюро мы снимаем административную нагрузку: перевод, документы, коммуникация с русскоязычным клиентом. Взамен просим подтверждение регистрации в коллегии и понятные ставки. Это разговор о загрузке, а не о рекламе. Уточняем загрузку: сколько дел в месяц бюро готово взять без потери качества.</p>
+        <p data-lang="en">For a Turkish law office we remove administrative load: translation, documents, communication with the Russian-speaking client. In return we ask for confirmation of bar registration and clear rates. This is a conversation about workload, not about advertising. We also ask how many cases per month the office can take.</p>
+      </div>
+    </section>
+
+    <section class="slide" id="s13" data-slide="13" aria-roledescription="slide" aria-label="Слайд 13 из 15">
+      <div class="slide-inner">
+        <div class="lang-block" data-lang="ru">
+          <p class="kicker">12 — Право и данные</p>
+          <h2 class="h2">Тайна, KVKK, реклама, ответственность</h2>
+          <div class="grid g2">
+            <article class="card"><h3>Адвокатская тайна</h3><p>Защищает сведения по делу.</p></article>
+            <article class="card"><h3>KVKK</h3><p>Ограничивает трансграничную передачу данных.</p></article>
+            <article class="card"><h3>Раскрытие</h3><p>По письменному согласию или в рамках официальной правовой помощи.</p></article>
+            <article class="card"><h3>Реклама</h3><p>Без гарантий и превосходных степеней.</p></article>
+          </div>
+          <p class="note-line">Это осознанная позиция, а не недоработка: поэтому на сайте нет отзывов и гарантий.</p>
+        </div>
+        <div class="lang-block" data-lang="en" hidden>
+          <p class="kicker">12 — Law and data</p>
+          <h2 class="h2">Privilege, KVKK, advertising, liability</h2>
+          <div class="grid g2">
+            <article class="card"><h3>Attorney-client privilege</h3><p>Protects case information.</p></article>
+            <article class="card"><h3>KVKK</h3><p>Restricts cross-border data transfers.</p></article>
+            <article class="card"><h3>Disclosure</h3><p>Only with written consent or through official legal assistance.</p></article>
+            <article class="card"><h3>Advertising</h3><p>No guarantees, no superlatives.</p></article>
+          </div>
+          <p class="note-line">A deliberate position, not an omission: that is why the site has no reviews or guarantees.</p>
+        </div>
+        <div class="lang-block" data-lang="tr" hidden>
+          <p class="kicker">12 — Hukuk ve veriler</p>
+          <h2 class="h2">Sır, KVKK, reklam, sorumluluk</h2>
+          <div class="grid g2">
+            <article class="card"><h3>Avukatlık sırrı</h3><p>Dosya bilgilerini korur.</p></article>
+            <article class="card"><h3>KVKK</h3><p>Yurt dışına veri aktarımını sınırlar.</p></article>
+            <article class="card"><h3>Açıklama</h3><p>Yalnızca yazılı onayla veya resmi hukuki yardım kapsamında.</p></article>
+            <article class="card"><h3>Reklam</h3><p>Garanti ve üstünlük ifadesi yok.</p></article>
+          </div>
+          <p class="note-line">Bu bilinçli bir tercihtir, eksiklik değil: sitede bu yüzden yorum ve garanti yok.</p>
+        </div>
+      </div>
+      <footer class="slide-foot">
+        <span class="foot-brand">CELİKKOL &amp; ZYKIN</span>
+        <span class="foot-note" data-disclaimer></span>
+        <span class="foot-right"><span class="foot-lang"></span><span class="foot-page">13 / 15</span></span>
+      </footer>
+      <div class="slide-notes" hidden>
+        <p data-lang="ru">Юридическая часть — не украшение колоды. Адвокатская тайна и KVKK определяют, что мы вообще можем передавать и куда. Рекламные ограничения объясняют, почему на сайте нет ни отзывов, ни гарантий, ни превосходных степеней. Это осознанная позиция, а не недоработка. Если спросят про KVKK, не импровизируем: обещаем письменный ответ после консультации.</p>
+        <p data-lang="en">The legal part is not decoration. Attorney-client privilege and KVKK define what we can transfer and where. Advertising restrictions explain why the site has no reviews, no guarantees and no superlatives. That is a deliberate position, not an omission.</p>
+        <p data-lang="tr">Hukuk bölümü süs değildir. Avukatlık sırrı ve KVKK, neyi nereye aktarabileceğimizi belirler. Reklam sınırlamaları, sitede neden yorum, garanti ve üstünlük ifadesi olmadığını açıklar. Bu bilinçli bir tercihtir, eksiklik değil. KVKK sorulursa doğaçlama yapmıyoruz; danışmanlık sonrası yazılı yanıt sözü veriyoruz ve konuyu takip listesine ekliyoruz.</p>
+      </div>
+    </section>
+
+    <section class="slide" id="s14" data-slide="14" aria-roledescription="slide" aria-label="Слайд 14 из 15">
+      <div class="slide-inner">
+        <div class="lang-block" data-lang="ru">
+          <p class="kicker">13 — Пилот</p>
+          <h2 class="h2">Пилот: этапы, метрики, критерии остановки</h2>
+          <div class="grid g3">
+            <div class="phase"><p class="when">0–30 дней</p><p>Пилот с одним страховщиком и одной юрфирмой.</p></div>
+            <div class="phase"><p class="when">30–60 дней</p><p>Проверка полисов, первые дела, отчётность.</p></div>
+            <div class="phase"><p class="when">60–90 дней</p><p>Решение о регистрации по результатам пилота.</p></div>
+          </div>
+          <div class="bar">
+            <div><strong>Метрики</strong>Число обращений, доля квалифицированных, срок первого ответа.</div>
+            <div class="stop"><strong>Стоп</strong>Если к дню 90 нет ни одного рамочного соглашения — поток переводится в ожидание.</div>
+          </div>
+        </div>
+        <div class="lang-block" data-lang="en" hidden>
+          <p class="kicker">13 — Pilot</p>
+          <h2 class="h2">Pilot: stages, metrics, stop criteria</h2>
+          <div class="grid g3">
+            <div class="phase"><p class="when">Days 0–30</p><p>A pilot with one insurer and one law firm.</p></div>
+            <div class="phase"><p class="when">Days 30–60</p><p>Policy checks, first cases, reporting.</p></div>
+            <div class="phase"><p class="when">Days 60–90</p><p>Registration decision based on the pilot.</p></div>
+          </div>
+          <div class="bar">
+            <div><strong>Metrics</strong>Enquiry count, qualified share, first-response time.</div>
+            <div class="stop"><strong>Stop</strong>If by day 90 no framework agreement is signed, the flow moves to standby.</div>
+          </div>
+        </div>
+      </div>
+      <footer class="slide-foot">
+        <span class="foot-brand">CELİKKOL &amp; ZYKIN</span>
+        <span class="foot-note" data-disclaimer></span>
+        <span class="foot-right"><span class="foot-lang"></span><span class="foot-page">14 / 15</span></span>
+      </footer>
+      <div class="slide-notes" hidden>
+        <p data-lang="ru">Пилот на 90 дней — это проверка трёх гипотез: спрос, готовность страховщика и сроки согласований. Заранее называем критерии остановки, чтобы через три месяца не спорить о том, что считать успехом. Метрики фиксируем до старта, а не после. Критерии остановки обсуждаем с партнёром до старта, а не после первых неудач.</p>
+        <p data-lang="en">The 90-day pilot tests three hypotheses: demand, insurer readiness and approval timelines. We name stop criteria in advance so that in three months we do not argue about what counts as success. Metrics are fixed before the start, not after.</p>
+      </div>
+    </section>
+
+    <section class="slide" id="s15" data-slide="15" aria-roledescription="slide" aria-label="Слайд 15 из 15">
+      <div class="slide-inner">
+        <div class="lang-block" data-lang="ru">
+          <p class="kicker">14 — Риски и следующий шаг</p>
+          <h2 class="h2">Риски, открытые вопросы, следующий шаг</h2>
+          <div class="grid g3">
+            <div class="risk"><h3>Открытый вопрос</h3><p>Допустимость координационного сбора по турецкому регулированию — вопрос к турецкому адвокату.</p></div>
+            <div class="risk"><h3>Риски</h3><p>Зависимость от одного страховщика, сроки согласований, платёжный маршрут.</p></div>
+            <div class="risk"><h3>Следующий шаг</h3><p>Встреча с одним страховщиком и одной юрфирмой.</p></div>
+          </div>
+          <p class="contacts-line"><strong>Контакты</strong>Появятся к запуску пилота.</p>
+        </div>
+        <div class="lang-block" data-lang="en" hidden>
+          <p class="kicker">14 — Risks and next step</p>
+          <h2 class="h2">Risks, open questions, next step</h2>
+          <div class="grid g3">
+            <div class="risk"><h3>Open question</h3><p>Whether a coordination fee is permissible under Turkish regulation — a question for a Turkish attorney.</p></div>
+            <div class="risk"><h3>Risks</h3><p>Dependence on one insurer, approval timelines, payment route.</p></div>
+            <div class="risk"><h3>Next step</h3><p>A meeting with one insurer and one law firm.</p></div>
+          </div>
+          <p class="contacts-line"><strong>Contacts</strong>At pilot launch.</p>
+        </div>
+        <div class="lang-block" data-lang="tr" hidden>
+          <p class="kicker">14 — Riskler ve sonraki adım</p>
+          <h2 class="h2">Riskler, açık sorular, sonraki adım</h2>
+          <div class="grid g3">
+            <div class="risk"><h3>Açık soru</h3><p>Koordinasyon bedelinin Türk mevzuatına uygunluğu — Türk avukata soru.</p></div>
+            <div class="risk"><h3>Riskler</h3><p>Tek sigorta şirketine bağımlılık, onay süreleri, ödeme yolu.</p></div>
+            <div class="risk"><h3>Sonraki adım</h3><p>Tek sigorta şirketi ve tek hukuk bürosuyla görüşme.</p></div>
+          </div>
+          <p class="contacts-line"><strong>İletişim</strong>Pilot lansmanında.</p>
+        </div>
+      </div>
+      <footer class="slide-foot">
+        <span class="foot-brand">CELİKKOL &amp; ZYKIN</span>
+        <span class="foot-note" data-disclaimer></span>
+        <span class="foot-right"><span class="foot-lang"></span><span class="foot-page">15 / 15</span></span>
+      </footer>
+      <div class="slide-notes" hidden>
+        <p data-lang="ru">Закрываем честно: перечисляем риски и открытые вопросы, включая законность модели вознаграждения. Это вопрос к турецкому адвокату, а не к презентации. Следующий шаг — встреча с одним страховщиком и одной юрфирмой, затем решение о регистрации. Фиксируем договорённость о следующей встрече и владельца каждого действия.</p>
+        <p data-lang="en">We close honestly: risks and open questions, including the legality of the fee model. That is a question for a Turkish attorney, not for a presentation. The next step is a meeting with one insurer and one law firm, then a registration decision.</p>
+        <p data-lang="tr">Dürüst kapanış: riskler ve açık sorular, ücret modelinin hukukiliği dahil. Bu bir sunumun değil, Türk avukatın sorusudur. Sonraki adım tek sigorta şirketi ve tek hukuk bürosuyla görüşme, ardından tescil kararı. Toplantı sonunda bir sonraki görüşmenin tarihini ve her adımın sahibini yazıyoruz.</p>
+      </div>
+    </section>
+  </div>
+</div>
+
+<header class="topbar">
+  <span class="top-brand">CELİKKOL &amp; ZYKIN</span>
+  <span class="top-hint">← → · пробел · Home / End · N — заметки</span>
+  <div class="top-actions">
+    <div class="controls">
+      <button type="button" id="prev" aria-label="Предыдущий слайд">←</button>
+      <span class="counter" id="counter">01 / 15</span>
+      <button type="button" id="next" aria-label="Следующий слайд">→</button>
+    </div>
+    <div class="langs" role="group" aria-label="Язык презентации">
+      <button type="button" data-set-lang="ru" aria-pressed="true">RU</button>
+      <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+      <button type="button" data-set-lang="tr" aria-pressed="false">TR</button>
+    </div>
+    <button type="button" class="btn-notes" id="notesToggle" aria-pressed="false" aria-controls="notes">Заметки</button>
+  </div>
+</header>
+
+<div class="progress" aria-hidden="true"><span id="bar"></span></div>
+
+<aside class="notes-panel" id="notes" hidden aria-label="Заметки докладчика">
+  <div class="notes-head">
+    <span>Заметки докладчика</span>
+    <button type="button" class="notes-close" id="notesClose" aria-label="Закрыть заметки">×</button>
+  </div>
+  <p class="notes-body" id="notesBody"></p>
+</aside>
+
+<p class="sr-only" aria-live="polite" id="live"></p>
+
+<div id="disclaimers" hidden>
+  <p data-lang="ru">Материалы носят информационный характер, не являются юридической консультацией и не являются публичной офертой. Юридические услуги оказываются адвокатами, зарегистрированными в коллегии адвокатов Турции, на основании отдельных договоров.</p>
+  <p data-lang="en">This material is informational. It is not legal advice and not a public offer. Legal services are provided by attorneys registered with the Turkish bar association under separate agreements.</p>
+  <p data-lang="tr">Bu materyaller bilgilendirme amaçlıdır; hukuki danışmanlık değildir ve kamuya açık bir teklif niteliği taşımaz. Hukuki hizmetler, Türkiye barosuna kayıtlı avukatlar tarafından ayrı sözleşmelerle sunulur.</p>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var slides = Array.prototype.slice.call(document.querySelectorAll(".slide"));
+  var total = slides.length;
+  var stage = document.getElementById("stage");
+  var wrap = document.querySelector(".stage-wrap");
+  var counter = document.getElementById("counter");
+  var bar = document.getElementById("bar");
+  var prevBtn = document.getElementById("prev");
+  var nextBtn = document.getElementById("next");
+  var live = document.getElementById("live");
+  var notesPanel = document.getElementById("notes");
+  var notesBody = document.getElementById("notesBody");
+  var notesToggle = document.getElementById("notesToggle");
+  var notesClose = document.getElementById("notesClose");
+  var notesTitle = document.querySelector(".notes-head span");
+  var langButtons = Array.prototype.slice.call(document.querySelectorAll("[data-set-lang]"));
+  var disclaimers = {};
+
+  Array.prototype.forEach.call(document.querySelectorAll("#disclaimers p"), function (p) {
+    disclaimers[p.getAttribute("data-lang")] = p.textContent.trim();
+  });
+
+  var idx = 0;
+  var lang = "ru";
+  var UI = {
+    ru: { notes: "Заметки", title: "Заметки докладчика", slide: "Слайд" },
+    en: { notes: "Notes", title: "Speaker notes", slide: "Slide" },
+    tr: { notes: "Notlar", title: "Konuşmacı notları", slide: "Slayt" }
+  };
+
+  function pad(n) { return n < 10 ? "0" + n : String(n); }
+
+  function shownLangFor(slide) {
+    var avail = [];
+    Array.prototype.forEach.call(slide.querySelectorAll(".lang-block"), function (b) {
+      avail.push(b.getAttribute("data-lang"));
+    });
+    if (avail.indexOf(lang) !== -1) return lang;
+    if (avail.indexOf("en") !== -1) return "en";
+    return avail[0] || "ru";
+  }
+
+  function renderNotes() {
+    var slide = slides[idx];
+    notesBody.textContent = slide ? (slide.getAttribute("data-notes") || "") : "";
+  }
+
+  function applyLang() {
+    document.documentElement.lang = lang;
+    slides.forEach(function (slide) {
+      var use = shownLangFor(slide);
+      Array.prototype.forEach.call(slide.querySelectorAll(".lang-block"), function (b) {
+        b.hidden = b.getAttribute("data-lang") !== use;
+      });
+      var badge = slide.querySelector(".foot-lang");
+      if (badge) badge.textContent = use !== lang ? use.toUpperCase() : "";
+      var note = slide.querySelector('.slide-notes p[data-lang="' + use + '"]');
+      slide.setAttribute("data-notes", note ? note.textContent.trim() : "");
+    });
+    langButtons.forEach(function (b) {
+      b.setAttribute("aria-pressed", b.getAttribute("data-set-lang") === lang ? "true" : "false");
+    });
+    var text = disclaimers[lang] || disclaimers.ru || "";
+    Array.prototype.forEach.call(document.querySelectorAll("[data-disclaimer]"), function (el) {
+      el.textContent = text;
+    });
+    notesToggle.textContent = UI[lang].notes;
+    notesTitle.textContent = UI[lang].title;
+    renderNotes();
+  }
+
+  function go(n, opts) {
+    opts = opts || {};
+    n = Math.max(1, Math.min(total, n));
+    idx = n - 1;
+    slides.forEach(function (s, i) {
+      var active = i === idx;
+      s.classList.toggle("is-active", active);
+      if (active) {
+        s.removeAttribute("aria-hidden");
+        s.removeAttribute("inert");
+      } else {
+        s.setAttribute("aria-hidden", "true");
+        s.setAttribute("inert", "");
+      }
+    });
+    counter.textContent = pad(n) + " / " + pad(total);
+    bar.style.width = (n / total * 100) + "%";
+    prevBtn.disabled = n === 1;
+    nextBtn.disabled = n === total;
+    renderNotes();
+    live.textContent = UI[lang].slide + " " + n + " / " + total;
+    if (opts.hash !== false) {
+      var h = "#/" + n + (lang !== "ru" ? "/" + lang : "");
+      if (location.hash !== h) location.hash = h;
+    }
+  }
+
+  function parseHash() {
+    var m = /^#\/(\d+)(?:\/(ru|en|tr))?/.exec(location.hash);
+    if (!m) return null;
+    return { n: parseInt(m[1], 10), lang: m[2] || "ru" };
+  }
+
+  function syncFromHash() {
+    var p = parseHash();
+    if (!p) return;
+    if (p.lang !== lang) {
+      lang = p.lang;
+      applyLang();
+    }
+    if (p.n !== idx + 1) go(p.n, { hash: false });
+  }
+
+  function setLang(next) {
+    if (next === lang) return;
+    lang = next;
+    applyLang();
+    go(idx + 1);
+  }
+
+  function toggleNotes(force) {
+    var open = typeof force === "boolean" ? force : notesPanel.hidden;
+    notesPanel.hidden = !open;
+    notesToggle.setAttribute("aria-pressed", open ? "true" : "false");
+    if (open) notesClose.focus();
+  }
+
+  function resize() {
+    var w = wrap.clientWidth;
+    var h = wrap.clientHeight;
+    var s = Math.min(w / 1280, h / 720);
+    stage.style.transform = "scale(" + s + ")";
+    stage.style.left = Math.round((w - 1280 * s) / 2) + "px";
+    stage.style.top = Math.round((h - 720 * s) / 2) + "px";
+  }
+
+  prevBtn.addEventListener("click", function () { go(idx); });
+  nextBtn.addEventListener("click", function () { go(idx + 2); });
+  notesToggle.addEventListener("click", function () { toggleNotes(); });
+  notesClose.addEventListener("click", function () { toggleNotes(false); });
+
+  langButtons.forEach(function (b) {
+    b.addEventListener("click", function () { setLang(b.getAttribute("data-set-lang")); });
+  });
+
+  document.addEventListener("keydown", function (e) {
+    var t = e.target;
+    if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.isContentEditable)) return;
+    if (t && t.closest && t.closest("button, a") && (e.key === " " || e.key === "Enter")) return;
+
+    if (e.key === "ArrowRight" || e.key === "ArrowDown" || e.key === "PageDown" || e.key === " ") {
+      e.preventDefault();
+      go(idx + 2);
+    } else if (e.key === "ArrowLeft" || e.key === "ArrowUp" || e.key === "PageUp") {
+      e.preventDefault();
+      go(idx);
+    } else if (e.key === "Home") {
+      e.preventDefault();
+      go(1);
+    } else if (e.key === "End") {
+      e.preventDefault();
+      go(total);
+    } else if (e.key === "n" || e.key === "N") {
+      e.preventDefault();
+      toggleNotes();
+    } else if (e.key === "Escape") {
+      if (!notesPanel.hidden) toggleNotes(false);
+    }
+  });
+
+  wrap.addEventListener("click", function (e) {
+    if (e.target.closest && e.target.closest("button, a")) return;
+    var rect = wrap.getBoundingClientRect();
+    var x = (e.clientX - rect.left) / rect.width;
+    if (x < 0.12) go(idx);
+    else if (x > 0.88) go(idx + 2);
+  });
+
+  window.addEventListener("resize", resize);
+  window.addEventListener("hashchange", syncFromHash);
+
+  var initial = parseHash();
+  if (initial) {
+    lang = initial.lang;
+  }
+  applyLang();
+  go(initial ? initial.n : 1, { hash: false });
+  if (!location.hash) {
+    try {
+      history.replaceState(null, "", "#/1");
+    } catch (err) {
+      location.hash = "#/1";
+    }
+  }
+  resize();
+})();
+</script>
+</body>
+</html>
